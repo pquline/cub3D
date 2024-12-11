@@ -6,25 +6,27 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/11 15:21:10 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/11 16:31:18 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
+# include <limits.h>
+
+# include <libft.h>
 # include <mlxe.h>
 # include <mlxe_structs.h>
-# include <limits.h>
 
 /*
 in map: replace player direction by empty tile
 */
 typedef enum e_tile
 {
-	EMPTY		= '0',
-	WALL		= '1',
-	VOID		= INT_MAX,
+	EMPTY	= 0,
+	WALL	= 1,
+	VOID	= INT_MAX,
 }	t_tile;
 
 /*
@@ -46,7 +48,10 @@ typedef struct s_map
 	char		direction;
 }	t_map;
 
+t_map	*init_map(void);
 t_map	*parsing(char *path);
+
 void	free_map(t_map *map);
+void	*parsing_error(char *error);
 
 #endif
