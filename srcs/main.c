@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/09/16 14:47:45 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/09/16 15:26:51 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	print_error(char *msg)
 {
-	ft_putendl_fd("Error : ", 2);
+	ft_putendl_fd("Error :", 2);
 	ft_putendl_fd(msg, 2);
 	return (1);
 }
