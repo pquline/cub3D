@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/11 16:31:18 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/11 21:21:42 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,25 @@
 # define PARSING_H
 
 # include <limits.h>
+# include <fcntl.h>
 
 # include <libft.h>
 # include <mlxe.h>
 # include <mlxe_structs.h>
+
+# define ERROR			-1
+# define MIN_RGB_COLOR	0
+# define MAX_RGB_COLOR	255
+
+# define COMMA_CHAR	','
+
+# define COLOR_FLOOR	"F"
+# define COLOR_CEILING	"C"
+
+# define TEXTURE_NORTH	"NO"
+# define TEXTURE_SOUTH	"SO"
+# define TEXTURE_WEST	"WE"
+# define TEXTURE_EAST	"EA"
 
 /*
 in map: replace player direction by empty tile
@@ -44,8 +59,8 @@ typedef struct s_map
 	t_tile		**grid;
 	size_t		width;
 	size_t		height;
-	t_vector2	player_coords;
-	char		direction;
+	t_vector2	start_coords;
+	char		start_direction;
 }	t_map;
 
 t_map	*init_map(void);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/11 16:37:59 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/11 21:35:18 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ t_map* test_map()
 	}
 	map->width = 10;
 	map->height = 10;
-	map->player_coords = (t_vector2){5, 5};
-	map->direction = 'N';
+	map->start_coords = (t_vector2){5, 5};
+	map->start_direction = 'N';
 	return map;
 }
 
