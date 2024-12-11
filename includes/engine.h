@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   engine.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 14:33:01 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/11 15:59:34 by lfarhi           ###   ########.fr       */
+/*   Created: 2024/12/11 15:37:47 by lfarhi            #+#    #+#             */
+/*   Updated: 2024/12/11 16:32:35 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE3D_H
-# define CUBE3D_H
+#ifndef ENGINE_H
+# define ENGINE_H
 
-# include <libft.h>
 # include <mlxe.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <unistd.h>
-# include <limits.h>
-
 # include "parsing.h"
-# include "engine.h"
 
-typedef struct s_game
+typedef struct s_engine
 {
 	t_window	*window;
-	t_engine	engine;
-	char		error_msg[256];
-}	t_game;
+	t_texture	*walls[4];
+	t_map		*map;
+	t_list		*entities;
+}				t_engine;
 
-int			print_error(char *msg);
-t_bool		set_error(t_game *game, char *msg);
+void	engine_init(t_engine *engine, t_window *window, t_map *map);
+void	render_engine(t_engine *engine);
 
-void		main_loop(t_window *window, void *data);
-
-#endif
+#endif // ENGINE_H

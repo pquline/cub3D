@@ -6,23 +6,25 @@
 #    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/09/16 14:48:17 by lfarhi           ###   ########.fr        #
+#    Updated: 2024/12/11 16:25:12 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cube3d
 SRC = srcs/
 SRCS = ${SRC}main.c 
+SRCS += ${SRC}game/game.c
+SRCS += ${SRC}engine/engine.c
 
 OBJS = ${SRCS:.c=.o}
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g3 -Qunused-arguments
 BONUS_FLAGS = -DBONUS=1
 LIBFT_FLAGS = -L ./libft -I ./libft -lft
 MLX_FLAGS = -L ./minilibx -I ./minilibx -lmlx -Imlx -lXext -lX11 -lm -lz
 MLXE_FLAGS = -L ./mlxe -I ./mlxe -lmlxe
-LFLAGS = ${MLXE_FLAGS} ${MLX_FLAGS} ${LIBFT_FLAGS}
+LFLAGS = -I includes ${MLXE_FLAGS} ${MLX_FLAGS} ${LIBFT_FLAGS}
 
 LIBFT = libft/libft.a
 MINILIBX = minilibx/libmlx.a
