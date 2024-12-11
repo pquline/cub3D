@@ -6,7 +6,7 @@
 #    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/12 16:08:55 by lfarhi            #+#    #+#              #
-#    Updated: 2024/06/14 00:56:55 by lfarhi           ###   ########.fr        #
+#    Updated: 2024/12/11 16:25:32 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,8 @@ OBJS = ${SRCS:.c=.o}
 LIBFT = ../libft/libft.a
 MINILIBX = ../minilibx/libmlx.a
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I ../libft -I ../minilibx
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -I ../libft -I ../minilibx -Qunused-arguments
 
 all: ${NAME}
 

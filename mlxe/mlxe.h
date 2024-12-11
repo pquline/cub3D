@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:51 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/15 19:11:01 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/11 16:03:40 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@
 void		mlxe_free(t_window *window, void *ptr);
 t_window	*mlxe_init(int width, int height, char *title);
 void		mlxe_clear(t_window *window);
+void		mlxe_clear_color(t_window *window, t_color color);
 void		mlxe_render(t_window *window);
 void		mlxe_destroy(t_window *window);
 
