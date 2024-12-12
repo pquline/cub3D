@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:07:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 22:54:37 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:56:02 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ t_bool	map_is_valid(t_map *map)
 }
 
 /*
+CHECK IF MAP CONTAINS PLAYER
 map[y][x]
 valid map:
 - surrounded by walls (1)
