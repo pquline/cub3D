@@ -6,12 +6,16 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:01:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 15:54:22 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:12:48 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
+/*
+invalid:
+- if any tile is neither 0, 1, 2 nor a whitespace
+*/
 t_bool	parse_map_line(t_map *map)
 {
 	(void)map;
