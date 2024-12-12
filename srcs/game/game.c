@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/12 18:17:49 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/12 19:08:44 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,29 +51,6 @@ void add_move(t_engine *engine, float x, float y)
 	want_to_move(engine, engine->camera.x + x, engine->camera.y + y);
 }
 
-void draw_minimap(t_game *game)
-{
-	size_t		y;
-	size_t		x;
-	t_camera	*camera;
-
-	camera = &game->engine.camera;
-	y = 0;
-	while (y < game->engine.map->height)
-	{
-		x = 0;
-		while (x < game->engine.map->width)
-		{
-			if (game->engine.map->grid[y][x].id == WALL)
-				mlxe_draw_fillrect(game->window, (t_rect){x * 10, y * 10, 10, 10}, mlxe_color(0, 0, 255));
-			x++;
-		}
-		y++;
-	}
-	mlxe_draw_fillrect(game->window, (t_rect){(camera->x * 10) - 2, (camera->y * 10) - 2, 4, 4}, mlxe_color(255, 0, 0));
-	mlxe_draw_line(game->window, (t_vector2){camera->x * 10, camera->y * 10}, (t_vector2){camera->x * 10 + 10 * cos(camera->dir), camera->y * 10 + 10 * sin(camera->dir)}, mlxe_color(255, 0, 0));
-}
-
 void	main_loop(t_window *window, void *data)
 {
 	t_game	*game;
@@ -98,4 +75,29 @@ void	main_loop(t_window *window, void *data)
 	render_engine(&game->engine);
 	draw_minimap(game);
 	mlxe_render(window);
+}
+
+t_bool	game_init(t_game *game, t_window *window, t_map *map)
+{
+	ft_memset(game, 0, sizeof(t_game));
+	game->window = window;
+	if (!load_assets(&game->assets, window))
+		return (FAILURE);
+	engine_init(&game->engine, window, map);
+	return (SUCCESS);
+}
+
+t_bool	load_assets(t_assets *assets, t_window *window)
+{
+	assets->minimap_entities = mlxe_load_texture(window, "assets/UI/minimap_entities.xpm", TRUE);//TODO check if it's loaded
+	printf("minimap_entities: %p\n", assets->minimap_entities);
+	assets->player[0] = mlxe_create_sprite(window, assets->minimap_entities,(t_rect){0,0,48,44}, TRUE);
+	assets->player[1] = mlxe_create_sprite(window, assets->minimap_entities,(t_rect){58,0,48,44}, TRUE);
+	assets->player[2] = mlxe_create_sprite(window, assets->minimap_entities,(t_rect){118,0,48,44}, TRUE);
+	assets->player[3] = mlxe_create_sprite(window, assets->minimap_entities,(t_rect){178,0,48,44}, TRUE);
+	assets->player[4] = assets->player[2];
+	assets->player[5] = assets->player[1];
+	assets->player_anim = 0;
+	printf("player[0]: %p\n", assets->player[0]);
+	return (SUCCESS);
 }

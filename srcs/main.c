@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/12 17:16:16 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:41:04 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,13 @@ t_bool	set_error(t_game *game, char *msg)
 	return (FAILURE);
 }
 
-t_bool	game_init(t_game *game, t_window *window, t_map *map)
-{
-	ft_memset(game, 0, sizeof(t_game));
-	game->window = window;
-	engine_init(&game->engine, window, map);
-	return (SUCCESS);
-}
-
 t_map* test_map()
 {
 	t_map *map = malloc(sizeof(t_map));
-	map->no = "./assets/missing_n.xpm";
-	map->so = "./assets/missing_s.xpm";
-	map->we = "./assets/missing_w.xpm";
-	map->ea = "./assets/missing_e.xpm";
+	map->no = "./assets/tests/missing_n.xpm";
+	map->so = "./assets/tests/missing_s.xpm";
+	map->we = "./assets/tests/missing_w.xpm";
+	map->ea = "./assets/tests/missing_e.xpm";
 	map->c = mlxe_color(139, 170, 173);
 	map->f = mlxe_color(77, 77, 71);
 	map->width = 10;
@@ -101,8 +93,8 @@ int	main(int ac, char **av)
 	(void)av;
 	(void)ac;
 	error = SUCCESS;
-	t_map	*map = parsing(TEST_MAP);
-	return (free_map(map), 0);
+	//t_map	*map = parsing(TEST_MAP);
+	//return (free_map(map), 0);
 	//if (ac != 2)
 	//	return (print_error("Usage : ./cube3d [map.ber]"));
 	window = mlxe_init(1920 / 2, 1080 / 2, "cube3d");
