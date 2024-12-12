@@ -6,13 +6,12 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:07:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 22:14:39 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:54:37 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-/*
 void	print_list(t_list *list)
 {
 	while (list)
@@ -67,13 +66,54 @@ void	debug_parsing(t_parsing *parsing)
 	printf("\n");
 	print_map(parsing->map);
 }
-*/
+
+t_bool	empty_tile_is_valid(t_map *map, size_t x, size_t y)
+{
+	if (x == 0 || x == map->width || y == 0 || y == map->height)
+		return (FALSE);
+	if ((map->grid[y - 1][x].id == WALL || map->grid[y - 1][x].id == EMPTY)
+			&& (map->grid[y + 1][x].id == WALL \
+				|| map->grid[y + 1][x].id == EMPTY) \
+			&& (map->grid[y][x - 1].id == WALL \
+				|| map->grid[y][x - 1].id == EMPTY) \
+			&& (map->grid[y][x + 1].id == WALL \
+				|| map->grid[y][x + 1].id == EMPTY))
+		return (TRUE);
+	return (FALSE);
+}
+
+t_bool	map_is_valid(t_map *map)
+{
+	size_t	empty_tiles;
+	size_t	x;
+	size_t	y;
+
+	empty_tiles = 0;
+	y = 0;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			if (map->grid[y][x].id == EMPTY \
+					&& empty_tile_is_valid(map, x, y))
+				++empty_tiles;
+			else if (map->grid[y][x].id == EMPTY)
+				return (FALSE);
+			++x;
+		}
+		++y;
+	}
+	if (empty_tiles == 0)
+		return (FALSE);
+	return (TRUE);
+}
 
 /*
 map[y][x]
 valid map:
-- 8 possible characters (0, 1, 2, N, S, E, W or ' ')
 - surrounded by walls (1)
+- 8 possible characters (0, 1, 2, N, S, E, W or ' ')
 - types of elements (except for map content) can be separated by 0+ empty line(s)
 - types of elements (except for map content) can be set in any order in the file
 - types of elements (except for map content) cam be separated by 0+ space(s)
@@ -95,5 +135,9 @@ t_map	*parsing(char *path)
 	get_grid(&parsing);
 	//debug_parsing(&parsing);
 	free_parsing(&parsing);
-	return (parsing.map);
+	if (map_is_valid(parsing.map))
+		return (parsing.map);
+	parsing_error("invalid map");
+	free_map(parsing.map);
+	return (NULL);
 }
