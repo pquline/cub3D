@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:49:50 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/12 14:06:03 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/12 15:23:20 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 
 void	engine_init(t_engine *engine, t_window *window, t_map *map)
 {
+	engine->walls[0] = mlxe_load_texture(window, map->no, TRUE);
+	engine->walls[1] = mlxe_load_texture(window, map->so, TRUE);
+	engine->walls[2] = mlxe_load_texture(window, map->we, TRUE);
+	engine->walls[3] = mlxe_load_texture(window, map->ea, TRUE);
+	if (!engine->walls[0] || !engine->walls[1] || !engine->walls[2] || !engine->walls[3])
+	{
+		printf("Failed to load textures\n");
+		return ;
+	}
 	engine->window = window;
 	engine->map = map;
 	engine->camera.x = map->player_coords.x + 0.5;
@@ -123,10 +132,12 @@ t_ray raycast(t_engine *engine, float angle)
     }
 
     ray.dist *= cos(ray.dir - engine->camera.dir); // Correction du fisheye
+	ray.x = map_x + side_dist_x;//a changer
+	ray.y = map_y + side_dist_y;//a changer
     return ray;
 }
 
-void draw_map(t_engine *engine)
+void draw_map_old(t_engine *engine)
 {
     float camera_plane = engine->camera.fov / 2.0f;
 
@@ -165,6 +176,55 @@ void draw_map(t_engine *engine)
     }
 }
 
+void draw_map(t_engine *engine)
+{
+    float camera_plane = engine->camera.fov / 2.0f;
+
+    for (int i = 0; i < engine->window->buffer->size.x; i++)
+    {
+        float camera_x = 2 * i / (float)engine->window->buffer->size.x - 1;
+        float ray_angle = engine->camera.dir + camera_x * camera_plane;
+
+        t_ray ray = raycast(engine, ray_angle);
+
+        int line_height = (int)(engine->window->buffer->size.y / ray.dist);
+        int draw_start = -line_height / 2 + engine->window->buffer->size.y / 2;
+        int draw_end = line_height / 2 + engine->window->buffer->size.y / 2;
+
+        int side_dir = ray.side_hit; // Nord, Sud, Est, Ouest
+        int texture_width = engine->walls[side_dir]->size.x;
+        int texture_height = engine->walls[side_dir]->size.y;
+
+        // Position du point d'impact dans la texture
+        float wall_x;
+        if (side_dir == 0 || side_dir == 2) // Nord ou Sud (horizontal)
+            wall_x = ray.y - floor(ray.y);
+        else                               // Est ou Ouest (vertical)
+            wall_x = ray.x - floor(ray.x);
+
+        // Conversion de la position dans la texture
+        int tex_x = (int)(wall_x * (float)texture_width);
+        if ((side_dir == 0 && ray.dir > 0) || (side_dir == 3 && ray.dir < 0))
+            tex_x = texture_width - tex_x - 1; // Inversion pour certains côtés
+
+        // Dessin de chaque ligne de pixel
+        for (int y = draw_start; y < draw_end; y++)
+        {
+            if (y >= 0 && y < engine->window->buffer->size.y)
+            {
+                // Calculer la position y dans la texture
+                int d = (y - draw_start) * texture_height / line_height; // Position relative sur le mur
+                int tex_y = d;
+
+                // Obtenir la couleur depuis la texture
+                t_color color = mlxe_get_pixel(engine->walls[side_dir], tex_x, tex_y);
+
+                // Dessiner le pixel sur le buffer
+                mlxe_draw_pixel(engine->window->buffer, i, y, color);
+            }
+        }
+    }
+}
 
 void	render_engine(t_engine *engine)
 {

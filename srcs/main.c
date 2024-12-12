@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/11 19:09:49 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/12 14:39:22 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ t_bool	game_init(t_game *game, t_window *window, t_map *map)
 t_map* test_map()
 {
 	t_map *map = malloc(sizeof(t_map));
-	map->no = "textures/wood.xpm";
-	map->so = "textures/wood.xpm";
-	map->we = "textures/wood.xpm";
-	map->ea = "textures/wood.xpm";
+	map->no = "./assets/missing_n.xpm";
+	map->so = "./assets/missing_s.xpm";
+	map->we = "./assets/missing_w.xpm";
+	map->ea = "./assets/missing_e.xpm";
 	map->c = mlxe_color(139, 170, 173);
 	map->f = mlxe_color(77, 77, 71);
 	map->width = 10;
