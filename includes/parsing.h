@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 22:02:55 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:14:12 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ typedef struct s_map
 typedef struct s_parsing
 {
 	char	*line;
-	char	*path_prefix;
 	t_list	*cub;
 	t_map	*map;
 	t_state	state;

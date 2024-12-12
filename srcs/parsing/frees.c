@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:14:56 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 18:55:31 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:14:46 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,5 @@ void	*free_parsing(t_parsing *parsing)
 	ft_lstclear(&parsing->cub, free);
 	free(parsing->line);
 	parsing->line = NULL;
-	free(parsing->path_prefix);
-	parsing->path_prefix = NULL;
 	return (NULL);
 }

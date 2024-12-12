@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:01:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 21:53:50 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:14:31 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,22 +77,6 @@ static void	parse_cub(t_parsing *parsing, int fd)
 	}
 }
 
-/*
-/home/user/map.cub
-../maps/map.cub
-../map.cub
-./map.cub
-map.cub
-*/
-static void	extract_path(t_parsing *parsing, char *path)
-{
-	const char	*file_name = ft_strrchr(path, SLASH_CHAR);
-
-	if (file_name == NULL)
-		return ;
-	parsing->path_prefix = ft_strndup(path, file_name - path + sizeof(char));
-}
-
 void	get_cub(t_parsing *parsing, char *path)
 {
 	int	fd;
@@ -102,7 +86,6 @@ void	get_cub(t_parsing *parsing, char *path)
 		parsing_error("invalid .cub file name");
 		return ;
 	}
-	extract_path(parsing, path);
 	fd = open(path, O_RDONLY);
 	if (fd == ERROR)
 	{

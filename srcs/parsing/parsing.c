@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:07:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 22:05:53 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:14:39 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	print_map(t_map *map)
 void	debug_parsing(t_parsing *parsing)
 {
 	printf("line:\t\t\t[%s]\n", parsing->line);
-	printf("path_prefix:\t\t[%s]\n", parsing->path_prefix);
 	printf("state:\t\t\t[%s]\n", parsing->state == PARSING_MAP ? "MAP" : "OTHER");
 	printf("map->no:\t\t[%s]\n", parsing->map->no);
 	printf("map->so:\t\t[%s]\n", parsing->map->so);
