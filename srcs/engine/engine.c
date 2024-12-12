@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:49:50 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/12 16:27:39 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/12 16:34:46 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ void	engine_init(t_engine *engine, t_window *window, t_map *map)
 	}
 	engine->window = window;
 	engine->map = map;
-	engine->camera.x = map->player_coords.x + 0.5;
-	engine->camera.y = map->player_coords.y + 0.5;
-	if (map->direction == 'N')
+	engine->camera.x = map->start_coords.x + 0.5;
+	engine->camera.y = map->start_coords.y + 0.5;
+	if (map->start_direction == 'N')
 		engine->camera.dir = 0;
-	else if (map->direction == 'E')
+	else if (map->start_direction == 'E')
 		engine->camera.dir = M_PI_2;
-	else if (map->direction == 'S')
+	else if (map->start_direction == 'S')
 		engine->camera.dir = M_PI;
-	else if (map->direction == 'W')
+	else if (map->start_direction == 'W')
 		engine->camera.dir = 3 * M_PI_2;
 	engine->camera.fov = M_PI / 3;
 	engine->entities = NULL;
@@ -118,7 +118,7 @@ t_ray raycast(t_engine *engine, float angle)
             map_y += step_y;
             side = 1; // Mur horizontal
         }
-        if (engine->map->grid[map_y][map_x] != EMPTY)
+        if (engine->map->grid[map_y][map_x].id != EMPTY)
             hit = 1;
     }
 

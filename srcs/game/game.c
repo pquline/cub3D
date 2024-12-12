@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/12 13:51:30 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/12 14:43:38 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void want_to_move(t_engine *engine, float x, float y)
 {
 	if (x < 0 || x >= engine->map->width || y < 0 || y >= engine->map->height)
 		return ;
-	if (engine->map->grid[(int)y][(int)x] != EMPTY)
+	if (engine->map->grid[(int)y][(int)x].id != EMPTY)
 		return ;
 	engine->camera.x = x;
 	engine->camera.y = y;
@@ -40,7 +40,7 @@ void draw_minimap(t_game *game)
 		x = 0;
 		while (x < game->engine.map->width)
 		{
-			if (game->engine.map->grid[y][x] == WALL)
+			if (game->engine.map->grid[y][x].id == WALL)
 				mlxe_draw_fillrect(game->window, (t_rect){x * 10, y * 10, 10, 10}, mlxe_color(0, 0, 255));
 			x++;
 		}

@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/12 14:39:22 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/12 16:35:29 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,18 @@ t_map* test_map()
 		map->grid[i] = malloc(sizeof(t_tile) * map->width);
 		for (size_t j = 0; j < map->width; j++)
 		{
-			map->grid[i][j] = EMPTY;
+			map->grid[i][j].id = EMPTY;
 		}
 	}
 	for (size_t i = 0; i < map->height; i++)
 	{
-		map->grid[i][0] = WALL;
-		map->grid[i][map->width - 1] = WALL;
+		map->grid[i][0].id = WALL;
+		map->grid[i][map->width - 1].id = WALL;
 	}
 	for (size_t j = 0; j < map->width; j++)
 	{
-		map->grid[0][j] = WALL;
-		map->grid[map->height - 1][j] = WALL;
+		map->grid[0][j].id = WALL;
+		map->grid[map->height - 1][j].id = WALL;
 	}
 	//spawn random WALL
 	//reset random seed
@@ -83,12 +83,12 @@ t_map* test_map()
 		for (size_t j = 1; j < map->width - 1; j++)
 		{
 			if (rand() % 5 == 0)
-				map->grid[i][j] = WALL;
+				map->grid[i][j].id = WALL;
 		}
 	}
-	map->grid[5][5] = EMPTY;
-	map->player_coords = (t_vector2){5, 5};
-	map->direction = 'N';
+	map->grid[5][5].id = EMPTY;
+	map->start_coords = (t_vector2){5, 5};
+	map->start_direction = 'N';
 	return map;
 }
 
