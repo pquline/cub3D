@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:49:50 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/11 19:01:45 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/12 14:06:03 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,11 @@ t_ray raycast(t_engine *engine, float angle)
     float side_dist_x, side_dist_y;
     int step_x, step_y;
     int hit = 0;
-    int side;
 
     ray.dir = angle;
     ray.x = engine->camera.x;
     ray.y = engine->camera.y;
 
-    // Calcul des directions initiales
     float ray_dir_x = cos(angle);
     float ray_dir_y = sin(angle);
 
@@ -73,7 +71,6 @@ t_ray raycast(t_engine *engine, float angle)
     delta_dist_x = fabs(1 / ray_dir_x);
     delta_dist_y = fabs(1 / ray_dir_y);
 
-    // Calcul des étapes et distances initiales
     if (ray_dir_x < 0)
     {
         step_x = -1;
@@ -95,7 +92,7 @@ t_ray raycast(t_engine *engine, float angle)
         side_dist_y = (map_y + 1.0 - ray.y) * delta_dist_y;
     }
 
-    // Lancement du DDA
+    int side; // 0 = vertical, 1 = horizontal
     while (!hit)
     {
         if (side_dist_x < side_dist_y)
@@ -114,46 +111,57 @@ t_ray raycast(t_engine *engine, float angle)
             hit = 1;
     }
 
-    // Calcul de la distance perpendiculaire pour réduire le fisheye
     if (side == 0)
+    {
         ray.dist = (map_x - ray.x + (1 - step_x) / 2) / ray_dir_x;
+        ray.side_hit = (step_x < 0) ? 3 : 1; // 3 = ouest, 1 = est
+    }
     else
+    {
         ray.dist = (map_y - ray.y + (1 - step_y) / 2) / ray_dir_y;
+        ray.side_hit = (step_y < 0) ? 0 : 2; // 0 = nord, 2 = sud
+    }
 
-    // Correction du fisheye
-    ray.dist *= cos(ray.dir - engine->camera.dir);
-
-    ray.x = ray.x + ray.dist * ray_dir_x;
-    ray.y = ray.y + ray.dist * ray_dir_y;
-
+    ray.dist *= cos(ray.dir - engine->camera.dir); // Correction du fisheye
     return ray;
 }
 
 void draw_map(t_engine *engine)
 {
     float camera_plane = engine->camera.fov / 2.0f;
+
     for (int i = 0; i < engine->window->buffer->size.x; i++)
     {
-        // Calcul de l'angle du rayon pour chaque colonne
         float camera_x = 2 * i / (float)engine->window->buffer->size.x - 1;
         float ray_angle = engine->camera.dir + camera_x * camera_plane;
 
         t_ray ray = raycast(engine, ray_angle);
 
-        // Projection de la hauteur des murs
         int line_height = (int)(engine->window->buffer->size.y / ray.dist);
         int draw_start = -line_height / 2 + engine->window->buffer->size.y / 2;
-        if (draw_start < 0) draw_start = 0;
         int draw_end = line_height / 2 + engine->window->buffer->size.y / 2;
-        if (draw_end >= engine->window->buffer->size.y) draw_end = engine->window->buffer->size.y - 1;
 
-        // Couleur avec effet de distance
-        int color = 255 - (ray.dist * 6);
-        if (color < 0) color = 0;
+        int color;
+        switch (ray.side_hit)
+        {
+            case 0: // Nord
+                color = mlxe_color(255, 0, 0); // Rouge
+                break;
+            case 1: // Est
+                color = mlxe_color(0, 255, 0); // Vert
+                break;
+            case 2: // Sud
+                color = mlxe_color(0, 0, 255); // Bleu
+                break;
+            case 3: // Ouest
+                color = mlxe_color(255, 255, 0); // Jaune
+                break;
+        }
+
         mlxe_draw_line(engine->window,
             (t_vector2){i, draw_start},
             (t_vector2){i, draw_end},
-            mlxe_color(color, color, color));
+            color);
     }
 }
 

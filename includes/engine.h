@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:37:47 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/11 19:06:57 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/12 14:06:09 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_ray
 	float		y;
 	float		dir;
 	float		dist;
+	int			side_hit;
 }				t_ray;
 
 typedef struct s_camera
