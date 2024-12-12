@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/11 21:35:18 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:43:12 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,42 @@ t_map* test_map()
 	map->ea = "textures/wood.xpm";
 	map->c = mlxe_color(139, 170, 173);
 	map->f = mlxe_color(77, 77, 71);
-	map->grid = malloc(sizeof(t_tile *) * 10);
-	for (size_t i = 0; i < 10; i++)
-	{
-		map->grid[i] = malloc(sizeof(t_tile) * 10);
-		for (size_t j = 0; j < 10; j++)
-		{
-			map->grid[i][j] = EMPTY;
-		}
-	}
 	map->width = 10;
 	map->height = 10;
+	map->grid = malloc(sizeof(t_tile *) * map->height);
+	for (size_t i = 0; i < map->height; i++)
+	{
+		map->grid[i] = malloc(sizeof(t_tile) * map->width);
+		for (size_t j = 0; j < map->width; j++)
+		{
+			map->grid[i][j].id = EMPTY;
+		}
+	}
+	for (size_t i = 0; i < map->height; i++)
+	{
+		map->grid[i][0].id = WALL;
+		map->grid[i][map->width - 1].id = WALL;
+	}
+	for (size_t j = 0; j < map->width; j++)
+	{
+		map->grid[0][j].id = WALL;
+		map->grid[map->height - 1][j].id = WALL;
+	}
+	//spawn random WALL
+	//reset random seed
+	struct timeval tv;
+    struct timezone tz;
+	gettimeofday(&tv, &tz);
+	srand(tv.tv_usec);
+	for (size_t i = 1; i < map->height - 1; i++)
+	{
+		for (size_t j = 1; j < map->width - 1; j++)
+		{
+			if (rand() % 5 == 0)
+				map->grid[i][j].id = WALL;
+		}
+	}
+	map->grid[5][5].id = EMPTY;
 	map->start_coords = (t_vector2){5, 5};
 	map->start_direction = 'N';
 	return map;
