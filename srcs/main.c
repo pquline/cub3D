@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/12 19:13:30 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:14:40 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	main(int ac, char **av)
 	//error = FAILURE;
 	//set_error(&game, "Test error");
 
-	free_map(map);
+	//free_map(map);
 	mlxe_destroy(window);
 	if (!error)
 		return (print_error(game.error_msg));
