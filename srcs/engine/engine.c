@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:49:50 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/12 16:34:46 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/12 17:44:35 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,6 @@ t_ray raycast(t_engine *engine, float angle)
         ray.side_hit = (step_y < 0) ? 0 : 2; // 0 = nord, 2 = sud
         ray.x_t = ray.x + ray.dist * ray_dir_x - floor(ray.x + ray.dist * ray_dir_x);
     }
-
-    ray.dist *= cos(ray.dir - engine->camera.dir); // Correction du fisheye
     return ray;
 }
 
@@ -151,7 +149,11 @@ void draw_map(t_engine *engine)
 
         t_ray ray = raycast(engine, ray_angle);
 
-        int line_height = (int)(engine->window->buffer->size.y / ray.dist);
+        // Appliquer une correction de fisheye sur la distance
+        ray.dist *= cos(ray.dir - engine->camera.dir);
+
+        // Calcul de la hauteur de la ligne
+        int line_height = (int)(engine->window->buffer->size.y / fmax(ray.dist, 0.1f)); // Eviter les distorsions extrêmes
         int draw_start = -line_height / 2 + engine->window->buffer->size.y / 2;
         int draw_end = line_height / 2 + engine->window->buffer->size.y / 2;
 
@@ -164,8 +166,8 @@ void draw_map(t_engine *engine)
 
         // Calculer la coordonnée x dans la texture
         int tex_x = (int)(ray.x_t * texture_width);
-        if ((side_dir == 0 && ray.dir > M_PI) || (side_dir == 3 && ray.dir < M_PI_2))
-            tex_x = texture_width - tex_x - 1; // Inversion pour certains côtés
+		
+        tex_x = tex_x % texture_width;  // Assure-toi que tex_x est toujours dans les limites de la texture
 
         // Dessin de chaque ligne de pixel
         for (int y = draw_start; y < draw_end; y++)
