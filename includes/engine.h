@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:37:47 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/12 14:06:09 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/12 17:14:47 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_ray
 	float		y;
 	float		dir;
 	float		dist;
+	float		x_t;
 	int			side_hit;
 }				t_ray;
 
@@ -51,5 +52,7 @@ typedef struct s_engine
 
 void	engine_init(t_engine *engine, t_window *window, t_map *map);
 void	render_engine(t_engine *engine);
+t_ray	raycast(t_engine *engine, float angle);
+void	draw_map(t_engine *engine);
 
 #endif // ENGINE_H

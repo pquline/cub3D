@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine.c                                           :+:      :+:    :+:   */
+/*   engine old.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:49:50 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/12 16:34:46 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/12 16:28:17 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ void	engine_init(t_engine *engine, t_window *window, t_map *map)
 	}
 	engine->window = window;
 	engine->map = map;
-	engine->camera.x = map->start_coords.x + 0.5;
-	engine->camera.y = map->start_coords.y + 0.5;
-	if (map->start_direction == 'N')
+	engine->camera.x = map->player_coords.x + 0.5;
+	engine->camera.y = map->player_coords.y + 0.5;
+	if (map->direction == 'N')
 		engine->camera.dir = 0;
-	else if (map->start_direction == 'E')
+	else if (map->direction == 'E')
 		engine->camera.dir = M_PI_2;
-	else if (map->start_direction == 'S')
+	else if (map->direction == 'S')
 		engine->camera.dir = M_PI;
-	else if (map->start_direction == 'W')
+	else if (map->direction == 'W')
 		engine->camera.dir = 3 * M_PI_2;
 	engine->camera.fov = M_PI / 3;
 	engine->entities = NULL;
@@ -59,7 +59,7 @@ static void	clear_screen(t_window *window, t_color top, t_color bottom)
 	}
 }
 
-t_ray raycast(t_engine *engine, float angle)
+/*t_ray raycast2(t_engine *engine, float angle)
 {
     t_ray ray;
     float delta_dist_x, delta_dist_y;
@@ -77,11 +77,9 @@ t_ray raycast(t_engine *engine, float angle)
     int map_x = (int)ray.x;
     int map_y = (int)ray.y;
 
-    // Calcul des delta_dist pour chaque pas
     delta_dist_x = (ray_dir_x == 0) ? 1e30 : fabs(1 / ray_dir_x);
     delta_dist_y = (ray_dir_y == 0) ? 1e30 : fabs(1 / ray_dir_y);
 
-    // Détermination des directions de progression et des distances initiales
     if (ray_dir_x < 0)
     {
         step_x = -1;
@@ -118,25 +116,156 @@ t_ray raycast(t_engine *engine, float angle)
             map_y += step_y;
             side = 1; // Mur horizontal
         }
-        if (engine->map->grid[map_y][map_x].id != EMPTY)
+        if (engine->map->grid[map_y][map_x] != EMPTY)
             hit = 1;
     }
 
-    // Calcul de la distance en fonction du côté touché
     if (side == 0)
     {
         ray.dist = (map_x - ray.x + (1 - step_x) / 2.0) / ray_dir_x;
+        ray.x = map_x + (step_x < 0 ? 0 : 1);
+        ray.y = engine->camera.y + ray.dist * ray_dir_y;
         ray.side_hit = (step_x < 0) ? 3 : 1; // 3 = ouest, 1 = est
-        ray.x_t = ray.y + ray.dist * ray_dir_y - floor(ray.y + ray.dist * ray_dir_y);
     }
     else
     {
         ray.dist = (map_y - ray.y + (1 - step_y) / 2.0) / ray_dir_y;
+        ray.y = map_y + (step_y < 0 ? 0 : 1);
+        ray.x = engine->camera.x + ray.dist * ray_dir_x;
         ray.side_hit = (step_y < 0) ? 0 : 2; // 0 = nord, 2 = sud
-        ray.x_t = ray.x + ray.dist * ray_dir_x - floor(ray.x + ray.dist * ray_dir_x);
     }
 
     ray.dist *= cos(ray.dir - engine->camera.dir); // Correction du fisheye
+
+    return ray;
+}
+
+void draw_map_old(t_engine *engine)
+{
+    float camera_plane = engine->camera.fov / 2.0f;
+
+    for (int i = 0; i < engine->window->buffer->size.x; i++)
+    {
+        float camera_x = 2 * i / (float)engine->window->buffer->size.x - 1;
+        float ray_angle = engine->camera.dir + camera_x * camera_plane;
+
+        t_ray ray = raycast(engine, ray_angle);
+
+        int line_height = (int)(engine->window->buffer->size.y / ray.dist);
+        int draw_start = -line_height / 2 + engine->window->buffer->size.y / 2;
+        int draw_end = line_height / 2 + engine->window->buffer->size.y / 2;
+
+        int color;
+        switch (ray.side_hit)
+        {
+            case 0: // Nord
+                color = mlxe_color(255, 0, 0); // Rouge
+                break;
+            case 1: // Est
+                color = mlxe_color(0, 255, 0); // Vert
+                break;
+            case 2: // Sud
+                color = mlxe_color(0, 0, 255); // Bleu
+                break;
+            case 3: // Ouest
+                color = mlxe_color(255, 255, 0); // Jaune
+                break;
+        }
+
+        mlxe_draw_line(engine->window,
+            (t_vector2){i, draw_start},
+            (t_vector2){i, draw_end},
+            color);
+    }
+}
+
+void draw_map3(t_engine *engine)
+{
+    float camera_plane = engine->camera.fov / 2.0f;
+
+    for (int i = 0; i < engine->window->buffer->size.x; i++)
+    {
+        float camera_x = 2 * i / (float)engine->window->buffer->size.x - 1;
+        float ray_angle = engine->camera.dir + camera_x * camera_plane;
+
+        t_ray ray = raycast(engine, ray_angle);
+
+        int line_height = (int)(engine->window->buffer->size.y / ray.dist);
+        int draw_start = -line_height / 2 + engine->window->buffer->size.y / 2;
+        int draw_end = line_height / 2 + engine->window->buffer->size.y / 2;
+
+        int side_dir = ray.side_hit; // Nord, Sud, Est, Ouest
+        int texture_width = engine->walls[side_dir]->size.x;
+        int texture_height = engine->walls[side_dir]->size.y;
+
+        // Position du point d'impact dans la texture
+        float wall_x;
+        if (side_dir == 0 || side_dir == 2) // Nord ou Sud (horizontal)
+            wall_x = ray.y - floor(ray.y);
+        else                               // Est ou Ouest (vertical)
+            wall_x = ray.x - floor(ray.x);
+
+		printf("ray.x: %f\n", ray.x);
+
+        // Conversion de la position dans la texture
+        int tex_x = (int)(wall_x * (float)texture_width);
+        if ((side_dir == 0 && ray.dir > 0) || (side_dir == 3 && ray.dir < 0))
+            tex_x = texture_width - tex_x - 1; // Inversion pour certains côtés
+
+        // Dessin de chaque ligne de pixel
+        for (int y = draw_start; y < draw_end; y++)
+        {
+            if (y >= 0 && y < engine->window->buffer->size.y)
+            {
+                // Calculer la position y dans la texture
+                int d = (y - draw_start) * texture_height / line_height; // Position relative sur le mur
+                int tex_y = d;
+
+                // Obtenir la couleur depuis la texture
+                t_color color = mlxe_get_pixel(engine->walls[side_dir], tex_x, tex_y);
+
+                // Dessiner le pixel sur le buffer
+                mlxe_draw_pixel(engine->window->buffer, i, y, color);
+            }
+        }
+    }
+}*/
+
+t_ray raycast(t_engine *engine, float angle)
+{
+    t_ray ray;
+
+    ray.dir = angle;
+    ray.x = engine->camera.x;
+    ray.y = engine->camera.y;
+
+    float delta_x = cos(ray.dir);
+    float delta_y = sin(ray.dir);
+
+    while (1)
+    {
+        ray.x += delta_x * 0.01; // Petits pas pour suivre le rayon
+        ray.y += delta_y * 0.01;
+
+        int map_x = (int)ray.x;
+        int map_y = (int)ray.y;
+
+        if (engine->map->grid[map_y][map_x] != EMPTY)
+        {
+            ray.side_hit = (fabs(delta_y) > fabs(delta_x))
+                               ? (delta_y > 0 ? 0 : 1)  // Nord ou Sud
+                               : (delta_x > 0 ? 2 : 3); // Est ou Ouest
+
+            if (ray.side_hit == 0 || ray.side_hit == 1) // Horizontal
+                ray.x_t = ray.x - floor(ray.x);
+            else                                       // Vertical
+                ray.x_t = ray.y - floor(ray.y);
+
+            break;
+        }
+    }
+
+    ray.dist = sqrt(pow(ray.x - engine->camera.x, 2) + pow(ray.y - engine->camera.y, 2));
     return ray;
 }
 
