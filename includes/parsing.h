@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 18:36:56 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:08:45 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@
 # define COMMA_CHAR	','
 # define NL_CHAR	'\n'
 # define SLASH_CHAR	'/'
+# define EMPTY_CHAR	'0'
+# define WALL_CHAR	'1'
+# define DOOR_CHAR	'2'
 
 # define CUB_EXT	".cub"
 
@@ -122,6 +125,7 @@ t_bool	parse_texture(t_parsing *parsing, char **texture, char *path);
 t_map	*parsing(char *path);
 
 void	get_cub(t_parsing *parsing, char *path);
+void	get_grid(t_parsing *parsing);
 void	init_parsing(t_parsing *parsing);
 
 void	*free_map(t_map *map);

@@ -6,7 +6,7 @@
 #    By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/12/12 15:12:12 by pfischof         ###   ########.fr        #
+#    Updated: 2024/12/12 18:46:41 by pfischof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ SRCS += ${SRC}engine/engine.c
 
 SRCS += ${SRC}parsing/frees.c
 SRCS += ${SRC}parsing/get_cub.c
+SRCS += ${SRC}parsing/get_grid.c
 SRCS += ${SRC}parsing/init_parsing.c
+SRCS += ${SRC}parsing/parse_elements.c
 SRCS += ${SRC}parsing/parsing.c
 SRCS += ${SRC}parsing/parsing_error.c
 SRCS +=	${SRC}parsing/utils.c

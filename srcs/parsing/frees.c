@@ -6,25 +6,22 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:14:56 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 15:08:54 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:55:31 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static void	free_map_grid(t_tile ***grid, size_t height)
+static void	free_map_grid(t_tile **grid, size_t height)
 {
 	size_t	index;
 
 	index = 0;
-	while (index < height)
+	while (index < height && grid[index] != NULL)
 	{
-		free(*grid[index]);
-		*grid[index] = NULL;
+		free(grid[index]);
 		++index;
 	}
-	free(*grid);
-	*grid = NULL;
 }
 
 void	*free_map(t_map *map)
@@ -39,8 +36,10 @@ void	*free_map(t_map *map)
 	map->no = NULL;
 	free(map->ea);
 	map->no = NULL;
-	if (map->grid)
-		free_map_grid(&map->grid, map->height);
+	if (map->grid && map->grid[0])
+		free_map_grid(map->grid, map->height);
+	free(map->grid);
+	map->grid = NULL;
 	free(map);
 	return (NULL);
 }
