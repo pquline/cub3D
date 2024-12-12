@@ -6,7 +6,7 @@
 #    By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/12/12 18:46:41 by pfischof         ###   ########.fr        #
+#    Updated: 2024/12/12 19:13:52 by pfischof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = cube3d
 SRC = srcs/
 SRCS = ${SRC}main.c
 SRCS += ${SRC}game/game.c
+SRCS += ${SRC}game/minimap.c
 SRCS += ${SRC}engine/engine.c
 
 SRCS += ${SRC}parsing/frees.c

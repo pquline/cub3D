@@ -70,19 +70,19 @@ void	mlxe_draw_subtexture_size(t_window *window,
 	y_ratio = (float)coords.src.height / (float)coords.dest.height;
 	change_bounds_neg(&coords, x_ratio, y_ratio);
 	change_bounds(window, &coords, texture);
-	inc.x = 0;
-	while (inc.x < coords.dest.height)
+	inc.y = 0;
+	while (inc.y < coords.dest.height)
 	{
-		inc.y = 0;
-		while (inc.y < coords.dest.width)
+		inc.x = 0;
+		while (inc.x < coords.dest.width)
 		{
 			texture_color = mlxe_read_pixel(texture, coords.src.x
-					+ (inc.y * x_ratio), coords.src.y + (inc.x * y_ratio));
+					+ (inc.x * x_ratio), coords.src.y + (inc.y * y_ratio));
 			if (!(texture_color & 0xFF000000))
-				mlxe_write_pixel(window->buffer, coords.dest.x + inc.y,
-					coords.dest.y + inc.x, mix_colors(texture_color, color));
-			inc.y++;
+				mlxe_write_pixel(window->buffer, coords.dest.x + inc.x,
+					coords.dest.y + inc.y, mix_colors(texture_color, color));
+			inc.x++;
 		}
-		inc.x++;
+		inc.y++;
 	}
 }
