@@ -6,18 +6,40 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:07:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 18:40:04 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:05:53 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
+/*
 void	print_list(t_list *list)
 {
 	while (list)
 	{
 		printf("%s", (char *)list->content);
 		list = list->next;
+	}
+}
+
+void	print_map(t_map *map)
+{
+	size_t	x;
+	size_t	y;
+
+	if (map == NULL)
+		return ;
+	y = 0;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			printf("%c", map->grid[y][x].id != VOID ? map->grid[y][x].id + '0' : ' ');
+			++x;
+		}
+		printf("\n");
+		++y;
 	}
 }
 
@@ -43,15 +65,15 @@ void	debug_parsing(t_parsing *parsing)
 	printf("map->start_dir:\t\t[%c]\n", parsing->map->start_direction);
 	printf("\n");
 	print_list(parsing->cub);
+	printf("\n");
+	print_map(parsing->map);
 }
+*/
 
 /*
 map[y][x]
-set map->grid[y][x]->entities to NULL
-map->grid = get_grid(list);
-
 valid map:
-- 6 possible characters (0, 1, N, S, E or W)
+- 8 possible characters (0, 1, 2, N, S, E, W or ' ')
 - surrounded by walls (1)
 - types of elements (except for map content) can be separated by 0+ empty line(s)
 - types of elements (except for map content) can be set in any order in the file
@@ -72,7 +94,7 @@ t_map	*parsing(char *path)
 		return (NULL);
 	}
 	get_grid(&parsing);
-	debug_parsing(&parsing);
+	//debug_parsing(&parsing);
 	free_parsing(&parsing);
 	return (parsing.map);
 }

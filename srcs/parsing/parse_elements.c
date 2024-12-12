@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:36:21 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 18:36:28 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:01:59 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,16 @@ t_bool	parse_map_line(t_parsing *parsing, size_t index)
 	return (TRUE);
 }
 
-t_bool	parse_texture(t_parsing *parsing, char **texture, char *path)
+t_bool	parse_texture(char **texture, char *path)
 {
-	const char	*file_name = ft_strrchr(path, SLASH_CHAR) + sizeof(char);
+	size_t	index;
 
-	if (file_name == NULL)
+	index = 0;
+	while (path[index] && ft_isspace(path[index]))
+		++index;
+	if (path[index] == 0)
 		return (FALSE);
-	*texture = ft_strjoin_safe(parsing->path_prefix, file_name);
-	if (*texture == NULL)
-		return (FALSE);
+	*texture = ft_strndup(&path[index], ft_strlen(&path[index]) - sizeof(char));
 	return (TRUE);
 }
 
@@ -80,19 +81,19 @@ t_bool	parse_color(t_color *color, char *line)
 		++index;
 	red = get_primary_color(&line[index], &index);
 	if (red == INT_MAX || line[index] != COMMA_CHAR)
-		return (FALSE);
+		return (parsing_error("invalid color format"), FALSE);
 	++index;
 	green = get_primary_color(&line[index], &index);
 	if (green == INT_MAX || line[index] != COMMA_CHAR)
-		return (FALSE);
+		return (parsing_error("invalid color format"), FALSE);
 	++index;
 	blue = get_primary_color(&line[index], &index);
 	if (blue == INT_MAX)
-		return (FALSE);
+		return (parsing_error("invalid color format"), FALSE);
 	while (line[index] && ft_isspace(line[index]))
 		++index;
 	if (index != ft_strlen(line))
-		return (FALSE);
+		return (parsing_error("invalid color format"), FALSE);
 	*color = mlxe_color(red, green, blue);
 	return (TRUE);
 }

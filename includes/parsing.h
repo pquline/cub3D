@@ -6,16 +6,12 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 19:08:45 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:02:55 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
-
-/* --------------------------------- TESTING -------------------------------- */
-
-# define TEST_MAP	"./map.cub"
 
 /* --------------------------------- HEADERS -------------------------------- */
 
@@ -39,6 +35,7 @@
 # define COMMA_CHAR	','
 # define NL_CHAR	'\n'
 # define SLASH_CHAR	'/'
+# define SPACE_CHAR	' '
 # define EMPTY_CHAR	'0'
 # define WALL_CHAR	'1'
 # define DOOR_CHAR	'2'
@@ -120,7 +117,7 @@ size_t	ft_strlen_safe(const char *string);
 
 t_bool	parse_color(t_color *color, char *line);
 t_bool	parse_map_line(t_parsing *parsing, size_t index);
-t_bool	parse_texture(t_parsing *parsing, char **texture, char *path);
+t_bool	parse_texture(char **texture, char *path);
 
 t_map	*parsing(char *path);
 

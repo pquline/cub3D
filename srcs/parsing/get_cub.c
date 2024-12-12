@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:01:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 18:45:09 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 21:53:50 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ static t_bool	parse_cub_line(t_parsing *parsing, t_map *map, char *line)
 	if (ft_strncmp(&line[index], COLOR_CEILING, 1) == 0)
 		return (map->c == UINT_MAX && parse_color(&map->c, &line[index + 1]));
 	if (ft_strncmp(&line[index], TEXTURE_NORTH, 2) == 0)
-		return (parse_texture(parsing, &map->no, &line[index + 2]));
+		return (parse_texture(&map->no, &line[index + 2]));
 	if (ft_strncmp(&line[index], TEXTURE_SOUTH, 2) == 0)
-		return (parse_texture(parsing, &map->so, &line[index + 2]));
+		return (parse_texture(&map->so, &line[index + 2]));
 	if (ft_strncmp(&line[index], TEXTURE_WEST, 2) == 0)
-		return (parse_texture(parsing, &map->we, &line[index + 2]));
+		return (parse_texture(&map->we, &line[index + 2]));
 	if (ft_strncmp(&line[index], TEXTURE_EAST, 2) == 0)
-		return (parse_texture(parsing, &map->ea, &line[index + 2]));
+		return (parse_texture(&map->ea, &line[index + 2]));
 	if (parsing->state == PARSING_MAP && line[0] != NL_CHAR)
 		return (parse_map_line(parsing, index));
 	parsing_error("invalid .cub file format");

@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/12 19:14:40 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:04:32 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,26 +87,26 @@ t_map* test_map()
 int	main(int ac, char **av)
 {
 	t_bool		error;
-	t_window	*window;
 	t_game		game;
+	t_map		*map;
+	t_window	*window;
 
-	(void)av;
-	(void)ac;
+	if (ac != 2)
+		return (print_error("Usage : ./cube3d [map.ber]"));
 	error = SUCCESS;
-	//t_map	*map = parsing(TEST_MAP);
-	//return (free_map(map), 0);
-	//if (ac != 2)
-	//	return (print_error("Usage : ./cube3d [map.ber]"));
+	map = parsing(av[1]);
+	if (map == NULL)
+		return (1);
 	window = mlxe_init(1920 / 2, 1080 / 2, "cube3d");
 	if (!window)
-		return (print_error("Failed to initialize window"));
-	game_init(&game, window, test_map());
+		return (free_map(map), print_error("Failed to initialize window"));
+	game_init(&game, window, map);
 	mlxe_loop(window, main_loop, &game);
 
 	//error = FAILURE;
 	//set_error(&game, "Test error");
 
-	//free_map(map);
+	free_map(map);
 	mlxe_destroy(window);
 	if (!error)
 		return (print_error(game.error_msg));
