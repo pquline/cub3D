@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:10:59 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 15:51:35 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:11:22 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ size_t	ft_strlen_safe(const char *string)
 	return (index);
 }
 
+/*
+- use ft_strlen_safe
+- replace last character ('\n') by '\0'
+*/
 char	*ft_strjoin_safe(char const *s1, char const *s2)
 {
 	size_t	len1;
@@ -39,6 +43,7 @@ char	*ft_strjoin_safe(char const *s1, char const *s2)
 		return (NULL);
 	ft_strlcpy(res, s1, -1);
 	ft_strlcpy(res + len1, s2, -1);
+	res[len1 + ft_strlen_safe(s2) - sizeof(char)] = 0;
 	return (res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/12 17:16:16 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:46:46 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int	main(int ac, char **av)
 	(void)ac;
 	error = SUCCESS;
 	t_map	*map = parsing(TEST_MAP);
+	//(void)map;
 	return (free_map(map), 0);
 	//if (ac != 2)
 	//	return (print_error("Usage : ./cube3d [map.ber]"));
@@ -114,6 +115,7 @@ int	main(int ac, char **av)
 	//error = FAILURE;
 	//set_error(&game, "Test error");
 
+	free_map(map);
 	mlxe_destroy(window);
 	if (!error)
 		return (print_error(game.error_msg));

@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 15:49:27 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:36:56 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@
 # define TEXTURE_SOUTH	"SO"
 # define TEXTURE_WEST	"WE"
 # define TEXTURE_EAST	"EA"
+
+# define VALID_MAP_CHARS	"012NSWE "
+# define PLAYER_MAP_CHARS	"NSWE"
 
 /* ---------------------------------- ENUMS --------------------------------- */
 
@@ -111,6 +114,10 @@ char	*ft_strndup(const char *string, size_t size);
 char	*ft_strjoin_safe(char const *s1, char const *s2);
 
 size_t	ft_strlen_safe(const char *string);
+
+t_bool	parse_color(t_color *color, char *line);
+t_bool	parse_map_line(t_parsing *parsing, size_t index);
+t_bool	parse_texture(t_parsing *parsing, char **texture, char *path);
 
 t_map	*parsing(char *path);
 
