@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:01:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 15:49:52 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:54:22 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@ t_bool	parse_map_line(t_map *map)
 	return (TRUE);
 }
 
-/*
-- get texture path
-- join path_prefix and texture path
-*/
 t_bool	parse_texture(t_parsing *parsing, char **texture, char *path)
 {
 	const char	*file_name = ft_strrchr(path, SLASH_CHAR);

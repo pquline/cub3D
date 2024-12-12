@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/12 14:43:12 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:31:18 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int	main(int ac, char **av)
 	(void)av;
 	(void)ac;
 	error = SUCCESS;
+	t_map	*map = parsing(TEST_MAP);
+	return (free_map(map), 0);
 	//if (ac != 2)
 	//	return (print_error("Usage : ./cube3d [map.ber]"));
 	window = mlxe_init(1920 / 2, 1080 / 2, "cube3d");
