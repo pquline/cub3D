@@ -6,12 +6,11 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:31:04 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 14:30:53 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:29:15 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include <stdio.h>
 
 void	init_parsing(t_parsing *parsing)
 {
@@ -33,6 +32,7 @@ void	init_parsing(t_parsing *parsing)
 	parsing->map->start_coords = (t_vector2){-1, -1};
 	parsing->map->start_direction = 0;
 	parsing->state = PARSING_OTHER;
+	parsing->path_prefix = NULL;
 	parsing->line = NULL;
 	parsing->cub = NULL;
 }
