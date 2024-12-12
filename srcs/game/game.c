@@ -6,29 +6,12 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/12 18:12:11 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/12 18:17:49 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3d.h>
 #include <stdio.h>
-
-void want_to_move2(t_engine *engine, float x, float y)
-{
-	if (x < 0 || x >= engine->map->width || y < 0 || y >= engine->map->height)
-		return ;
-	if (engine->map->grid[(int)y][(int)x].id != EMPTY)
-		return ;
-	float mov_dir = atan2(y - engine->camera.y, x - engine->camera.x);
-	printf("mov_dir: %f\n", mov_dir);
-	printf("camera_dir: %f\n", engine->camera.dir);
-	t_ray ray = raycast(engine, mov_dir);
-	float dist = sqrt(pow(engine->camera.x - x, 2) + pow(engine->camera.y - y, 2));
-	if (ray.dist < dist)
-		return ;
-	engine->camera.x = x;
-	engine->camera.y = y;
-}
 
 void want_to_move(t_engine *engine, float x, float y)
 {
