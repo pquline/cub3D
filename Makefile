@@ -3,18 +3,24 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
+#    By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/12/11 16:25:12 by lfarhi           ###   ########.fr        #
+#    Updated: 2024/12/12 14:33:31 by pfischof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cube3d
 SRC = srcs/
-SRCS = ${SRC}main.c 
+SRCS = ${SRC}main.c
 SRCS += ${SRC}game/game.c
 SRCS += ${SRC}engine/engine.c
+
+SRCS += ${SRC}parsing/frees.c
+SRCS += ${SRC}parsing/get_cub.c
+SRCS += ${SRC}parsing/init_parsing.c
+SRCS += ${SRC}parsing/parsing.c
+SRCS += ${SRC}parsing/parsing_error.c
 
 OBJS = ${SRCS:.c=.o}
 

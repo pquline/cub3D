@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:07:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/11 18:19:03 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:39:28 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 /*
 map[y][x]
+set map->grid[y][x]->entities to NULL
 valid map:
 - 6 possible characters (0, 1, N, S, E or W)
 - surrounded by walls (1)
@@ -24,14 +25,19 @@ valid map:
 
 t_map	*parsing(char *path)
 {
-	t_map	*map;
-	t_list	*list;
+	t_parsing	parsing;
 
-	map = init_map();
-	if (map == NULL)
+	init_parsing(&parsing);
+	if (parsing.map == NULL)
 		return (NULL);
-	list = get_cub(map, path);
-	if (list == NULL)
+	get_cub(&parsing, path);
+	if (parsing.cub == NULL)
+	{
+		free_map(parsing.map);
+		free_parsing(&parsing);
 		return (NULL);
-	map->grid = get_grid(list);
+	}
+	free_parsing(&parsing);
+	//map->grid = get_grid(list);
+	return (parsing.map);
 }

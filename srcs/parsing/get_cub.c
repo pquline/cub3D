@@ -6,13 +6,26 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:01:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/11 21:34:33 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:36:34 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	get_single_color(char *line, size_t *i)
+t_bool	parse_map_line(t_map *map)
+{
+	(void)map;
+	return (TRUE);
+}
+
+t_bool	parse_texture(t_map *map, char **texture, char *path)
+{
+	(void)map;
+	*texture = ft_strdup(path);
+	return (TRUE);
+}
+
+int	get_primary_color(char *line, size_t *i)
 {
 	size_t	index;
 	int		color;
@@ -20,7 +33,7 @@ int	get_single_color(char *line, size_t *i)
 	index = 0;
 	while (line[index] && ft_isdigit(line[index]))
 		++index;
-	if (index > 0 && index <= 3)
+	if (index >= MIN_RGB_LENGTH && index <= MAX_RGB_LENGTH)
 		color = ft_atoi(line);
 	else
 		return (INT_MAX);
@@ -30,7 +43,7 @@ int	get_single_color(char *line, size_t *i)
 	return (color);
 }
 
-t_bool	parse_colors(t_color *color, char *line)
+t_bool	parse_color(t_color *color, char *line)
 {
 	size_t	index;
 	int		red;
@@ -40,93 +53,101 @@ t_bool	parse_colors(t_color *color, char *line)
 	index = 0;
 	while (line[index] && ft_isspace(line[index]))
 		++index;
-	red = get_single_color(&line[index], &index);
+	red = get_primary_color(&line[index], &index);
 	if (red == INT_MAX || line[index] != COMMA_CHAR)
 		return (FALSE);
 	++index;
-	green = get_single_color(&line[index], &index);
+	green = get_primary_color(&line[index], &index);
 	if (green == INT_MAX || line[index] != COMMA_CHAR)
 		return (FALSE);
 	++index;
-	blue = get_single_color(&line[index], &index);
+	blue = get_primary_color(&line[index], &index);
 	if (blue == INT_MAX)
 		return (FALSE);
 	while (line[index] && ft_isspace(line[index]))
 		++index;
 	if (index != ft_strlen(line))
 		return (FALSE);
-	color = (t_color){red, green, blue};
+	*color = mlxe_color(red, green, blue);
 	return (TRUE);
 }
 
-t_bool	parse_cub_line(t_map *map, t_list **cub, char *line)
+t_bool	parse_cub_line(t_parsing *parsing, t_map *map, char *line)
 {
 	size_t	index;
 
 	index = 0;
+	if (parsing->state == PARSING_OTHER && line[0] == NL_CHAR)
+		return (TRUE);
 	while (line[index] && ft_isspace(line[index]))
 		++index;
 	if (ft_strncmp(&line[index], COLOR_FLOOR, 1) == 0)
-		return (parse_colors(&map->f, &line[index + 1]));
+		return (map->f == UINT_MAX && parse_color(&map->f, &line[index + 1]));
 	if (ft_strncmp(&line[index], COLOR_CEILING, 1) == 0)
-		return (parse_colors(&map->c, &line[index + 1]));
+		return (map->c == UINT_MAX && parse_color(&map->c, &line[index + 1]));
 	if (ft_strncmp(&line[index], TEXTURE_NORTH, 2) == 0)
-		return (parse_north(map, &line[index + 2]));
+		return (parse_texture(map, &map->no, &line[index + 2]));
 	if (ft_strncmp(&line[index], TEXTURE_SOUTH, 2) == 0)
-		return (parse_south(map, &line[index + 2]));
+		return (parse_texture(map, &map->so, &line[index + 2]));
 	if (ft_strncmp(&line[index], TEXTURE_WEST, 2) == 0)
-		return (parse_west(map, &line[index + 2]));
+		return (parse_texture(map, &map->we, &line[index + 2]));
 	if (ft_strncmp(&line[index], TEXTURE_EAST, 2) == 0)
-		return (parse_east(map, &line[index + 2]));
-	if (index == 0 && ft_strlen(line) == 0 && *line == NULL)
-		return (TRUE);
+		return (parse_texture(map, &map->ea, &line[index + 2]));
+	if (parsing->state == PARSING_MAP && line[0] != NL_CHAR)
+		return (parse_map_line(map));
 	return (FALSE);
 }
 
-void	parse_cub(t_map *map, t_list **cub, int fd)
+void	update_parsing_state(t_parsing *parsing)
 {
-	char	*line;
-	t_bool	valid;
+	if (parsing->state == PARSING_MAP)
+		return ;
+	if (parsing->map->f != UINT_MAX && parsing->map->c != UINT_MAX \
+			&& parsing->map->no != NULL && parsing->map->so != NULL \
+			&& parsing->map->we != NULL && parsing->map->ea != NULL \
+			&& parsing->line[0] != NL_CHAR)
+		parsing->state = PARSING_MAP;
+}
+
+void	parse_cub(t_parsing *parsing, int fd)
+{
 	t_list	*new;
 
-	line = get_next_line(fd);
-	while (line != NULL)
+	parsing->line = get_next_line(fd);
+	while (parsing->line != NULL)
 	{
-		valid = parse_cub_line(map, cub, line);
-		if (valid == FALSE)
+		update_parsing_state(parsing);
+		if (parse_cub_line(parsing, parsing->map, parsing->line) == FALSE)
 		{
-			free(line);
-			ft_lstclear(cub, free);
-			return (NULL);
+			parsing_error("invalid .cub file format");
+			return ;
 		}
-		new = ft_lstnew(line);
+		new = ft_lstnew(parsing->line);
 		if (new == NULL)
 		{
-			free(line);
-			ft_lstclear(cub, free);
-			return (parsing_error("malloc() failed on [t_list *]"));
+			parsing_error("malloc() failed on [t_list *]");
+			return ;
 		}
-		ft_lstadd_back(cub, new);
-		line = get_next_line(fd);
+		ft_lstadd_back(&parsing->cub, new);
+		parsing->line = get_next_line(fd);
 	}
 }
 
-t_list	*get_cub(t_map *map, char *path)
+void	get_cub(t_parsing *parsing, char *path)
 {
 	int		fd;
-	t_list	*cub;
 
-	cub = NULL;
+	if (ft_strncmp(&path[ft_strlen(path) - SIZE_EXT], CUB_EXT, SIZE_EXT) != 0)
+	{
+		parsing_error("invalid .cub file name");
+		return ;
+	}
 	fd = open(path, O_RDONLY);
 	if (fd == ERROR)
-		return (parsing_error("open() failed"));
-	parse_cub(map, &cub, fd);
-	if (cub == NULL)
-		return (NULL);
-	if (close(fd) == ERROR)
 	{
-		ft_lstclear(&cub, free);
-		return (parsing_error("close() failed"));
+		parsing_error("open() failed");
+		return ;
 	}
-	return (cub);
+	parse_cub(parsing, fd);
+	close(fd);
 }
