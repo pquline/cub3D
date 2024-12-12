@@ -52,7 +52,7 @@ Mkfile.old
 dkms.conf
 
 cube3d
-minilibx/*
+minilibx/
 mlxe/libmlxe.a
 libft/libft.a
 map_generator.py
