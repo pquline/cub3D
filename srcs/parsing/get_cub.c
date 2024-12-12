@@ -6,22 +6,31 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:01:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 14:36:34 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:12:48 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
+/*
+invalid:
+- if any tile is neither 0, 1, 2 nor a whitespace
+*/
 t_bool	parse_map_line(t_map *map)
 {
 	(void)map;
 	return (TRUE);
 }
 
-t_bool	parse_texture(t_map *map, char **texture, char *path)
+t_bool	parse_texture(t_parsing *parsing, char **texture, char *path)
 {
-	(void)map;
-	*texture = ft_strdup(path);
+	const char	*file_name = ft_strrchr(path, SLASH_CHAR);
+
+	if (file_name == NULL)
+		return (FALSE);
+	*texture = ft_strjoin_safe(parsing->path_prefix, file_name);
+	if (*texture == NULL)
+		return (FALSE);
 	return (TRUE);
 }
 
@@ -86,13 +95,13 @@ t_bool	parse_cub_line(t_parsing *parsing, t_map *map, char *line)
 	if (ft_strncmp(&line[index], COLOR_CEILING, 1) == 0)
 		return (map->c == UINT_MAX && parse_color(&map->c, &line[index + 1]));
 	if (ft_strncmp(&line[index], TEXTURE_NORTH, 2) == 0)
-		return (parse_texture(map, &map->no, &line[index + 2]));
+		return (parse_texture(parsing, &map->no, &line[index + 2]));
 	if (ft_strncmp(&line[index], TEXTURE_SOUTH, 2) == 0)
-		return (parse_texture(map, &map->so, &line[index + 2]));
+		return (parse_texture(parsing, &map->so, &line[index + 2]));
 	if (ft_strncmp(&line[index], TEXTURE_WEST, 2) == 0)
-		return (parse_texture(map, &map->we, &line[index + 2]));
+		return (parse_texture(parsing, &map->we, &line[index + 2]));
 	if (ft_strncmp(&line[index], TEXTURE_EAST, 2) == 0)
-		return (parse_texture(map, &map->ea, &line[index + 2]));
+		return (parse_texture(parsing, &map->ea, &line[index + 2]));
 	if (parsing->state == PARSING_MAP && line[0] != NL_CHAR)
 		return (parse_map_line(map));
 	return (FALSE);
@@ -133,6 +142,22 @@ void	parse_cub(t_parsing *parsing, int fd)
 	}
 }
 
+/*
+/home/pfischof/map.cub
+../maps/map.cub
+../map.cub
+./map.cub
+map.cub
+*/
+void	extract_path(t_parsing *parsing, char *path)
+{
+	const char	*file_name = ft_strrchr(path, SLASH_CHAR);
+
+	if (file_name == NULL)
+		return ;
+	parsing->path_prefix = ft_strndup(path, file_name - path + sizeof(char));
+}
+
 void	get_cub(t_parsing *parsing, char *path)
 {
 	int		fd;
@@ -142,6 +167,7 @@ void	get_cub(t_parsing *parsing, char *path)
 		parsing_error("invalid .cub file name");
 		return ;
 	}
+	extract_path(parsing, path);
 	fd = open(path, O_RDONLY);
 	if (fd == ERROR)
 	{

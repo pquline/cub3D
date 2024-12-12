@@ -6,7 +6,7 @@
 #    By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/12/12 14:33:31 by pfischof         ###   ########.fr        #
+#    Updated: 2024/12/12 15:12:12 by pfischof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS += ${SRC}parsing/get_cub.c
 SRCS += ${SRC}parsing/init_parsing.c
 SRCS += ${SRC}parsing/parsing.c
 SRCS += ${SRC}parsing/parsing_error.c
+SRCS +=	${SRC}parsing/utils.c
 
 OBJS = ${SRCS:.c=.o}
 

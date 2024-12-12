@@ -6,21 +6,28 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 14:37:06 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:49:27 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# define TEST_MAP	"map.cub"
+/* --------------------------------- TESTING -------------------------------- */
+
+# define TEST_MAP	"./map.cub"
+
+/* --------------------------------- HEADERS -------------------------------- */
 
 # include <limits.h>
 # include <fcntl.h>
+# include <stdio.h>
 
 # include <libft.h>
 # include <mlxe.h>
 # include <mlxe_structs.h>
+
+/* --------------------------------- MACROS --------------------------------- */
 
 # define ERROR			-1
 # define SIZE_EXT		4
@@ -31,6 +38,7 @@
 
 # define COMMA_CHAR	','
 # define NL_CHAR	'\n'
+# define SLASH_CHAR	'/'
 
 # define CUB_EXT	".cub"
 
@@ -41,6 +49,8 @@
 # define TEXTURE_SOUTH	"SO"
 # define TEXTURE_WEST	"WE"
 # define TEXTURE_EAST	"EA"
+
+/* ---------------------------------- ENUMS --------------------------------- */
 
 typedef enum e_state
 {
@@ -59,12 +69,13 @@ typedef enum e_tile_id
 	VOID	= INT_MAX,
 }	t_tile_id;
 
+/* ------------------------------- STRUCTURES ------------------------------- */
+
 typedef struct s_tile
 {
 	t_tile_id	id;
 	t_list		*entities;
 }	t_tile;
-
 
 /*
 for textures: from path relative to the map to path relative to the program
@@ -88,10 +99,18 @@ typedef struct s_map
 typedef struct s_parsing
 {
 	char	*line;
+	char	*path_prefix;
 	t_list	*cub;
 	t_map	*map;
 	t_state	state;
 }	t_parsing;
+
+/* -------------------------------- FUNCTIONS ------------------------------- */
+
+char	*ft_strndup(const char *string, size_t size);
+char	*ft_strjoin_safe(char const *s1, char const *s2);
+
+size_t	ft_strlen_safe(const char *string);
 
 t_map	*parsing(char *path);
 

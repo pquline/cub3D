@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:07:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 14:39:28 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:55:28 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 /*
 map[y][x]
 set map->grid[y][x]->entities to NULL
+map->grid = get_grid(list);
+
 valid map:
 - 6 possible characters (0, 1, N, S, E or W)
 - surrounded by walls (1)
@@ -22,7 +24,6 @@ valid map:
 - types of elements (except for map content) can be set in any order in the file
 - types of elements (except for map content) cam be separated by 0+ space(s)
 */
-
 t_map	*parsing(char *path)
 {
 	t_parsing	parsing;
@@ -38,6 +39,5 @@ t_map	*parsing(char *path)
 		return (NULL);
 	}
 	free_parsing(&parsing);
-	//map->grid = get_grid(list);
 	return (parsing.map);
 }
