@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:40:23 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 20:44:59 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/13 10:15:30 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	parse_grid_line(t_parsing *parsing, size_t y)
 	}
 }
 
-void	get_grid(t_parsing *parsing)
+t_bool	get_grid(t_parsing *parsing)
 {
 	size_t	index;
 
@@ -60,7 +60,7 @@ void	get_grid(t_parsing *parsing)
 	if (parsing->map->grid == NULL)
 	{
 		parsing_error("malloc() failed on [t_tile **]");
-		return ;
+		return (FAILURE);
 	}
 	index = 0;
 	while (index < parsing->map->height)
@@ -70,9 +70,10 @@ void	get_grid(t_parsing *parsing)
 		if (parsing->map->grid[index] == NULL)
 		{
 			parsing_error("malloc() failed on [t_tile *]");
-			return ;
+			return (FAILURE);
 		}
 		parse_grid_line(parsing, index);
 		++index;
 	}
+	return (SUCCESS);
 }

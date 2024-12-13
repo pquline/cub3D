@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_validity.c                                     :+:      :+:    :+:   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:08:02 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/13 10:08:14 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/13 10:49:56 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_bool	map_is_valid(t_map *map)
 	size_t	y;
 
 	if (map->start_direction == 0)
-		return (FALSE);
+		return (parsing_error("no player in map"), FALSE);
 	empty_tiles = 0;
 	y = 0;
 	while (y < map->height)
@@ -43,12 +43,12 @@ t_bool	map_is_valid(t_map *map)
 					&& empty_tile_is_valid(map, x, y))
 				++empty_tiles;
 			else if (map->grid[y][x].id == EMPTY)
-				return (FALSE);
+				return (parsing_error("empty tile near void in map"), FALSE);
 			++x;
 		}
 		++y;
 	}
 	if (empty_tiles == 0)
-		return (FALSE);
+		return (parsing_error("no empty tile in map"), FALSE);
 	return (TRUE);
 }

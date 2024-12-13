@@ -6,19 +6,19 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:31:04 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 22:14:34 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/13 10:31:08 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	init_parsing(t_parsing *parsing)
+t_bool	init_parsing(t_parsing *parsing)
 {
 	parsing->map = (t_map *)malloc(sizeof(t_map));
 	if (parsing->map == NULL)
 	{
 		parsing_error("malloc() failed on [t_map *]");
-		return ;
+		return (FAILURE);
 	}
 	parsing->map->no = NULL;
 	parsing->map->so = NULL;
@@ -34,4 +34,5 @@ void	init_parsing(t_parsing *parsing)
 	parsing->state = PARSING_OTHER;
 	parsing->line = NULL;
 	parsing->cub = NULL;
+	return (SUCCESS);
 }

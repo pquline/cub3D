@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:01:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/13 09:53:11 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/13 10:37:44 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_bool	parse_cub_line(t_parsing *parsing, t_map *map, char *line)
 
 	index = 0;
 	if (parsing->state == PARSING_OTHER && line[0] == NL_CHAR)
-		return (TRUE);
+		return (SUCCESS);
 	while (line[index] && ft_isspace(line[index]))
 		++index;
 	if (ft_strncmp(&line[index], COLOR_FLOOR, 1) == 0)
@@ -36,7 +36,7 @@ static t_bool	parse_cub_line(t_parsing *parsing, t_map *map, char *line)
 	if (parsing->state == PARSING_MAP && line[0] != NL_CHAR)
 		return (parse_map_line(parsing, index));
 	parsing_error("invalid .cub file format");
-	return (FALSE);
+	return (FAILURE);
 }
 
 static void	update_parsing_state(t_parsing *parsing)
@@ -50,7 +50,7 @@ static void	update_parsing_state(t_parsing *parsing)
 		parsing->state = PARSING_MAP;
 }
 
-static void	parse_cub(t_parsing *parsing, int fd)
+static t_bool	parse_cub(t_parsing *parsing, int fd)
 {
 	t_list	*new;
 
@@ -58,15 +58,15 @@ static void	parse_cub(t_parsing *parsing, int fd)
 	while (parsing->line != NULL)
 	{
 		update_parsing_state(parsing);
-		if (parse_cub_line(parsing, parsing->map, parsing->line) == FALSE)
-			return ;
+		if (parse_cub_line(parsing, parsing->map, parsing->line) == FAILURE)
+			return (FAILURE);
 		if (parsing->state == PARSING_MAP)
 		{
 			new = ft_lstnew(parsing->line);
 			if (new == NULL)
 			{
 				parsing_error("malloc() failed on [t_list *]");
-				return ;
+				return (FAILURE);
 			}
 			ft_lstadd_back(&parsing->cub, new);
 			++parsing->map->height;
@@ -75,23 +75,29 @@ static void	parse_cub(t_parsing *parsing, int fd)
 			free(parsing->line);
 		parsing->line = get_next_line(fd);
 	}
+	return (SUCCESS);
 }
 
-void	get_cub(t_parsing *parsing, char *path)
+t_bool	get_cub(t_parsing *parsing, char *path)
 {
 	int	fd;
 
 	if (ft_strncmp(&path[ft_strlen(path) - SIZE_EXT], CUB_EXT, SIZE_EXT) != 0)
 	{
 		parsing_error("invalid .cub file name");
-		return ;
+		return (FAILURE);
 	}
 	fd = open(path, O_RDONLY);
 	if (fd == ERROR)
 	{
 		parsing_error("open() failed");
-		return ;
+		return (FAILURE);
 	}
-	parse_cub(parsing, fd);
+	if (parse_cub(parsing, fd) == FAILURE)
+	{
+		close(fd);
+		return (FAILURE);
+	}
 	close(fd);
+	return (SUCCESS);
 }
