@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:36:21 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/13 10:53:36 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/13 13:43:12 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_bool	parse_map_line(t_parsing *parsing, size_t index)
 		{
 			if (parsing->map->start_direction != 0)
 			{
-				parsing_error("too many player in map");
+				parsing_error("too many players in map");
 				return (FAILURE);
 			}
 			parsing->map->start_direction = parsing->line[index];

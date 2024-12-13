@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:07:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/13 10:55:49 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:43:18 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_map	*parsing(char *path)
 	free_parsing(&parsing);
 	if (map_is_valid(parsing.map))
 		return (parsing.map);
-	//parsing_error("invalid map");
+	parsing_error("invalid map");
 	free_map(parsing.map);
 	return (NULL);
 }
