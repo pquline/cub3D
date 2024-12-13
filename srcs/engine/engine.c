@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:49:50 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/12 17:44:35 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/13 14:08:05 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	engine_init(t_engine *engine, t_window *window, t_map *map)
 	engine->map = map;
 	engine->camera.x = map->start_coords.x + 0.5;
 	engine->camera.y = map->start_coords.y + 0.5;
-	if (map->start_direction == 'N')
+	if (map->start_direction == 'E')
 		engine->camera.dir = 0;
-	else if (map->start_direction == 'E')
-		engine->camera.dir = M_PI_2;
 	else if (map->start_direction == 'S')
-		engine->camera.dir = M_PI;
+		engine->camera.dir = M_PI_2;
 	else if (map->start_direction == 'W')
+		engine->camera.dir = M_PI;
+	else if (map->start_direction == 'N')
 		engine->camera.dir = 3 * M_PI_2;
 	engine->camera.fov = M_PI / 3;
 	engine->entities = NULL;
@@ -166,7 +166,7 @@ void draw_map(t_engine *engine)
 
         // Calculer la coordonnée x dans la texture
         int tex_x = (int)(ray.x_t * texture_width);
-		
+
         tex_x = tex_x % texture_width;  // Assure-toi que tex_x est toujours dans les limites de la texture
 
         // Dessin de chaque ligne de pixel
