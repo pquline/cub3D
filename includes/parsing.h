@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 22:14:12 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/13 09:58:14 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,6 @@ typedef struct s_parsing
 /* -------------------------------- FUNCTIONS ------------------------------- */
 
 char	*ft_strndup(const char *string, size_t size);
-char	*ft_strjoin_safe(char const *s1, char const *s2);
-
-size_t	ft_strlen_safe(const char *string);
 
 t_bool	parse_color(t_color *color, char *line);
 t_bool	parse_map_line(t_parsing *parsing, size_t index);

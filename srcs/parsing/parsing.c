@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:07:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/13 09:43:37 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/13 09:57:36 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,15 +111,6 @@ t_bool	map_is_valid(t_map *map)
 	return (TRUE);
 }
 
-/*
-map[y][x]
-valid map:
-- surrounded by walls (1)
-- 8 possible characters (0, 1, 2, N, S, E, W or ' ')
-- types of elements (except for map content) can be separated by 0+ empty line(s)
-- types of elements (except for map content) can be set in any order in the file
-- types of elements (except for map content) cam be separated by 0+ space(s)
-*/
 t_map	*parsing(char *path)
 {
 	t_parsing	parsing;
