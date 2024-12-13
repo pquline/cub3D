@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/13 10:13:28 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/13 23:45:23 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,11 @@ int	main(int ac, char **av)
 	t_window	*window;
 
 	if (ac != 2)
-		return (print_error("Usage : ./cube3d [map.ber]"));
+		return (print_error("Usage : ./cube3d [map.cub]"));
 	error = SUCCESS;
 	map = parsing(av[1]);
 	if (map == NULL)
-		return (1);
-	return (free_map(map), 1);
+		return (EXIT_FAILURE);
 	window = mlxe_init(1920 / 2, 1080 / 2, "cube3d");
 	if (!window)
 		return (free_map(map), print_error("Failed to initialize window"));
@@ -106,12 +105,11 @@ int	main(int ac, char **av)
 
 	//error = FAILURE;
 	//set_error(&game, "Test error");
-	// (void)map;
-	// (void)game;
-	// (void)window;
 	free_map(map);
+	// shouldn't mlxe_destroy do mlx_do_key_autorepeaton?
+	mlx_do_key_autorepeaton(window->mlx);
 	mlxe_destroy(window);
 	// if (!error)
 	// 	return (print_error(game.error_msg));
-	return (0);
+	return (EXIT_SUCCESS);
 }

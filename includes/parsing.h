@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/13 11:02:04 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/13 23:39:12 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,6 @@ typedef enum e_state
 	PARSING_OTHER,
 }	t_state;
 
-/*
-in map: replace player direction by empty tile
-*/
 typedef enum e_tile_id
 {
 	EMPTY	= 0,
@@ -81,10 +78,6 @@ typedef struct s_tile
 	t_list		*entities;
 }	t_tile;
 
-/*
-for textures: from path relative to the map to path relative to the program
-for t_colors: mlx_color(r, g, b)
-*/
 typedef struct s_map
 {
 	char		*no;
