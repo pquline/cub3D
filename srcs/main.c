@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/13 23:45:23 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/14 09:23:56 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	main(int ac, char **av)
 	//error = FAILURE;
 	//set_error(&game, "Test error");
 	free_map(map);
-	// shouldn't mlxe_destroy do mlx_do_key_autorepeaton?
+	// shouldn't mlxe_destroy() call mlx_do_key_autorepeaton()?
 	mlx_do_key_autorepeaton(window->mlx);
 	mlxe_destroy(window);
 	// if (!error)

@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:07:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/13 14:14:52 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/14 09:19:12 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,11 @@ t_map	*parsing(char *path)
 		return (NULL);
 	if (get_cub(&parsing, path) == FAILURE || get_grid(&parsing) == FAILURE)
 	{
-		free_map(parsing.map);
-		return (free_parsing(&parsing));
+		free_parsing(&parsing);
+		return (free_map(parsing.map));
 	}
 	free_parsing(&parsing);
-	if (map_is_valid(parsing.map))
-		return (parsing.map);
-	free_map(parsing.map);
-	return (NULL);
+	if (map_is_valid(parsing.map) == FALSE)
+		return (free_map(parsing.map));
+	return (parsing.map);
 }
