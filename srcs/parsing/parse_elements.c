@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:36:21 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/13 13:43:12 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/15 10:57:16 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,13 @@ t_bool	parse_map_line(t_parsing *parsing, size_t index)
 {
 	while (parsing->line[index])
 	{
-		if (ft_strchr(VALID_MAP_CHARS, parsing->line[index]) == NULL
-			&& parsing->line[index] != NL_CHAR)
-		{
-			parsing_error("invalid character in map");
-			return (FAILURE);
-		}
+		if (ft_strchr(VALID_MAP_CHARS, parsing->line[index]) == NULL \
+				&& parsing->line[index] != NL_CHAR)
+			return (parsing_error(ERR_INVALID_CHAR));
 		if (ft_strchr(PLAYER_MAP_CHARS, parsing->line[index]) != NULL)
 		{
 			if (parsing->map->start_direction != 0)
-			{
-				parsing_error("too many players in map");
-				return (FAILURE);
-			}
+				return (parsing_error(ERR_PLAYERS));
 			parsing->map->start_direction = parsing->line[index];
 			parsing->map->start_coords = (t_vector2){index, \
 				parsing->map->height};
@@ -48,16 +42,10 @@ t_bool	parse_texture(char **texture, char *path)
 	while (path[index] && ft_isspace(path[index]))
 		++index;
 	if (path[index] == 0)
-	{
-		parsing_error("missing texture path");
-		return (FAILURE);
-	}
+		return (parsing_error(ERR_TEXTURE_PATH));
 	*texture = ft_strndup(&path[index], ft_strlen(&path[index]) - sizeof(char));
 	if (*texture == NULL)
-	{
-		parsing_error("malloc() failed on [char *]");
-		return (FAILURE);
-	}
+		return (parsing_error(ERR_MALLOC_STRING));
 	return (SUCCESS);
 }
 
@@ -91,19 +79,19 @@ t_bool	parse_color(t_color *color, char *line)
 		++index;
 	red = get_primary_color(&line[index], &index);
 	if (red == INT_MAX || line[index] != COMMA_CHAR)
-		return (parsing_error("invalid color format"), FAILURE);
+		return (parsing_error(ERR_COLOR));
 	++index;
 	green = get_primary_color(&line[index], &index);
 	if (green == INT_MAX || line[index] != COMMA_CHAR)
-		return (parsing_error("invalid color format"), FAILURE);
+		return (parsing_error(ERR_COLOR));
 	++index;
 	blue = get_primary_color(&line[index], &index);
 	if (blue == INT_MAX)
-		return (parsing_error("invalid color format"), FAILURE);
+		return (parsing_error(ERR_COLOR));
 	while (line[index] && ft_isspace(line[index]))
 		++index;
 	if (index != ft_strlen(line))
-		return (parsing_error("invalid color format"), FAILURE);
+		return (parsing_error(ERR_COLOR));
 	*color = mlxe_color(red, green, blue);
 	return (SUCCESS);
 }

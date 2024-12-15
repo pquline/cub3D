@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:01:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/13 11:00:55 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/15 10:49:07 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ static t_bool	parse_cub_line(t_parsing *parsing, t_map *map, char *line)
 		return (parse_texture(&map->ea, &line[index + 2]));
 	if (parsing->state == PARSING_MAP && line[0] != NL_CHAR)
 		return (parse_map_line(parsing, index));
-	parsing_error("invalid .cub file format");
-	return (FAILURE);
+	return (parsing_error(ERR_CUB_FORMAT));
 }
 
 static void	update_parsing_state(t_parsing *parsing)
@@ -64,10 +63,7 @@ static t_bool	parse_cub(t_parsing *parsing, int fd)
 		{
 			new = ft_lstnew(parsing->line);
 			if (new == NULL)
-			{
-				parsing_error("malloc() failed on [t_list *]");
-				return (FAILURE);
-			}
+				return (parsing_error(ERR_MALLOC_TLIST));
 			ft_lstadd_back(&parsing->cub, new);
 			++parsing->map->height;
 		}
@@ -82,17 +78,11 @@ t_bool	get_cub(t_parsing *parsing, char *path)
 {
 	int	fd;
 
-	if (ft_strncmp(&path[ft_strlen(path) - SIZE_EXT], CUB_EXT, SIZE_EXT) != 0)
-	{
-		parsing_error("invalid .cub file name");
-		return (FAILURE);
-	}
+	if (ft_strncmp(&path[ft_strlen(path) - SUFFIX], CUB_SUFFIX, SUFFIX) != 0)
+		return (parsing_error(ERR_CUB_SUFFIX));
 	fd = open(path, O_RDONLY);
 	if (fd == ERROR)
-	{
-		parsing_error("open() failed");
-		return (FAILURE);
-	}
+		return (parsing_error(ERR_CUB_OPEN));
 	if (parse_cub(parsing, fd) == FAILURE)
 	{
 		close(fd);

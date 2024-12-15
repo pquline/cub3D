@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:31:04 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/13 10:31:08 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/15 11:11:56 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@ t_bool	init_parsing(t_parsing *parsing)
 {
 	parsing->map = (t_map *)malloc(sizeof(t_map));
 	if (parsing->map == NULL)
-	{
-		parsing_error("malloc() failed on [t_map *]");
-		return (FAILURE);
-	}
+		return (parsing_error(ERR_MALLOC_TMAP));
 	parsing->map->no = NULL;
 	parsing->map->so = NULL;
 	parsing->map->we = NULL;
@@ -29,7 +26,9 @@ t_bool	init_parsing(t_parsing *parsing)
 	parsing->map->c = UINT_MAX;
 	parsing->map->width = 0;
 	parsing->map->height = 0;
-	parsing->map->start_coords = (t_vector2){-1, -1};
+	parsing->map->door_coords[0] = (t_vector2){UNSET, UNSET};
+	parsing->map->door_coords[1] = (t_vector2){UNSET, UNSET};
+	parsing->map->start_coords = (t_vector2){UNSET, UNSET};
 	parsing->map->start_direction = 0;
 	parsing->state = PARSING_OTHER;
 	parsing->line = NULL;
