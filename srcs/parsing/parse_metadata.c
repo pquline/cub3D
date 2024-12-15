@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_elements.c                                   :+:      :+:    :+:   */
+/*   parse_metadata.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:36:21 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/15 10:57:16 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/15 23:18:08 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_bool	parse_texture(char **texture, char *path)
 {
 	size_t	index;
 
+	if (*texture != NULL)
+		return (parsing_error(ERR_TEXTURE_MULT));
 	index = 0;
 	while (path[index] && ft_isspace(path[index]))
 		++index;

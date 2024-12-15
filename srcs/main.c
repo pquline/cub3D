@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/15 11:24:12 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/15 23:13:55 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,15 @@ t_map* test_map()
 
 int	main(int ac, char **av)
 {
-	t_bool		error;
 	t_game		game;
 	t_map		*map;
 	t_window	*window;
 
 	if (ac != 2)
 		return (print_error("Usage : ./cube3d [map.cub]"));
-	error = SUCCESS;
 	map = parsing(av[1]);
+	if (map == NULL)
+		return (EXIT_FAILURE);
 	return (free_map(map), EXIT_SUCCESS);
 	if (map == NULL)
 		return (EXIT_FAILURE);

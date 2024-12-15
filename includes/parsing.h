@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/15 11:33:56 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/15 23:18:49 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@
 # define ERR_CUB_FORMAT		"Invalid [.cub] file format"
 # define ERR_CUB_OPEN		"Cannot open [.cub] file"
 # define ERR_TEXTURE_PATH	"Missing texture path"
+# define ERR_TEXTURE_MULT	"Multiple definitions of texture path"
 # define ERR_COLOR			"Invalid color format"
 # define ERR_INVALID_CHAR	"Map can only contain valid tiles [0/1/2/N/S/W/E/ ]"
 # define ERR_PLAYERS		"Map can only contain one player tile [N/S/W/E]"
