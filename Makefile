@@ -6,13 +6,13 @@
 #    By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/12/13 10:09:07 by pfischof         ###   ########.fr        #
+#    Updated: 2024/12/15 13:31:37 by pfischof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cube3d
 SRC = srcs/
-SRCS = ${SRC}main.c
+SRCS += ${SRC}main.c
 SRCS += ${SRC}game/game.c
 SRCS += ${SRC}game/minimap.c
 SRCS += ${SRC}engine/engine.c
@@ -21,7 +21,7 @@ SRCS += ${SRC}parsing/frees.c
 SRCS += ${SRC}parsing/get_cub.c
 SRCS += ${SRC}parsing/get_grid.c
 SRCS += ${SRC}parsing/init_parsing.c
-SRCS += ${SRC}parsing/parse_elements.c
+SRCS += ${SRC}parsing/parse_metadata.c
 SRCS += ${SRC}parsing/parsing.c
 SRCS += ${SRC}parsing/parsing_error.c
 SRCS +=	${SRC}parsing/utils.c

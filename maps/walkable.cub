@@ -1,13 +1,13 @@
-NO ./assets/tests/wall.xpm
+NO ./assets/tests/floor.xpm
 SO ./assets/tests/wall.xpm
 WE ./assets/tests/wall.xpm
-EA ./assets/tests/wall.xpm
+EA ./assets/tests/floor.xpm
 
 F 14,5,58
-C 1,1,1
+C 10,0,10
 
 11111111111111111
-1000S000100000001
+1000N000100000001
 10110110101101101
 10000000000000001
 10110101110101101
