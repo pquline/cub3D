@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:49:50 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/13 14:08:05 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/15 14:46:05 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 void	engine_init(t_engine *engine, t_window *window, t_map *map)
 {
 	engine->walls[0] = mlxe_load_texture(window, map->no, TRUE);
-	engine->walls[1] = mlxe_load_texture(window, map->so, TRUE);
-	engine->walls[2] = mlxe_load_texture(window, map->we, TRUE);
-	engine->walls[3] = mlxe_load_texture(window, map->ea, TRUE);
+	engine->walls[1] = mlxe_load_texture(window, map->ea, TRUE);
+	engine->walls[2] = mlxe_load_texture(window, map->so, TRUE);
+	engine->walls[3] = mlxe_load_texture(window, map->we, TRUE);
 	if (!engine->walls[0] || !engine->walls[1] || !engine->walls[2] || !engine->walls[3])
 	{
 		printf("Failed to load textures\n");
