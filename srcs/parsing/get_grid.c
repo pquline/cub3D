@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:40:23 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/15 11:11:18 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/15 14:56:55 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ static t_bool	door_tile_is_valid(t_parsing *parsing, const char *line, \
 	if (x != 0 && ft_isspace(line[x - 1]) == FALSE)
 		return (parsing_error(ERR_DOOR_NO_ENDS));
 	++x;
-	if (line[x] != EMPTY_CHAR)
+	if (line[x] != EMPTY_CHAR && ft_strchr(PLAYER_MAP_CHARS, line[x]) == NULL)
 		return (parsing_error(ERR_DOOR_NO_ACCESS));
 	while (line[x] != 0 && line[x] != DOOR_CHAR)
 		++x;
 	if (line[x] == DOOR_CHAR)
 	{
-		if (line[x - 1] != EMPTY_CHAR)
+		if (line[x - 1] != EMPTY_CHAR \
+				&& ft_strchr(PLAYER_MAP_CHARS, line[x - 1]) == NULL)
 			return (parsing_error(ERR_DOOR_NO_ACCESS));
 		if (ft_isspace(line[x + 1]) == FALSE)
 			return (parsing_error(ERR_DOOR_NO_ENDS));

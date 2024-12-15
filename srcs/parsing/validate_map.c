@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:08:02 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/15 11:06:29 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/15 15:09:50 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_bool	empty_tile_is_valid(t_map *map, size_t x, size_t y)
 {
-	if (x == 0 || x == map->width || y == 0 || y == map->height)
+	if (x == 0 || x == map->width - 1 || y == 0 || y == map->height - 1)
 		return (FALSE);
 	if (map->grid[y - 1][x].id == VOID \
 			|| map->grid[y + 1][x].id == VOID \
