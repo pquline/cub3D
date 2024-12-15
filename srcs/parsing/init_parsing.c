@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:31:04 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/15 11:11:56 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/15 11:34:43 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_bool	init_parsing(t_parsing *parsing)
 	parsing->map->door_coords[1] = (t_vector2){UNSET, UNSET};
 	parsing->map->start_coords = (t_vector2){UNSET, UNSET};
 	parsing->map->start_direction = 0;
-	parsing->state = PARSING_OTHER;
+	parsing->state = PARSING_METADATA;
 	parsing->line = NULL;
 	parsing->cub = NULL;
 	return (SUCCESS);

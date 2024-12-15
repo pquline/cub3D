@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/15 11:11:17 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/15 11:33:56 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@
 
 /* ---------------------------------- ENUMS --------------------------------- */
 
-typedef enum e_state
+typedef enum e_parsing_state
 {
 	PARSING_MAP,
-	PARSING_OTHER,
-}	t_state;
+	PARSING_METADATA,
+}	t_parsing_state;
 
 typedef enum e_tile_id
 {
@@ -116,10 +116,10 @@ typedef struct s_map
 
 typedef struct s_parsing
 {
-	char	*line;
-	t_list	*cub;
-	t_map	*map;
-	t_state	state;
+	char			*line;
+	t_list			*cub;
+	t_map			*map;
+	t_parsing_state	state;
 }	t_parsing;
 
 /* -------------------------------- FUNCTIONS ------------------------------- */

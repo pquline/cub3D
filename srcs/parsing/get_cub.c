@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:01:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/15 10:49:07 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/15 11:33:47 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_bool	parse_cub_line(t_parsing *parsing, t_map *map, char *line)
 	size_t	index;
 
 	index = 0;
-	if (parsing->state == PARSING_OTHER && line[0] == NL_CHAR)
+	if (parsing->state == PARSING_METADATA && line[0] == NL_CHAR)
 		return (SUCCESS);
 	while (line[index] && ft_isspace(line[index]))
 		++index;
