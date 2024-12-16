@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:37:47 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 15:37:56 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 15:50:36 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 typedef struct s_ray
 {
+	t_bool		hit;
 	float		x;
 	float		y;
 	float		dir;
@@ -44,7 +45,6 @@ typedef struct s_ray_calc
 	int			map_x;
 	int			map_y;
 	int			side;
-	int			hit;
 }				t_ray_calc;
 
 typedef struct s_rendering

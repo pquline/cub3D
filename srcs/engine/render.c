@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 15:06:39 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 15:42:50 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 15:56:22 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,11 @@ void	draw_map(t_engine *engine)
 		r.camera_x = 2 * x / (float)engine->window->buffer->size.x - 1;
 		r.ray_angle = engine->camera.dir + r.camera_x * r.camera_plane;
 		r.ray = raycast(engine, r.ray_angle);
-		line_init(engine, &r);
-		draw_line(engine, x, r);
+		if (r.ray.hit)
+		{
+			line_init(engine, &r);
+			draw_line(engine, x, r);
+		}
 		x++;
 	}
 }
