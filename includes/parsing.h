@@ -103,6 +103,7 @@ typedef struct s_tile
 {
 	t_tile_id	id;
 	t_list		*entities;
+	int			data;
 }	t_tile;
 
 typedef struct s_map

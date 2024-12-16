@@ -29,6 +29,7 @@ static t_bool	parse_grid_line(t_parsing *parsing, char *line, size_t y)
 		else
 			parsing->map->grid[y][index].id = EMPTY;
 		parsing->map->grid[y][index].entities = NULL;
+		parsing->map->grid[y][index].data = 0;
 		++index;
 	}
 	return (SUCCESS);
