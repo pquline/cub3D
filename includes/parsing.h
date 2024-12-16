@@ -70,10 +70,12 @@
 # define ERR_PLAYERS		"Map can only contain one player tile [N/S/W/E]"
 # define ERR_NO_PLAYER		"Map must contain a player tile [N/S/W/E]"
 # define ERR_NOT_SURROUNDED	"Map must be surrounded by wall tiles [1]"
-# define ERR_DOOR_NO_ENDS	"Doors [2] must terminate both ends of map rows"
-# define ERR_DOOR_NO_ACCESS	"Doors [2] must be accessible"
 # define ERR_DOORS			"Map can only contain two door tiles [2]"
 # define ERR_NO_EMPTY		"Map must contain at least one empty tile [0]"
+# define ERR_DOOR_MISPLACED	"Doors [2] can only be placed like so:\n\
+001    110\n\
+121 or 020\n\
+100    011"
 
 /* ---------------------------------- ENUMS --------------------------------- */
 
@@ -85,10 +87,11 @@ typedef enum e_parsing_state
 
 typedef enum e_tile_id
 {
-	EMPTY	= 0,
-	WALL	= 1,
-	DOOR	= 2,
-	VOID	= INT_MAX,
+	EMPTY		= 0,
+	WALL		= 1,
+	DOOR_HOR	= 2,
+	DOOR_VER	= 3,
+	VOID		= INT_MAX,
 }	t_tile_id;
 
 /* ------------------------------- STRUCTURES ------------------------------- */
@@ -112,7 +115,6 @@ typedef struct s_map
 	size_t		height;
 	t_vector2	start_coords;
 	char		start_direction;
-	t_vector2	door_coords[2];
 }	t_map;
 
 typedef struct s_parsing

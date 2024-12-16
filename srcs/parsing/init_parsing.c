@@ -26,8 +26,6 @@ t_bool	init_parsing(t_parsing *parsing)
 	parsing->map->c = UINT_MAX;
 	parsing->map->width = 0;
 	parsing->map->height = 0;
-	parsing->map->door_coords[0] = (t_vector2){UNSET, UNSET};
-	parsing->map->door_coords[1] = (t_vector2){UNSET, UNSET};
 	parsing->map->start_coords = (t_vector2){UNSET, UNSET};
 	parsing->map->start_direction = 0;
 	parsing->state = PARSING_METADATA;

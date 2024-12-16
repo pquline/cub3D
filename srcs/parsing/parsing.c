@@ -69,6 +69,11 @@ void	debug_parsing(t_parsing *parsing)
 }
 */
 
+/*
+door_horizontal = porte de l'ouest vers l'est ou inversement
+limit size map to INT_MAX
+*/
+
 t_map	*parsing(char *path)
 {
 	t_parsing	parsing;

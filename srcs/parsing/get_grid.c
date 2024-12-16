@@ -12,31 +12,6 @@
 
 #include "parsing.h"
 
-static t_bool	door_tile_is_valid(t_parsing *parsing, const char *line, \
-	size_t x, size_t y)
-{
-	if (parsing->map->door_coords[0].x != UNSET)
-		return (parsing_error(ERR_DOORS));
-	if (x != 0 && ft_isspace(line[x - 1]) == FALSE)
-		return (parsing_error(ERR_DOOR_NO_ENDS));
-	++x;
-	if (line[x] != EMPTY_CHAR && ft_strchr(PLAYER_MAP_CHARS, line[x]) == NULL)
-		return (parsing_error(ERR_DOOR_NO_ACCESS));
-	while (line[x] != 0 && line[x] != DOOR_CHAR)
-		++x;
-	if (line[x] == DOOR_CHAR)
-	{
-		if (line[x - 1] != EMPTY_CHAR \
-				&& ft_strchr(PLAYER_MAP_CHARS, line[x - 1]) == NULL)
-			return (parsing_error(ERR_DOOR_NO_ACCESS));
-		if (ft_isspace(line[x + 1]) == FALSE)
-			return (parsing_error(ERR_DOOR_NO_ENDS));
-		parsing->map->door_coords[1] = (t_vector2){x, y};
-		return (TRUE);
-	}
-	return (parsing_error(ERR_DOOR_NO_ENDS));
-}
-
 static t_bool	parse_grid_line(t_parsing *parsing, char *line, size_t y)
 {
 	size_t			index;
@@ -48,13 +23,7 @@ static t_bool	parse_grid_line(t_parsing *parsing, char *line, size_t y)
 		if (index < size && line[index] == WALL_CHAR)
 			parsing->map->grid[y][index].id = WALL;
 		else if (index < size && line[index] == DOOR_CHAR)
-		{
-			if (door_tile_is_valid(parsing, line, index, y) == FALSE)
-				return (FAILURE);
-			parsing->map->door_coords[0] = (t_vector2){index, y};
-			parsing->map->grid[y][index].id = WALL;
-			line[parsing->map->door_coords[1].x] = WALL_CHAR;
-		}
+			parsing->map->grid[y][index].id = DOOR_HOR;
 		else if (index >= size - sizeof(char) || ft_isspace(line[index]))
 			parsing->map->grid[y][index].id = VOID;
 		else
