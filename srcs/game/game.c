@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:31:57 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 18:51:27 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,10 @@ t_bool	game_init(t_game *game, t_window *window, t_map *map)
 	set_entity_pos(player, game->engine.camera.x, game->engine.camera.y);
 	player->dir = game->engine.camera.dir;
 	return (SUCCESS);
+}
+
+void	destroy_game(t_game *game)
+{
+	destory_engine(&game->engine);
+	free_map(game->engine.map);
 }

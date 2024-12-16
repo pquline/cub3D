@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:49:50 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:22:19 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 18:49:22 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ void	engine_init(t_engine *engine, t_window *window, t_map *map)
 	else if (map->start_direction == 'N')
 		engine->camera.dir = 3 * M_PI_2;
 	engine->camera.fov = M_PI / 3;
+	engine->entities = NULL;
+}
+
+void	destory_engine(t_engine *engine)
+{
+	ft_lstclear(&engine->entities, free);
 	engine->entities = NULL;
 }
 

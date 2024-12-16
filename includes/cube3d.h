@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:33:01 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:41:49 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 18:50:47 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int			print_error(char *msg);
 t_bool		set_error(t_game *game, char *msg);
 
 t_bool		game_init(t_game *game, t_window *window, t_map *map);
+void		destroy_game(t_game *game);
 t_bool		load_assets(t_assets *assets, t_window *window);
 void		draw_minimap(t_game *game);
 

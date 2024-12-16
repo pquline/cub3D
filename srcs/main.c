@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:43:01 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 18:51:16 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,16 @@ int	main(int ac, char **av)
 	if (!window)
 		return (free_map(map), print_error("Failed to initialize window"));
 	if (game_init(&game, window, map) == FAILURE)
-		return (free_map(map), EXIT_FAILURE);
+	{
+		free_map(map);
+		mlxe_destroy(window);
+		return (EXIT_FAILURE);
+	}
 	mlxe_loop(window, main_loop, &game);
 
 	//error = FAILURE;
 	//set_error(&game, "Test error");
-	free_map(map);
+	destroy_game(&game);
 	mlxe_destroy(window);
 	// if (!error)
 	// 	return (print_error(game.error_msg));
