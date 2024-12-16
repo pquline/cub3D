@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:22:50 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 18:43:01 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ int	main(int ac, char **av)
 	window = mlxe_init(1920 / 1.5, 1080 / 1.5, "cub3d");
 	if (!window)
 		return (free_map(map), print_error("Failed to initialize window"));
-	game_init(&game, window, map);//TODO: handle error
+	if (game_init(&game, window, map) == FAILURE)
+		return (free_map(map), EXIT_FAILURE);
 	mlxe_loop(window, main_loop, &game);
 
 	//error = FAILURE;

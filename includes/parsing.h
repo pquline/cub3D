@@ -50,6 +50,7 @@
 # define TEXTURE_SOUTH	"SO"
 # define TEXTURE_WEST	"WE"
 # define TEXTURE_EAST	"EA"
+# define TEXTURE_DOOR	"DO"
 
 # define VALID_MAP_CHARS	"012NSWE "
 # define PLAYER_MAP_CHARS	"NSWE"
@@ -66,6 +67,7 @@
 # define ERR_TEXTURE_PATH	"Missing texture path"
 # define ERR_TEXTURE_MULT	"Multiple definitions of texture path"
 # define ERR_COLOR			"Invalid color format"
+# define ERR_TOO_BIG		"Map size must be less than INT_MAX"
 # define ERR_INVALID_CHAR	"Map can only contain valid tiles [0/1/2/N/S/W/E/ ]"
 # define ERR_PLAYERS		"Map can only contain one player tile [N/S/W/E]"
 # define ERR_NO_PLAYER		"Map must contain a player tile [N/S/W/E]"
@@ -91,6 +93,7 @@ typedef enum e_tile_id
 	WALL		= 1,
 	DOOR_HOR	= 2,
 	DOOR_VER	= 3,
+	ENTITY		= 4,
 	VOID		= INT_MAX,
 }	t_tile_id;
 
@@ -100,6 +103,7 @@ typedef struct s_tile
 {
 	t_tile_id	id;
 	t_list		*entities;
+	int			data;
 }	t_tile;
 
 typedef struct s_map
@@ -108,6 +112,7 @@ typedef struct s_map
 	char		*so;
 	char		*we;
 	char		*ea;
+	char		*door;
 	t_color		f;
 	t_color		c;
 	t_tile		**grid;

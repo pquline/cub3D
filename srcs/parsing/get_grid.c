@@ -29,6 +29,7 @@ static t_bool	parse_grid_line(t_parsing *parsing, char *line, size_t y)
 		else
 			parsing->map->grid[y][index].id = EMPTY;
 		parsing->map->grid[y][index].entities = NULL;
+		parsing->map->grid[y][index].data = 0;
 		++index;
 	}
 	return (SUCCESS);
@@ -39,6 +40,8 @@ t_bool	get_grid(t_parsing *parsing)
 	size_t	index;
 	t_list	*cub;
 
+	if (parsing->map->width >= INT_MAX || parsing->map->height >= INT_MAX)
+		return (parsing_error(ERR_TOO_BIG));
 	parsing->map->grid = (t_tile **)ft_calloc(parsing->map->height, \
 		sizeof(t_tile *));
 	if (parsing->map->grid == NULL)

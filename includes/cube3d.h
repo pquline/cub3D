@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:33:01 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:38:05 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 18:41:49 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,16 @@
 
 typedef struct s_assets
 {
-	t_texture	*minimap_entities;
-	t_sprite	*player[6];
+	t_sprite	*map_player[6];
+	t_sprite	*map_enemy[4];
+	t_sprite	*map_coin;
+	t_sprite	*enemy[4][4];
+	t_sprite	*door[4];
+	t_sprite	*coin[4];
+	t_texture	*map_xpm;
+	t_texture	*enemy_xpm[4];
+	t_texture	*door_xpm;
+	t_texture	*coin_xpm;
 }	t_assets;
 
 typedef struct s_game

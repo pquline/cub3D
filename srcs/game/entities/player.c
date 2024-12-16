@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:12:10 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:38:41 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 18:43:48 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ void player_minimap(t_entity *entity)
 	t_game	*game = entity->game;
 
 	draw_subtexture_size_angle(game->window,
-		game->assets.player[0]->texture,
-		(t_coords){game->assets.player[(int)entity->anim_map]->rect, (t_rect){50, 50, 10, 10}}, entity->dir);
+		game->assets.map_player[0]->texture,
+		(t_coords){game->assets.map_player[(int)entity->anim_map]->rect, (t_rect){50, 50, 10, 10}}, entity->dir);
 	mlxe_draw_rect(game->window, (t_rect){0, 0, 100, 100}, mlxe_color(14*4,5*4,58*4));
 	mlxe_draw_rect(game->window, (t_rect){1, 1, 100, 100}, mlxe_color(14*4,5*4,58*4));
 	entity->anim_map += 0.05;
