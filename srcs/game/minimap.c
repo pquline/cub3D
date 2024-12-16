@@ -144,8 +144,8 @@ void draw_minimap(t_game *game)
 		iter.y++;
 	}
 	draw_subtexture_size_angle(game->window,
-		game->assets.player[0]->texture,
-		(t_coords){game->assets.player[(int)game->assets.player_anim]->rect, (t_rect){50, 50, 10, 10}}, camera->dir);
+		game->assets.map_player[0]->texture,
+		(t_coords){game->assets.map_player[(int)game->assets.player_anim]->rect, (t_rect){50, 50, 10, 10}}, camera->dir);
 	mlxe_draw_rect(game->window, (t_rect){0, 0, 100, 100}, mlxe_color(14*4,5*4,58*4));
 	mlxe_draw_rect(game->window, (t_rect){1, 1, 100, 100}, mlxe_color(14*4,5*4,58*4));
 	game->assets.player_anim += 0.05;

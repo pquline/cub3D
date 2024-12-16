@@ -93,6 +93,7 @@ typedef enum e_tile_id
 	WALL		= 1,
 	DOOR_HOR	= 2,
 	DOOR_VER	= 3,
+	ENTITY		= 4,
 	VOID		= INT_MAX,
 }	t_tile_id;
 

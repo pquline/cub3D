@@ -27,8 +27,15 @@
 
 typedef struct s_assets
 {
-	t_texture	*minimap_entities;
-	t_sprite	*player[6];
+	t_texture	*map_xpm;
+	t_sprite	*map_player[6];
+	t_sprite	*map_enemy[4];
+	t_sprite	*map_pellet;
+	t_texture	*enemy_xpm[4];
+	t_sprite	*enemy[4][4];
+	t_sprite	*door[4];
+	t_texture	*pellet_xpm;
+	t_sprite	*pellet[4];
 	float		player_anim;
 }	t_assets;
 
