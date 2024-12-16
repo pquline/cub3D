@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:49:54 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/14 15:47:10 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 13:49:28 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ typedef struct s_window
 	void		(*funct_ptr)(t_window *, void *data);
 	char		keys[MAX_ALL_KEYS];
 	t_vector2	mouse;
+	int			width;
+	int			height;
 	int			error;
 }				t_window;
 

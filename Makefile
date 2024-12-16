@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+         #
+#    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/12/16 09:51:01 by pfischof         ###   ########.fr        #
+#    Updated: 2024/12/16 15:37:41 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ SRCS += ${SRC}main.c
 SRCS += ${SRC}game/game.c
 SRCS += ${SRC}game/minimap.c
 SRCS += ${SRC}engine/engine.c
+SRCS += ${SRC}engine/raycast.c
+SRCS += ${SRC}engine/render.c
 
 SRCS += ${SRC}parsing/frees.c
 SRCS += ${SRC}parsing/get_cub.c

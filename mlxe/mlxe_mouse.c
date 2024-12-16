@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlxe_destroy.c                                     :+:      :+:    :+:   */
+/*   mlxe_mouse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 15:18:04 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/13 13:42:53 by lfarhi           ###   ########.fr       */
+/*   Created: 2024/12/16 12:40:19 by lfarhi            #+#    #+#             */
+/*   Updated: 2024/12/16 12:50:54 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "mlxe.h"
 
-void	mlxe_destroy(t_window *window)
+int	mlxe_mouse_get_pos(t_window *window, int *x, int *y)
 {
-	if (window->running)
-		mlxe_loop_end(window);
-	mlx_do_key_autorepeaton(window->mlx);
-	mlxe_free_garbage(window);
-	mlxe_free_texture(window, window->buffer);
-	mlx_destroy_window(window->mlx, window->win);
-	mlx_destroy_display(window->mlx);
-	free(window->mlx);
-	free(window);
+	return (mlx_mouse_get_pos(window->mlx, window->win, x, y));
+}
+
+int	mlxe_mouse_move(t_window *window, int x, int y)
+{
+	return (mlx_mouse_move(window->mlx, window->win, x, y));
 }
