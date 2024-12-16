@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 09:55:28 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/16 13:42:01 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,12 @@ int	main(int ac, char **av)
 	t_window	*window;
 
 	if (ac != 2)
-		return (print_error("Usage : ./cube3d [map.cub]"));
+		return (print_error("Usage : ./cub3d [map.cub]"));
 	map = parsing(av[1]);
 	if (map == NULL)
 		return (EXIT_FAILURE);
 	//return (free_map(map), EXIT_SUCCESS);
-	window = mlxe_init(1920 / 2, 1080 / 2, "cube3d");
+	window = mlxe_init(1920 / 1.5, 1080 / 1.5, "cub3d");
 	if (!window)
 		return (free_map(map), print_error("Failed to initialize window"));
 	game_init(&game, window, map);
@@ -105,8 +105,6 @@ int	main(int ac, char **av)
 	//error = FAILURE;
 	//set_error(&game, "Test error");
 	free_map(map);
-	// shouldn't mlxe_destroy() call mlx_do_key_autorepeaton()?
-	mlx_do_key_autorepeaton(window->mlx);
 	mlxe_destroy(window);
 	// if (!error)
 	// 	return (print_error(game.error_msg));

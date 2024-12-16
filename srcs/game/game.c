@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/13 09:49:50 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/16 13:57:34 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void want_to_move(t_engine *engine, float x, float y)
 		return ;
 	if (engine->map->grid[(int)y][(int)x].id != EMPTY)
 		return ;
-	// Taille du carré de collision (0.2)
-    float half_size = 0.05;  // La moitié de la taille du carré (0.2 / 2)
+	// Taille du carré de collision (0.1)
+    float half_size = 0.05;  // La moitié de la taille du carré
 
     // Vérifier si les coins autour de la position souhaitée sont libres
     for (float dx = -half_size; dx <= half_size; dx += half_size) {
@@ -58,23 +58,25 @@ void	main_loop(t_window *window, void *data)
 	game = (t_game *)data;
 	//move forward
 	if (mlxe_is_key_pressed(window, XK_w))
-		add_move(&game->engine, cos(game->engine.camera.dir) * 0.01, sin(game->engine.camera.dir) * 0.01);
+		add_move(&game->engine, cos(game->engine.camera.dir) * 0.02, sin(game->engine.camera.dir) * 0.02);
 	//move backward
 	if (mlxe_is_key_pressed(window, XK_s))
-		add_move(&game->engine, -cos(game->engine.camera.dir) * 0.01, -sin(game->engine.camera.dir) * 0.01);
+		add_move(&game->engine, -cos(game->engine.camera.dir) * 0.02, -sin(game->engine.camera.dir) * 0.02);
 	//strafe right
 	if (mlxe_is_key_pressed(window, XK_d))
-		add_move(&game->engine, cos(game->engine.camera.dir + M_PI_2) * 0.01, sin(game->engine.camera.dir + M_PI_2) * 0.01);
+		add_move(&game->engine, cos(game->engine.camera.dir + M_PI_2) * 0.02, sin(game->engine.camera.dir + M_PI_2) * 0.02);
 	//strafe left
 	if (mlxe_is_key_pressed(window, XK_a))
-		add_move(&game->engine, cos(game->engine.camera.dir - M_PI_2) * 0.01, sin(game->engine.camera.dir - M_PI_2) * 0.01);
+		add_move(&game->engine, cos(game->engine.camera.dir - M_PI_2) * 0.02, sin(game->engine.camera.dir - M_PI_2) * 0.02);
+	game->engine.camera.dir -= (window->width / 2 - window->mouse.x) * 0.0025;
 	if (mlxe_is_key_pressed(window, XK_Left))
-		game->engine.camera.dir -= 0.01;
+		game->engine.camera.dir -= 0.02;
 	if (mlxe_is_key_pressed(window, XK_Right))
-		game->engine.camera.dir += 0.01;
+		game->engine.camera.dir += 0.02;
 	render_engine(&game->engine);
 	draw_minimap(game);
 	mlxe_render(window);
+	mlxe_mouse_move(window, window->width / 2, 1000000);
 }
 
 t_bool	game_init(t_game *game, t_window *window, t_map *map)

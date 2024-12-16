@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 15:14:38 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/14 16:00:25 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 13:49:18 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ t_window	*mlxe_init(int width, int height, char *title)
 	window = malloc(sizeof(t_window));
 	if (!window)
 		return (NULL);
+	window->width = width;
+	window->height = height;
 	window->mlx = mlx_init();
 	if (!window->mlx)
 		return (exit_free_(window, window->mlx, NULL, NULL));

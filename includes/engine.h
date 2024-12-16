@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:37:47 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/15 22:27:35 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:37:56 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,36 @@ typedef struct s_ray
 	float		x_t;
 	int			side_hit;
 }				t_ray;
+
+typedef struct s_ray_calc
+{
+	t_ray		ray;
+	float		delta_dist_x;
+	float		delta_dist_y;
+	float		side_dist_x;
+	float		side_dist_y;
+	float		ray_dir_x;
+	float		ray_dir_y;
+	int			step_x;
+	int			step_y;
+	int			map_x;
+	int			map_y;
+	int			side;
+	int			hit;
+}				t_ray_calc;
+
+typedef struct s_rendering
+{
+	t_ray		ray;
+	float		camera_plane;
+	float		camera_x;
+	float		ray_angle;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	int			tex_x;
+	t_texture	*texture;
+}			t_rendering;
 
 typedef struct s_camera
 {

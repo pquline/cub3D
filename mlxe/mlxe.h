@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:51 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/11 16:03:40 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 12:50:58 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,8 @@ void		mlxe_font_set_color(t_font *font, t_color color);
 void		mlxe_font_set_size(t_font *font, int size);
 void		mlxe_draw_text(t_window *window,
 				t_font *font, char *text, t_vector2 pos);
+
+int			mlxe_mouse_get_pos(t_window *window, int *x, int *y);
+int			mlxe_mouse_move(t_window *window, int x, int y);
 
 #endif
