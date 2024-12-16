@@ -1,5 +1,5 @@
 /* XPM */
-static char *pellet[] = {
+static char *coin[] = {
 /* columns rows colors chars-per-pixel */
 "2560 640 39 1 ",
 "  c #EFB937",

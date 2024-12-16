@@ -1,5 +1,5 @@
 /* XPM */
-static char *enemy_pink[] = {
+static char *pink[] = {
 /* columns rows colors chars-per-pixel */
 "2560 640 256 2 ",
 "   c #5D054B",

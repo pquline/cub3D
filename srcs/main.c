@@ -99,7 +99,8 @@ int	main(int ac, char **av)
 	window = mlxe_init(1920 / 1.5, 1080 / 1.5, "cub3d");
 	if (!window)
 		return (free_map(map), print_error("Failed to initialize window"));
-	game_init(&game, window, map);
+	if (game_init(&game, window, map) == FAILURE)
+		return (free_map(map), EXIT_FAILURE);
 	mlxe_loop(window, main_loop, &game);
 
 	//error = FAILURE;
