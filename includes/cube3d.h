@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:33:01 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:57:34 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 19:00:25 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_assets
 	t_texture	*coin_xpm;
 }	t_assets;
 
+typedef struct s_entity	t_entity;
+
 typedef struct s_game
 {
 	t_window	*window;
@@ -46,6 +48,7 @@ typedef struct s_game
 	t_assets	assets;
 	char		error_msg[256];
 	float		delta_time;
+	t_entity	*player;
 }	t_game;
 
 typedef struct s_entity
