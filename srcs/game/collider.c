@@ -6,20 +6,20 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:14 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:28:49 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 18:57:22 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3d.h>
 
-void	want_to_move(t_entity *entity, float x, float y)
+t_bool	want_to_move(t_entity *entity, float x, float y)
 {
 	t_engine *engine = &entity->game->engine;
 
 	if (x < 0 || x >= engine->map->width || y < 0 || y >= engine->map->height)
-		return ;
+		return (FAILURE);
 	if (engine->map->grid[(int)y][(int)x].id != EMPTY)
-		return ;
+		return (FAILURE);
 	// Taille du carré de collision (0.1)
     float half_size = 0.05;  // La moitié de la taille du carré
 
@@ -31,10 +31,10 @@ void	want_to_move(t_entity *entity, float x, float y)
 
             // Vérifier les limites du terrain et si la case est occupée
             if (check_x < 0 || check_x >= (int)engine->map->width || check_y < 0 || check_y >= (int)engine->map->height)
-                return;  // Si la position est en dehors de la carte, on annule le déplacement
+                return (FAILURE);  // Si la position est en dehors de la carte, on annule le déplacement
 
             if (engine->map->grid[check_y][check_x].id != EMPTY)
-                return;  // Si la case est occupée, on annule le déplacement
+                return (FAILURE);  // Si la case est occupée, on annule le déplacement
         }
     }
 
@@ -42,13 +42,14 @@ void	want_to_move(t_entity *entity, float x, float y)
 	t_ray ray = raycast(engine, mov_dir);
 	float dist = sqrt(pow(entity->pos[0] - x, 2) + pow(entity->pos[1] - y, 2));
 	if (ray.dist < dist)
-		return ;
+		return (FAILURE);
 	entity->pos[0] = x;
 	entity->pos[1] = y;
 	entity->mov_dir = mov_dir;
+	return (SUCCESS);
 }
 
-void	add_move(t_entity *entity, float x, float y)
+t_bool	add_move(t_entity *entity, float x, float y)
 {
-	want_to_move(entity, entity->pos[0] + x, entity->pos[1] + y);
+	return want_to_move(entity, entity->pos[0] + x, entity->pos[1] + y);
 }

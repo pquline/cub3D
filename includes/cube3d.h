@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:33:01 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:50:47 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 18:57:34 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ float		get_delta(t_time start, t_time end);
 int			get_fps(t_time start, t_time end);
 float		adaptive_speed(float speed, float delta);
 
-void		want_to_move(t_entity *entity, float x, float y);
-void		add_move(t_entity *entity, float x, float y);
+t_bool		want_to_move(t_entity *entity, float x, float y);
+t_bool		add_move(t_entity *entity, float x, float y);
 
 int			print_error(char *msg);
 t_bool		set_error(t_game *game, char *msg);
