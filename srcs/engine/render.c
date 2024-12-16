@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 15:06:39 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 16:47:24 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 17:29:47 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	line_init(t_engine *engine, t_rendering *r)
 {
 	r->line_height = (int)(engine->window->buffer->size.y
-			/ fmax(r->ray.dist, 0.1f));
+			/ fmax(r->ray.dist * tan(engine->camera.fov / 2.0f), 0.1f));
 	r->draw_start = -r->line_height / 2 + engine->window->buffer->size.y / 2;
 	r->draw_end = r->line_height / 2 + engine->window->buffer->size.y / 2;
 	if (r->draw_start < 0)

@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:42:12 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 16:00:50 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 17:49:15 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ static int	raycast_loop(t_engine *engine, t_ray_calc *ray_calc)
 			ray_calc->map_y += ray_calc->step_y;
 			ray_calc->side = 1;
 		}
+		ray_calc->ray.tile_id = engine->map->grid[ray_calc->map_y][ray_calc->map_x].id;
 		if (engine->map->grid[ray_calc->map_y][ray_calc->map_x].id != EMPTY)
 			hit = 1;
 		iter++;

@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:33:01 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 16:22:53 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 18:38:05 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_assets
 {
 	t_texture	*minimap_entities;
 	t_sprite	*player[6];
-	float		player_anim;
 }	t_assets;
 
 typedef struct s_game
@@ -41,6 +40,19 @@ typedef struct s_game
 	float		delta_time;
 }	t_game;
 
+typedef struct s_entity
+{
+	t_game		*game;
+	t_sprite	*sprites;
+	float		pos[2];
+	float		dir;
+	float		mov_dir;
+	float		anim;
+	float		anim_map;
+	void		(*update)(struct s_entity *entity);
+	void		(*minimap)(struct s_entity *entity);
+}				t_entity;
+
 typedef struct timeval t_time;
 
 t_time		get_time();
@@ -48,8 +60,8 @@ float		get_delta(t_time start, t_time end);
 int			get_fps(t_time start, t_time end);
 float		adaptive_speed(float speed, float delta);
 
-void		want_to_move(t_engine *engine, float x, float y);
-void		add_move(t_engine *engine, float x, float y);
+void		want_to_move(t_entity *entity, float x, float y);
+void		add_move(t_entity *entity, float x, float y);
 
 int			print_error(char *msg);
 t_bool		set_error(t_game *game, char *msg);
@@ -57,6 +69,12 @@ t_bool		set_error(t_game *game, char *msg);
 t_bool		game_init(t_game *game, t_window *window, t_map *map);
 t_bool		load_assets(t_assets *assets, t_window *window);
 void		draw_minimap(t_game *game);
+
+t_entity	*spawn_entity(t_game *game,
+	void (*update)(t_entity *entity),
+	void (*minimap)(t_entity *entity),
+	t_sprite *sprites);
+void		set_entity_pos(t_entity *entity, float x, float y);
 
 void		main_loop(t_window *window, void *data);
 
