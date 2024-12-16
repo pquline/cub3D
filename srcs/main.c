@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/15 23:13:55 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/16 09:55:28 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,7 @@ int	main(int ac, char **av)
 	map = parsing(av[1]);
 	if (map == NULL)
 		return (EXIT_FAILURE);
-	return (free_map(map), EXIT_SUCCESS);
-	if (map == NULL)
-		return (EXIT_FAILURE);
+	//return (free_map(map), EXIT_SUCCESS);
 	window = mlxe_init(1920 / 2, 1080 / 2, "cube3d");
 	if (!window)
 		return (free_map(map), print_error("Failed to initialize window"));
