@@ -47,10 +47,8 @@ static t_bool	load_world_textures(t_assets *assets, t_window *window)
 		"assets/world/enemy_pink.xpm", TRUE);
 	assets->enemy_xpm[3] = mlxe_load_texture(window, \
 		"assets/world/enemy_red.xpm", TRUE);
-	if (!assets->enemy_xpm[0] || !assets->enemy_xpm[1] || !assets->enemy_xpm[2]\
-			|| !assets->enemy_xpm[3])
-		return (FAILURE);
-	return (SUCCESS);
+	return (assets->enemy_xpm[0] && assets->enemy_xpm[1] && assets->enemy_xpm[2] \
+		&& assets->enemy_xpm[3]);
 }
 
 t_bool	load_assets(t_assets *assets, t_window *window)
