@@ -51,7 +51,7 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-cube3D
+cub3D
 minilibx/
 mlxe/libmlxe.a
 libft/libft.a
