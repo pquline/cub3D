@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 15:06:39 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 15:56:22 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/16 16:47:24 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	line_init(t_engine *engine, t_rendering *r)
 {
-	r->ray.dist *= cos(r->ray.dir - engine->camera.dir);
 	r->line_height = (int)(engine->window->buffer->size.y
 			/ fmax(r->ray.dist, 0.1f));
 	r->draw_start = -r->line_height / 2 + engine->window->buffer->size.y / 2;
@@ -61,6 +60,7 @@ void	draw_map(t_engine *engine)
 		r.ray = raycast(engine, r.ray_angle);
 		if (r.ray.hit)
 		{
+			r.ray.dist *= cos(r.ray.dir - engine->camera.dir);
 			line_init(engine, &r);
 			draw_line(engine, x, r);
 		}
