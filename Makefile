@@ -6,11 +6,11 @@
 #    By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/12/15 23:11:38 by pauline          ###   ########.fr        #
+#    Updated: 2024/12/16 09:51:01 by pfischof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 SRC = srcs/
 SRCS += ${SRC}main.c
 SRCS += ${SRC}game/game.c
