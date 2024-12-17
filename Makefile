@@ -6,7 +6,7 @@
 #    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/12/16 18:19:52 by lfarhi           ###   ########.fr        #
+#    Updated: 2024/12/17 14:59:00 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ SRCS += ${SRC}game/minimap.c
 SRCS += ${SRC}game/entity.c
 
 SRCS += ${SRC}game/entities/player.c
+SRCS += ${SRC}game/entities/orbe.c
+SRCS += ${SRC}game/entities/ghost.c
 
 SRCS += ${SRC}engine/engine.c
 SRCS += ${SRC}engine/raycast.c
