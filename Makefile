@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
+#    By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/12/16 18:19:52 by lfarhi           ###   ########.fr        #
+#    Updated: 2024/12/17 17:15:16 by pfischof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ SRCS += ${SRC}game/entities/coins.c
 SRCS += ${SRC}game/entities/enemies.c
 SRCS += ${SRC}game/entities/player.c
 SRCS += ${SRC}game/entities/spawn_entities.c
+SRCS += ${SRC}game/entities/orbe.c
+SRCS += ${SRC}game/entities/ghost.c
 
 SRCS += ${SRC}engine/engine.c
 SRCS += ${SRC}engine/raycast.c
