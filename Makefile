@@ -6,7 +6,7 @@
 #    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/12/17 17:44:29 by lfarhi           ###   ########.fr        #
+#    Updated: 2024/12/17 18:41:30 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = cub3D
 SRC = srcs/
 SRCS += ${SRC}main.c
 SRCS += ${SRC}game/game.c
+SRCS += ${SRC}game/menu.c
 SRCS += ${SRC}game/fps.c
 SRCS += ${SRC}game/collider.c
 SRCS += ${SRC}game/assets.c

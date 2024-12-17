@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/17 18:09:35 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/17 18:44:51 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,15 @@ void	main_loop(t_window *window, void *data)
 	game->current_time = start;
 	render_engine(&game->engine);
 	draw_minimap(game);
+	if (mlxe_is_key_down(window, XK_Tab))
+	{
+		mlxe_update_input(window);
+		window->funct_ptr = pause_menu_loop;
+		mlxe_mouse_move(window, window->width / 2, window->height/2);
+		return ;
+	}
 	mlxe_render(window);
-	mlxe_mouse_move(window, window->width / 2, 1000000);
+	mlxe_mouse_move(window, window->width / 2, window->height);
 	end = get_time();
 	game->delta_time = get_delta(start, end);
 }
@@ -72,7 +79,7 @@ t_bool	game_init(t_game *game, t_window *window, t_map *map)
 	set_entity_pos(player, game->engine.camera.x, game->engine.camera.y);
 	player->dir = game->engine.camera.dir;
 	game->player = player;
-	mlxe_mouse_move(window, window->width / 2, 1000000);
+	mlxe_mouse_move(window, window->width / 2, window->height);
 	return (SUCCESS);
 }
 

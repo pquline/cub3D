@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:35 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:42:31 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/17 18:51:58 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,9 @@ t_bool	load_assets(t_assets *assets, t_window *window)
 	if (load_world_enemy_sprites(assets, window) == FAILURE)
 		return (FAILURE);
 	if (load_world_door_and_coin_sprites(assets, window) == FAILURE)
+		return (FAILURE);
+	assets->main_font = mlxe_create_font(window, "assets/UI/pacman_font.xpm", TRUE);
+	if (assets->main_font == NULL)
 		return (FAILURE);
 	return (SUCCESS);
 }

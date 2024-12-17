@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:33:01 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/17 18:10:55 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/17 18:50:44 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_assets
 	t_texture	*enemy_xpm[4];
 	t_texture	*door_xpm;
 	t_texture	*coin_xpm;
+	t_font		*main_font;
 }	t_assets;
 
 typedef struct s_entity	t_entity;
@@ -91,6 +92,11 @@ t_entity	*spawn_entity(t_game *game,
 void		set_entity_pos(t_entity *entity, float x, float y);
 
 void		main_loop(t_window *window, void *data);
+
+/*Menu*/
+void	main_menu_loop(t_window *window, void *data);
+void	pause_menu_loop(t_window *window, void *data);
+void	gameover_loop(t_window *window, void *data);
 
 /*render blocks*/
 t_ltxt	render_door(t_engine *engine, t_ray ray);
