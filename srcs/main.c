@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:51:16 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/17 10:13:28 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../includes/cub3D.h"
 
 int	print_error(char *msg)
 {
@@ -91,12 +91,12 @@ int	main(int ac, char **av)
 	t_window	*window;
 
 	if (ac != 2)
-		return (print_error("Usage : ./cub3d [map.cub]"));
+		return (print_error("Usage : ./cub3D [map.cub]"));
 	map = parsing(av[1]);
 	if (map == NULL)
 		return (EXIT_FAILURE);
-	//return (free_map(map), EXIT_SUCCESS);
-	window = mlxe_init(1920 / 1.5, 1080 / 1.5, "cub3d");
+	return (free_map(map), EXIT_SUCCESS);
+	window = mlxe_init(1920 / 1.5, 1080 / 1.5, "cub3D");
 	if (!window)
 		return (free_map(map), print_error("Failed to initialize window"));
 	if (game_init(&game, window, map) == FAILURE)

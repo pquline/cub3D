@@ -16,16 +16,12 @@ static t_bool	empty_tile_is_valid(t_map *map, size_t x, size_t y)
 {
 	if (x == 0 || x == map->width - 1 || y == 0 || y == map->height - 1)
 		return (FALSE);
-	if (map->grid[y - 1][x].id == VOID \
-			|| map->grid[y + 1][x].id == VOID \
-			|| map->grid[y][x - 1].id == VOID \
-			|| map->grid[y][x + 1].id == VOID \
-			|| map->grid[y - 1][x - 1].id == VOID \
-			|| map->grid[y - 1][x + 1].id == VOID \
-			|| map->grid[y + 1][x - 1].id == VOID \
-			|| map->grid[y + 1][x + 1].id == VOID)
-		return (FALSE);
-	return (TRUE);
+	return (map->grid[y - 1][x].id != VOID && map->grid[y + 1][x].id != VOID \
+		&& map->grid[y][x - 1].id != VOID && map->grid[y][x + 1].id != VOID \
+		&& map->grid[y - 1][x - 1].id != VOID \
+		&& map->grid[y - 1][x + 1].id != VOID \
+		&& map->grid[y + 1][x - 1].id != VOID \
+		&& map->grid[y + 1][x + 1].id != VOID);
 }
 
 static t_bool	door_tile_is_valid(t_map *map, size_t x, size_t y)

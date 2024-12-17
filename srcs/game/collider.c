@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   collider.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:14 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:57:22 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/17 10:13:28 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cube3d.h>
+#include <cub3D.h>
 
 t_bool	want_to_move(t_entity *entity, float x, float y)
 {

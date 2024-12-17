@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:12:10 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:43:48 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/17 10:13:28 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cube3d.h>
+#include <cub3D.h>
+#include <entities.h>
 
 static void	change_bounds(t_window *window,
 	t_coords *coords, t_texture *texture)
@@ -83,7 +84,7 @@ void player_update(t_entity *entity)
 	entity->game->engine.camera.x = entity->pos[0];
 	entity->game->engine.camera.y = entity->pos[1];
 	entity->game->engine.camera.dir = entity->dir;
-	
+
 }
 void player_minimap(t_entity *entity)
 {

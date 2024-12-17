@@ -113,13 +113,13 @@ typedef struct s_map
 	char		*we;
 	char		*ea;
 	char		*door;
+	char		start_direction;
+	size_t		width;
+	size_t		height;
 	t_color		f;
 	t_color		c;
 	t_tile		**grid;
-	size_t		width;
-	size_t		height;
 	t_vector2	start_coords;
-	char		start_direction;
 }	t_map;
 
 typedef struct s_parsing

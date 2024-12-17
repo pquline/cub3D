@@ -20,7 +20,10 @@ SRCS += ${SRC}game/assets.c
 SRCS += ${SRC}game/minimap.c
 SRCS += ${SRC}game/entity.c
 
+SRCS += ${SRC}game/entities/coins.c
+SRCS += ${SRC}game/entities/enemies.c
 SRCS += ${SRC}game/entities/player.c
+SRCS += ${SRC}game/entities/spawn_entities.c
 
 SRCS += ${SRC}engine/engine.c
 SRCS += ${SRC}engine/raycast.c

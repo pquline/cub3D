@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fps.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:10:15 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 16:19:16 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/17 10:13:28 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cube3d.h>
+#include <cub3D.h>
 #include <time.h>
 
 t_time	get_time()
