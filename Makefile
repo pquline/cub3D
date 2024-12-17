@@ -6,7 +6,7 @@
 #    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/12/17 14:59:00 by lfarhi           ###   ########.fr        #
+#    Updated: 2024/12/17 17:44:29 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,9 @@ SRCS += ${SRC}game/collider.c
 SRCS += ${SRC}game/assets.c
 SRCS += ${SRC}game/minimap.c
 SRCS += ${SRC}game/entity.c
+
+SRCS += ${SRC}game/blocks/wall.c
+SRCS += ${SRC}game/blocks/door.c
 
 SRCS += ${SRC}game/entities/player.c
 SRCS += ${SRC}game/entities/orbe.c

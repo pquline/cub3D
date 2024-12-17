@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:49:50 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:49:22 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/17 17:59:24 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,7 @@
 
 void	engine_init(t_engine *engine, t_window *window, t_map *map)
 {
-	engine->walls[0] = mlxe_load_texture(window, map->no, TRUE);
-	engine->walls[1] = mlxe_load_texture(window, map->ea, TRUE);
-	engine->walls[2] = mlxe_load_texture(window, map->so, TRUE);
-	engine->walls[3] = mlxe_load_texture(window, map->we, TRUE);
-	if (!engine->walls[0] || !engine->walls[1] || !engine->walls[2] || !engine->walls[3])
-	{
-		printf("Failed to load textures\n");//TODO: handle error
-		return ;
-	}
+	engine->game = NULL;
 	engine->window = window;
 	engine->map = map;
 	engine->camera.x = map->start_coords.x + 0.5;
@@ -36,8 +28,9 @@ void	engine_init(t_engine *engine, t_window *window, t_map *map)
 		engine->camera.dir = M_PI;
 	else if (map->start_direction == 'N')
 		engine->camera.dir = 3 * M_PI_2;
-	engine->camera.fov = M_PI / 3;
+	engine->camera.fov = M_PI / 2.8;
 	engine->entities = NULL;
+	ft_memset(engine->render_block, 0, sizeof(engine->render_block));
 }
 
 void	destory_engine(t_engine *engine)

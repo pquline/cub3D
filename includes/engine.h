@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:37:47 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:49:34 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/17 17:59:13 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,20 @@ typedef struct s_camera
 	float		fov;
 }				t_camera;
 
+typedef struct s_ltxt
+{
+	int			x;
+	t_texture	*texture;
+}				t_ltxt;
 
 typedef struct s_engine
 {
+	void		*game;
 	t_window	*window;
-	t_texture	*walls[4];
 	t_camera	camera;
 	t_map		*map;
 	t_list		*entities;
+	t_ltxt		(*render_block[LEN_TILE_ID])(struct s_engine *engine, t_ray ray);
 }				t_engine;
 
 void	engine_init(t_engine *engine, t_window *window, t_map *map);

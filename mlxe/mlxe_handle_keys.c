@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 17:51:46 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/06/14 16:00:22 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/17 16:39:28 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_keys(t_window *window)
 		window->keys[i++] = 0;
 	mlx_do_key_autorepeatoff(window->mlx);
 	window->mouse = (t_vector2){0, 0};
+	mlxe_mouse_get_pos(window, &window->mouse.x, &window->mouse.y);
 	mlx_hook(window->win, KeyPress, KeyPressMask, &handle_keydown, window);
 	mlx_hook(window->win, KeyRelease,
 		KeyReleaseMask, &handle_keyrelease, window);

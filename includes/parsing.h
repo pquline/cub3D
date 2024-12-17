@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/15 23:18:49 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:06:55 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,13 @@ typedef enum e_parsing_state
 
 typedef enum e_tile_id
 {
-	EMPTY		= 0,
-	WALL		= 1,
-	DOOR_HOR	= 2,
-	DOOR_VER	= 3,
-	ENTITY		= 4,
-	VOID		= INT_MAX,
+	EMPTY,
+	WALL,
+	DOOR_HOR,
+	DOOR_VER,
+	ENTITY,
+	VOID,
+	LEN_TILE_ID
 }	t_tile_id;
 
 /* ------------------------------- STRUCTURES ------------------------------- */

@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:42:12 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 17:49:15 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/17 16:35:22 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	raycast_init(t_engine *engine, float angle, t_ray_calc *ray_calc)
 	ray_calc->ray_dir_y = sin(angle);
 	ray_calc->map_x = (int)ray_calc->ray.x;
 	ray_calc->map_y = (int)ray_calc->ray.y;
-	if (ray_calc->ray_dir_y == 0)
+	if (ray_calc->ray_dir_x == 0)
 		ray_calc->delta_dist_x = 1e30;
 	else
 		ray_calc->delta_dist_x = fabs(1 / ray_calc->ray_dir_x);

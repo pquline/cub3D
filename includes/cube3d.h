@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:33:01 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 19:00:25 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/17 18:10:55 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include "parsing.h"
 # include "engine.h"
 
+typedef struct timeval t_time;
+
 typedef struct s_assets
 {
 	t_sprite	*map_player[6];
@@ -32,6 +34,7 @@ typedef struct s_assets
 	t_sprite	*map_coin;
 	t_sprite	*enemy[4][4];
 	t_sprite	*door[4];
+	t_texture	*walls[4];
 	t_sprite	*coin[4];
 	t_texture	*map_xpm;
 	t_texture	*enemy_xpm[4];
@@ -48,6 +51,7 @@ typedef struct s_game
 	t_assets	assets;
 	char		error_msg[256];
 	float		delta_time;
+	t_time		current_time;
 	t_entity	*player;
 }	t_game;
 
@@ -63,8 +67,6 @@ typedef struct s_entity
 	void		(*update)(struct s_entity *entity);
 	void		(*minimap)(struct s_entity *entity);
 }				t_entity;
-
-typedef struct timeval t_time;
 
 t_time		get_time();
 float		get_delta(t_time start, t_time end);
@@ -89,5 +91,9 @@ t_entity	*spawn_entity(t_game *game,
 void		set_entity_pos(t_entity *entity, float x, float y);
 
 void		main_loop(t_window *window, void *data);
+
+/*render blocks*/
+t_ltxt	render_door(t_engine *engine, t_ray ray);
+t_ltxt	render_wall(t_engine *engine, t_ray ray);
 
 #endif
