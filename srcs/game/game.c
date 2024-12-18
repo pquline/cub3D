@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/17 18:44:51 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/18 15:08:47 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,31 @@ void	update_entities(t_game *game)
 	}
 }
 
+void	update_map(t_game *game)
+{
+	t_vector2	pos;
+	t_tile		*tile;
+
+	pos = (t_vector2){0, 0};
+	while (pos.y < (int)game->engine.map->height)
+	{
+		pos.x = 0;
+		while (pos.x < (int)game->engine.map->width)
+		{
+			tile = &game->engine.map->grid[(int)pos.y][(int)pos.x];
+			if (tile->id == DOOR_HOR || tile->id == DOOR_VER)
+			{
+				if (tile->data > 0 && tile->data < 100)
+					tile->data += 2;
+				if (tile->data < 0 && tile->data > -100)
+					tile->data += 2;
+			}
+			pos.x++;
+		}
+		pos.y++;
+	}
+}
+
 void	main_loop(t_window *window, void *data)
 {
 	t_game	*game;
@@ -34,6 +59,7 @@ void	main_loop(t_window *window, void *data)
 	t_time	end;
 
 	game = (t_game *)data;
+	update_map(game);
 	update_entities(game);
 	start = get_time();
 	game->current_time = start;

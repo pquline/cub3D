@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:42:12 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/17 16:35:22 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/18 15:43:34 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	raycast_side(t_ray_calc *ray_calc)
 	}
 }
 
-t_ray	raycast(t_engine *engine, float angle)
+t_ray_calc	raycast_calc(t_engine *engine, float angle)
 {
 	t_ray_calc	ray_calc;
 	int			hit;
@@ -130,11 +130,18 @@ t_ray	raycast(t_engine *engine, float angle)
 	{
 		ray_calc.ray.hit = TRUE;
 		raycast_side(&ray_calc);
+		ray_calc.ray.x = ray_calc.map_x;
+		ray_calc.ray.y = ray_calc.map_y;
 	}
 	else
 	{
 		ray_calc.ray.dist = FLT_MAX;
 		ray_calc.ray.hit = FALSE;
 	}
-	return (ray_calc.ray);
+	return (ray_calc);
+}
+
+t_ray	raycast(t_engine *engine, float angle)
+{
+	return (raycast_calc(engine, angle).ray);
 }

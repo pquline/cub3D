@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:33:01 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/17 18:50:44 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/18 15:39:14 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	pause_menu_loop(t_window *window, void *data);
 void	gameover_loop(t_window *window, void *data);
 
 /*render blocks*/
-t_ltxt	render_door(t_engine *engine, t_ray ray);
-t_ltxt	render_wall(t_engine *engine, t_ray ray);
+t_ltxt	render_door(t_engine *engine, t_rendering *r);
+t_ltxt	render_wall(t_engine *engine, t_rendering *r);
 
 #endif
