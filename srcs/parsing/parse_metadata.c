@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:36:21 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/18 15:58:31 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:09:58 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,27 +68,28 @@ static int	get_primary_color(char *line, size_t *i)
 	return (color);
 }
 
-t_bool	parse_color(t_color *color, char *line)
+t_bool	parse_color(t_color *result, char *line)
 {
-	size_t	index;
-	int		red;
-	int		green;
-	int		blue;
+	int			primary[3];
+	size_t		index;
+	t_primary	color;
 
 	index = 0;
-	while (line[index] && ft_isspace(line[index]))
-		++index;
-	red = get_primary_color(&line[index], &index);
-	if (red == INT_MAX || line[index] != COMMA_CHAR)
+	color = RED;
+	while (color < PRIMARY_END)
+	{
+		while (line[index] && ft_isspace(line[index]))
+			++index;
+		primary[color] = get_primary_color(&line[index], &index);
+		if (primary[color] == INT_MAX \
+				|| (color < BLUE && line[index] != COMMA_CHAR))
+			return (parsing_error(ERR_COLOR));
+		if (color < BLUE)
+			++index;
+		++color;
+	}
+	if (index != ft_strlen(line) - sizeof(char))
 		return (parsing_error(ERR_COLOR));
-	++index;
-	green = get_primary_color(&line[index], &index);
-	if (green == INT_MAX || line[index] != COMMA_CHAR)
-		return (parsing_error(ERR_COLOR));
-	++index;
-	blue = get_primary_color(&line[index], &index);
-	if (blue == INT_MAX || index != ft_strlen(line) - sizeof(char))
-		return (parsing_error(ERR_COLOR));
-	*color = mlxe_color(red, green, blue);
+	*result = mlxe_color(primary[RED], primary[GREEN], primary[BLUE]);
 	return (SUCCESS);
 }

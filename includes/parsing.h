@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/15 23:18:49 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:07:08 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,14 @@
 100    011"
 
 /* ---------------------------------- ENUMS --------------------------------- */
+
+typedef enum e_primary
+{
+	RED,
+	GREEN,
+	BLUE,
+	PRIMARY_END,
+}	t_primary;
 
 typedef enum e_parsing_state
 {
