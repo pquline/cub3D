@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/17 18:35:25 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/18 16:36:02 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	main(int ac, char **av)
 		mlxe_destroy(window);
 		return (EXIT_FAILURE);
 	}
-	mlxe_loop(window, main_loop, &game);
+	mlxe_loop(window, main_menu_loop, &game);
 
 	//error = FAILURE;
 	//set_error(&game, "Test error");

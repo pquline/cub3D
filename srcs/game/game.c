@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/18 15:08:47 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/18 16:49:04 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	update_map(t_game *game)
 			if (tile->id == DOOR_HOR || tile->id == DOOR_VER)
 			{
 				if (tile->data > 0 && tile->data < 100)
-					tile->data += 2;
+					tile->data += 4;
 				if (tile->data < 0 && tile->data > -100)
-					tile->data += 2;
+					tile->data += 4;
 			}
 			pos.x++;
 		}
@@ -105,7 +105,6 @@ t_bool	game_init(t_game *game, t_window *window, t_map *map)
 	set_entity_pos(player, game->engine.camera.x, game->engine.camera.y);
 	player->dir = game->engine.camera.dir;
 	game->player = player;
-	mlxe_mouse_move(window, window->width / 2, window->height);
 	return (SUCCESS);
 }
 
