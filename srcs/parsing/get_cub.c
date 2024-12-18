@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:01:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/18 09:48:42 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:34:54 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,11 @@ static t_bool	parse_cub(t_parsing *parsing, int fd)
 
 t_bool	get_cub(t_parsing *parsing, char *path)
 {
-	int	fd;
+	int				fd;
+	const size_t	length = ft_strlen(path);
 
-	if (ft_strncmp(&path[ft_strlen(path) - SUFFIX], CUB_SUFFIX, SUFFIX) != 0)
+	if (length < CUB_LENGTH || ft_strncmp(&path[length - CUB_LENGTH], \
+			CUB_SUFFIX, CUB_LENGTH) != 0)
 		return (parsing_error(ERR_CUB_SUFFIX));
 	fd = open(path, O_RDONLY);
 	if (fd == ERROR)

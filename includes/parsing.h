@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/18 16:07:08 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:35:23 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 # define ERROR			-1
 # define UNSET			-1
-# define SUFFIX			4
+# define CUB_LENGTH		4
 # define MIN_RGB_COLOR	0
 # define MAX_RGB_COLOR	255
 # define MIN_RGB_LENGTH	1
