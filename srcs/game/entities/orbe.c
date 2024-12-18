@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   orbe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:52 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/17 14:58:00 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/17 17:17:11 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cube3d.h>
+#include <cub3D.h>
 
 void orbe_update(t_entity *entity)
 {
 	(void)entity;
-	
+
 }
 void orbe_minimap(t_entity *entity)
 {

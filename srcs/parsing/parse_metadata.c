@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:36:21 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/15 23:18:08 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/18 09:35:09 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,9 @@ static int	get_primary_color(char *line, size_t *i)
 	index = 0;
 	while (line[index] && ft_isdigit(line[index]))
 		++index;
-	if (index >= MIN_RGB_LENGTH && index <= MAX_RGB_LENGTH)
-		color = ft_atoi(line);
-	else
+	if (index < MIN_RGB_LENGTH || index > MAX_RGB_COLOR)
 		return (INT_MAX);
+	color = ft_atoi(line);
 	if (color < MIN_RGB_COLOR || color > MAX_RGB_COLOR)
 		return (INT_MAX);
 	*i += index;
@@ -88,11 +87,7 @@ t_bool	parse_color(t_color *color, char *line)
 		return (parsing_error(ERR_COLOR));
 	++index;
 	blue = get_primary_color(&line[index], &index);
-	if (blue == INT_MAX)
-		return (parsing_error(ERR_COLOR));
-	while (line[index] && ft_isspace(line[index]))
-		++index;
-	if (index != ft_strlen(line))
+	if (blue == INT_MAX || index != ft_strlen(line))
 		return (parsing_error(ERR_COLOR));
 	*color = mlxe_color(red, green, blue);
 	return (SUCCESS);

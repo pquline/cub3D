@@ -6,11 +6,12 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:07:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/17 10:18:44 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/17 21:07:41 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include <entities.h>
 
 /*
 */
@@ -67,6 +68,7 @@ void	debug_parsing(t_parsing *parsing)
 	print_list(parsing->cub);
 	printf("\n");
 	print_map(parsing->map);
+	spawn_coin_entities(parsing->map);
 }
 
 t_map	*parsing(char *path)
