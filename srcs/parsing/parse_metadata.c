@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:36:21 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/18 09:48:42 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/18 15:58:31 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_bool	parse_color(t_color *color, char *line)
 		return (parsing_error(ERR_COLOR));
 	++index;
 	blue = get_primary_color(&line[index], &index);
-	if (blue == INT_MAX || index != ft_strlen(line))
+	if (blue == INT_MAX || index != ft_strlen(line) - sizeof(char))
 		return (parsing_error(ERR_COLOR));
 	*color = mlxe_color(red, green, blue);
 	return (SUCCESS);

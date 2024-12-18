@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/17 22:22:19 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/18 15:57:43 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ t_bool	spawn_entities(t_game *game)
 	t_entity	*enemy[4];
 
 	player = spawn_entity(game, &player_update, &player_minimap, NULL);
-	enemy[0] = spawn_entity(game, &update_enemy, &draw_minimap_enemy, NULL);
-	enemy[1] = spawn_entity(game, &update_enemy, &draw_minimap_enemy, NULL);
-	enemy[2] = spawn_entity(game, &update_enemy, &draw_minimap_enemy, NULL);
-	enemy[3] = spawn_entity(game, &update_enemy, &draw_minimap_enemy, NULL);
+	enemy[0] = spawn_entity(game, &ghost_update, &ghost_minimap, NULL);
+	enemy[1] = spawn_entity(game, &ghost_update, &ghost_minimap, NULL);
+	enemy[2] = spawn_entity(game, &ghost_update, &ghost_minimap, NULL);
+	enemy[3] = spawn_entity(game, &ghost_update, &ghost_minimap, NULL);
 	if (spawn_coin_entities(game->engine.map) == FAILURE)
 		return (FAILURE);
 	return (player && enemy[0] && enemy[1] && enemy[2] && enemy[3]);
