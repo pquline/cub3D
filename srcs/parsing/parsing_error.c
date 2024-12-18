@@ -6,11 +6,11 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:14:13 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/15 10:44:58 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/18 09:48:42 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include <parsing.h>
 
 t_bool	parsing_error(char *error)
 {

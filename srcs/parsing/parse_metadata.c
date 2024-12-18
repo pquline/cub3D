@@ -6,11 +6,11 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:36:21 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/18 09:35:09 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/18 09:48:42 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include <parsing.h>
 
 t_bool	parse_map_line(t_parsing *parsing, size_t index)
 {

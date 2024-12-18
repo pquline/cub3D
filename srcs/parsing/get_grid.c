@@ -6,11 +6,11 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:40:23 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/15 14:56:55 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/18 09:48:42 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include <parsing.h>
 
 static t_bool	parse_grid_line(t_parsing *parsing, char *line, size_t y)
 {

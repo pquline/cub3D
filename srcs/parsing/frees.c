@@ -6,11 +6,11 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:14:56 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/12 22:14:46 by pfischof         ###   ########.fr       */
+/*   Updated: 2024/12/18 09:48:42 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include <parsing.h>
 
 static void	free_map_grid(t_tile **grid, size_t height)
 {
