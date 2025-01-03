@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:44:28 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/18 15:45:00 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/03 12:11:04 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cube3d.h>
+#include <cub3D.h>
 
 t_ltxt	render_wall(t_engine *engine, t_rendering *r)
 {

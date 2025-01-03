@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:50:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/18 15:56:40 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/03 12:11:10 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cube3d.h>
+#include <cub3D.h>
 
 static void	render_behind(t_engine *engine, t_rendering *r, t_tile *tile)
 {

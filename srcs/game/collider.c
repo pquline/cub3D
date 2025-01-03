@@ -6,11 +6,11 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:14 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/03 12:03:37 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/03 12:10:54 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cube3d.h>
+#include <cub3D.h>
 
 t_bool	check_collider_block(t_tile *tile)
 {
