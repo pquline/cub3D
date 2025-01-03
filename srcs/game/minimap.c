@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:54:36 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/17 10:13:28 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/03 12:04:55 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ void draw_minimap(t_game *game)
 			t_rect rect = mask_minimap(coords).dest;
 			if (game->engine.map->grid[iter.y][iter.x].id == WALL)
 				mlxe_draw_fillrect(game->window, rect, mlxe_color(0, 0, 255));
+			if (game->engine.map->grid[iter.y][iter.x].id == DOOR_HOR || game->engine.map->grid[iter.y][iter.x].id == DOOR_VER)
+				mlxe_draw_fillrect(game->window, rect, mlxe_color(0, 255, 0));
 			iter.x++;
 		}
 		iter.y++;

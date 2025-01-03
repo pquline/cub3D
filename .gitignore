@@ -60,3 +60,5 @@ libft/libft.a
 map_generator.py
 .vscode/*
 en.subject.pdf
+ttf2png.py
+pacman_font.TTF

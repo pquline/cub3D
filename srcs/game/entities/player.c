@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:12:10 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/17 10:13:28 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/03 12:02:22 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,24 @@ static void	draw_subtexture_size_angle(t_window *window,
 	}
 }
 
+void	check_door(t_entity *entity, t_game *game)
+{
+	if (mlxe_is_key_down(game->window, XK_space) || mlxe_is_key_down(game->window, MOUSE_LEFT))
+	{
+		t_ray ray = raycast(&game->engine, entity->dir);
+		if (ray.dist > 2)
+			return ;
+		if (ray.tile_id == DOOR_HOR || ray.tile_id == DOOR_VER)
+		{
+			t_tile *tile = &game->engine.map->grid[(int)ray.y][(int)ray.x];
+			if (tile->data == 100)
+				tile->data = -96;
+			else if (tile->data == 0)
+				tile->data = 4;
+		}
+	}
+}
+
 void player_update(t_entity *entity)
 {
 	t_game	*game = entity->game;
@@ -84,7 +102,7 @@ void player_update(t_entity *entity)
 	entity->game->engine.camera.x = entity->pos[0];
 	entity->game->engine.camera.y = entity->pos[1];
 	entity->game->engine.camera.dir = entity->dir;
-
+	check_door(entity, game);
 }
 void player_minimap(t_entity *entity)
 {

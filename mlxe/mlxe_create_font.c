@@ -24,7 +24,7 @@ static int	get_char_width(t_texture *txt, int start)
 	{
 		alpha = mlxe_read_pixel(txt, i, 0) & 0xFF000000;
 		if (!alpha)
-			return (width);
+			return (width + 1);
 		width++;
 		i++;
 	}

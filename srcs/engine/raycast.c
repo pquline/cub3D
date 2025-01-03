@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:42:12 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 17:49:15 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/18 15:43:34 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	raycast_init(t_engine *engine, float angle, t_ray_calc *ray_calc)
 	ray_calc->ray_dir_y = sin(angle);
 	ray_calc->map_x = (int)ray_calc->ray.x;
 	ray_calc->map_y = (int)ray_calc->ray.y;
-	if (ray_calc->ray_dir_y == 0)
+	if (ray_calc->ray_dir_x == 0)
 		ray_calc->delta_dist_x = 1e30;
 	else
 		ray_calc->delta_dist_x = fabs(1 / ray_calc->ray_dir_x);
@@ -119,7 +119,7 @@ void	raycast_side(t_ray_calc *ray_calc)
 	}
 }
 
-t_ray	raycast(t_engine *engine, float angle)
+t_ray_calc	raycast_calc(t_engine *engine, float angle)
 {
 	t_ray_calc	ray_calc;
 	int			hit;
@@ -130,11 +130,18 @@ t_ray	raycast(t_engine *engine, float angle)
 	{
 		ray_calc.ray.hit = TRUE;
 		raycast_side(&ray_calc);
+		ray_calc.ray.x = ray_calc.map_x;
+		ray_calc.ray.y = ray_calc.map_y;
 	}
 	else
 	{
 		ray_calc.ray.dist = FLT_MAX;
 		ray_calc.ray.hit = FALSE;
 	}
-	return (ray_calc.ray);
+	return (ray_calc);
+}
+
+t_ray	raycast(t_engine *engine, float angle)
+{
+	return (raycast_calc(engine, angle).ray);
 }

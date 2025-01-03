@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:37:47 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/16 18:49:34 by lfarhi           ###   ########.fr       */
+/*   Updated: 2024/12/18 15:57:32 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_ray_calc
 
 typedef struct s_rendering
 {
-	t_ray		ray;
+	t_ray_calc	ray_calc;
 	float		camera_plane;
 	float		camera_x;
 	float		ray_angle;
@@ -58,6 +58,7 @@ typedef struct s_rendering
 	int			draw_start;
 	int			draw_end;
 	int			tex_x;
+	int			screen_x;
 	t_texture	*texture;
 }			t_rendering;
 
@@ -69,20 +70,29 @@ typedef struct s_camera
 	float		fov;
 }				t_camera;
 
+typedef struct s_ltxt
+{
+	int			x;
+	t_texture	*texture;
+}				t_ltxt;
 
 typedef struct s_engine
 {
+	void		*game;
 	t_window	*window;
-	t_texture	*walls[4];
 	t_camera	camera;
 	t_map		*map;
 	t_list		*entities;
+	t_ltxt		(*render_block[LEN_TILE_ID])(struct s_engine *engine, t_rendering *r);
 }				t_engine;
 
-void	engine_init(t_engine *engine, t_window *window, t_map *map);
-void	destory_engine(t_engine *engine);
-void	render_engine(t_engine *engine);
-t_ray	raycast(t_engine *engine, float angle);
-void	draw_map(t_engine *engine);
+void		engine_init(t_engine *engine, t_window *window, t_map *map);
+void		destory_engine(t_engine *engine);
+void		render_engine(t_engine *engine);
+void		render_line(t_engine *engine, t_rendering *r);
+void		render_copy(t_rendering *from, t_rendering *to);
+t_ray_calc	raycast_calc(t_engine *engine, float angle);
+t_ray		raycast(t_engine *engine, float angle);
+void		draw_map(t_engine *engine);
 
 #endif // ENGINE_H

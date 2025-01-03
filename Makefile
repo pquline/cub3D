@@ -6,7 +6,7 @@
 #    By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2024/12/18 16:18:05 by pfischof         ###   ########.fr        #
+#    Updated: 2025/01/03 12:07:11 by pfischof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,18 @@ NAME = cub3D
 SRC = srcs/
 SRCS += ${SRC}main.c
 SRCS += ${SRC}game/game.c
+SRCS += ${SRC}game/menu.c
 SRCS += ${SRC}game/fps.c
 SRCS += ${SRC}game/collider.c
 SRCS += ${SRC}game/assets.c
 SRCS += ${SRC}game/minimap.c
 SRCS += ${SRC}game/entity.c
+
+SRCS += ${SRC}game/blocks/wall.c
+SRCS += ${SRC}game/blocks/door.c
+
+SRCS += ${SRC}game/blocks/wall.c
+SRCS += ${SRC}game/blocks/door.c
 
 SRCS += ${SRC}game/entities/orbe.c
 SRCS += ${SRC}game/entities/ghost.c

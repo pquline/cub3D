@@ -6,7 +6,7 @@
 #    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/12 16:08:55 by lfarhi            #+#    #+#              #
-#    Updated: 2024/12/16 12:42:36 by lfarhi           ###   ########.fr        #
+#    Updated: 2024/12/17 18:29:05 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ ${SRC}mlxe_read_pixel.c ${SRC}mlxe_write_pixel.c \
 ${SRC}mlxe_handle_keys.c ${SRC}mlxe_draw_subtexture_size.c \
 ${SRC}mlxe_create_font.c ${SRC}mlxe_free_font.c \
 ${SRC}mlxe_font_set_color.c ${SRC}mlxe_font_set_size.c \
-${SRC}mlxe_draw_text.c ${SRC}mlxe_mouse.c
+${SRC}mlxe_draw_text.c ${SRC}mlxe_mouse.c ${SRC}mlxe_init_hook.c
 
 OBJS = ${SRCS:.c=.o}
 

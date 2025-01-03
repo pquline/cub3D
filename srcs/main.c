@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/18 09:46:43 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/03 12:05:25 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,9 @@ int	main(int ac, char **av)
 	map = parsing(av[1]);
 	if (map == NULL)
 		return (EXIT_FAILURE);
-	return (free_map(map), EXIT_SUCCESS);
-	window = mlxe_init(1920 / 1.5, 1080 / 1.5, "cub3D");
+	//return (free_map(map), EXIT_SUCCESS);
+	//window = mlxe_init(1920 / 1.5, 1080 / 1.5, "cub3d");
+	window = mlxe_init_fullscreen("cub3d");
 	if (!window)
 		return (free_map(map), print_error("Failed to initialize window"));
 	if (game_init(&game, window, map) == FAILURE)
@@ -105,7 +106,7 @@ int	main(int ac, char **av)
 		mlxe_destroy(window);
 		return (EXIT_FAILURE);
 	}
-	mlxe_loop(window, main_loop, &game);
+	mlxe_loop(window, main_menu_loop, &game);
 
 	//error = FAILURE;
 	//set_error(&game, "Test error");
