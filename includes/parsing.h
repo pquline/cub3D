@@ -99,8 +99,7 @@ typedef enum e_tile_id
 {
 	EMPTY,
 	WALL,
-	DOOR_HOR,
-	DOOR_VER,
+	DOOR,
 	ENTITY,
 	VOID,
 	LEN_TILE_ID

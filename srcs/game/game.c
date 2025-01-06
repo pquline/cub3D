@@ -39,7 +39,7 @@ void	update_map(t_game *game)
 		while (pos.x < (int)game->engine.map->width)
 		{
 			tile = &game->engine.map->grid[(int)pos.y][(int)pos.x];
-			if (tile->id == DOOR_HOR || tile->id == DOOR_VER)
+			if (tile->id == DOOR)
 			{
 				if (tile->data > 0 && tile->data < 100)
 					tile->data += 4;
@@ -95,8 +95,7 @@ t_bool	game_init(t_game *game, t_window *window, t_map *map)
 		printf("Failed to load textures\n");//TODO: handle error
 		return (FAILURE);
 	}
-	game->engine.render_block[DOOR_HOR] = &render_door;
-	game->engine.render_block[DOOR_VER] = &render_door;
+	game->engine.render_block[DOOR] = &render_door;
 	game->engine.render_block[WALL] = &render_wall;
 	game->player = spawn_entity(game, &player_update, &player_minimap, NULL);
 	if (!game->player)

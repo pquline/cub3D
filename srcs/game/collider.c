@@ -16,7 +16,7 @@ t_bool	check_collider_block(t_tile *tile)
 {
 	if (tile->id == EMPTY)
 		return (SUCCESS);
-	if (tile->id == DOOR_HOR || tile->id == DOOR_VER)
+	if (tile->id == DOOR)
 	{
 		if (tile->data > 0)
 			return (SUCCESS);

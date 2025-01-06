@@ -23,7 +23,7 @@ static t_bool	parse_grid_line(t_parsing *parsing, char *line, size_t y)
 		if (index < size && line[index] == WALL_CHAR)
 			parsing->map->grid[y][index].id = WALL;
 		else if (index < size && line[index] == DOOR_CHAR)
-			parsing->map->grid[y][index].id = DOOR_HOR;
+			parsing->map->grid[y][index].id = DOOR;
 		else if (index >= size - sizeof(char) || ft_isspace(line[index]))
 			parsing->map->grid[y][index].id = VOID;
 		else

@@ -106,7 +106,7 @@ void draw_minimap(t_game *game)
 			t_rect rect = mask_minimap(coords).dest;
 			if (game->engine.map->grid[iter.y][iter.x].id == WALL)
 				mlxe_draw_fillrect(game->window, rect, mlxe_color(0, 0, 255));
-			if (game->engine.map->grid[iter.y][iter.x].id == DOOR_HOR || game->engine.map->grid[iter.y][iter.x].id == DOOR_VER)
+			if (game->engine.map->grid[iter.y][iter.x].id == DOOR)
 				mlxe_draw_fillrect(game->window, rect, mlxe_color(0, 255, 0));
 			iter.x++;
 		}

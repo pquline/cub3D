@@ -67,7 +67,7 @@ void	check_door(t_entity *entity, t_game *game)
 		t_ray ray = raycast(&game->engine, entity->dir);
 		if (ray.dist > 2)
 			return ;
-		if (ray.tile_id == DOOR_HOR || ray.tile_id == DOOR_VER)
+		if (ray.tile_id == DOOR)
 		{
 			t_tile *tile = &game->engine.map->grid[(int)ray.y][(int)ray.x];
 			if (tile->data == 100)

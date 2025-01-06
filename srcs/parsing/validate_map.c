@@ -29,11 +29,8 @@ static t_bool	door_tile_is_valid(t_map *map, size_t x, size_t y)
 	if (x == 0 || x == map->width - 1 || y == 0 || y == map->height - 1)
 		return (parsing_error(ERR_DOOR_MISPLACED));
 	if (map->grid[y - 1][x].id == EMPTY && map->grid[y + 1][x].id == EMPTY
-		&& map->grid[y][x - 1].id == WALL && map->grid[y][x + 1].id == WALL)
-	{
-		map->grid[y][x].id = DOOR_VER;
+			&& map->grid[y][x - 1].id == WALL && map->grid[y][x + 1].id == WALL)
 		return (TRUE);
-	}
 	else if (map->grid[y][x - 1].id == EMPTY && map->grid[y][x + 1].id == EMPTY
 			&& map->grid[y - 1][x].id == WALL && map->grid[y + 1][x].id == WALL)
 		return (TRUE);
@@ -47,7 +44,7 @@ static t_bool	map_row_is_valid(t_map *map, size_t y, size_t *empty_tiles)
 	x = 0;
 	while (x < map->width)
 	{
-		if (map->grid[y][x].id == DOOR_HOR \
+		if (map->grid[y][x].id == DOOR \
 				&& door_tile_is_valid(map, x, y) == FALSE)
 			return (FALSE);
 		if (map->grid[y][x].id == EMPTY && empty_tile_is_valid(map, x, y))
