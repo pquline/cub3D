@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/06 15:26:46 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:43:49 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,42 @@ static t_bool	spawn_coin_entities(t_game *game)
 }
 */
 
-static t_vector2	get_farthest_tile(t_game *game, t_map *map)
+static float	get_distance(size_t x, size_t y, t_vector2 v)
 {
-	int	x;
-	int	y;
+	float	dx;
+	float	dy;
 
-	x = 0;
+	dx = (float)x - (float)v.x;
+	dy = (float)y - (float)v.y;
+	return (sqrtf(dx * dx + dy * dy));
+}
+
+static t_vector2	get_farthest_tile(t_map *map)
+{
+	size_t		x;
+	size_t		y;
+	t_vector2	tile;
+	float		current;
+	float		max;
+
 	y = 0;
-	(void)game;
-	(void)map;
-	return ((t_vector2){x, y});
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			current = get_distance(x, y, map->start_coords);
+			if (current > max && map->visited[y][x] == TRUE)
+			{
+				tile.x = x;
+				tile.y = y;
+				max = current;
+			}
+			++x;
+		}
+		++y;
+	}
+	return (tile);
 }
 
 static t_bool	spawn_enemy_entities(t_game *game, t_map *map)
@@ -102,7 +128,7 @@ static t_bool	spawn_enemy_entities(t_game *game, t_map *map)
 	t_entity	*enemy;
 	t_vector2	pos;
 
-	pos = get_farthest_tile(game, map);
+	pos = get_farthest_tile(map);
 	index = 0;
 	while (index < 4)
 	{
