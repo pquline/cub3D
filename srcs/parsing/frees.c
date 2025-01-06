@@ -6,22 +6,24 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:14:56 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/18 09:48:42 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:15:45 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parsing.h>
 
-static void	free_map_grid(t_tile **grid, size_t height)
+t_bool	free_double_array(void **array, size_t size)
 {
 	size_t	index;
 
 	index = 0;
-	while (index < height && grid[index] != NULL)
+	while (index < size)
 	{
-		free(grid[index]);
+		free(array[index]);
 		++index;
 	}
+	free(array);
+	return (FAILURE);
 }
 
 void	*free_map(t_map *map)
@@ -37,9 +39,11 @@ void	*free_map(t_map *map)
 	free(map->ea);
 	map->no = NULL;
 	if (map->grid && map->grid[0])
-		free_map_grid(map->grid, map->height);
-	free(map->grid);
+		free_double_array((void **)map->grid, map->height);
 	map->grid = NULL;
+	if (map->visited && map->visited[0])
+		free_double_array((void **)map->visited, map->height);
+	map->visited = NULL;
 	free(map);
 	return (NULL);
 }

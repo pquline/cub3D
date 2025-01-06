@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/03 12:05:59 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:15:34 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_map
 	char		start_direction;
 	size_t		width;
 	size_t		height;
+	t_bool		**visited;
 	t_color		f;
 	t_color		c;
 	t_tile		**grid;
@@ -142,6 +143,7 @@ typedef struct s_parsing
 
 char	*ft_strndup(const char *string, size_t size);
 
+t_bool	free_double_array(void **array, size_t size);
 t_bool	get_cub(t_parsing *parsing, char *path);
 t_bool	get_grid(t_parsing *parsing);
 t_bool	init_parsing(t_parsing *parsing);

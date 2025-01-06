@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/06 14:44:18 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:26:46 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,58 @@
 #include <entities.h>
 
 static size_t	get_accessible_tiles_count(t_map *map, t_vector2 v, \
-	t_bool visited[][map->width], size_t count)
+	size_t count)
 {
-	if (visited[v.y][v.x] == TRUE || map->grid[v.y][v.x].id != EMPTY)
+	if (map->visited[v.y][v.x] == TRUE || map->grid[v.y][v.x].id != EMPTY)
 		return (0);
-	visited[v.y][v.x] = TRUE;
-	return (get_accessible_tiles_count(map, (t_vector2){v.x - 1, v.y}, visited,\
-		count) + get_accessible_tiles_count(map, (t_vector2){v.x + 1, v.y}, \
-		visited, count) + get_accessible_tiles_count(map, \
-		(t_vector2){v.x, v.y - 1}, visited, count) \
-		+ get_accessible_tiles_count(map, (t_vector2){v.x, v.y + 1}, visited, \
-		count) + 1);
+	map->visited[v.y][v.x] = TRUE;
+	return (
+		get_accessible_tiles_count(map, (t_vector2){v.x - 1, v.y}, count) \
+		+ get_accessible_tiles_count(map, (t_vector2){v.x + 1, v.y}, count) \
+		+ get_accessible_tiles_count(map, (t_vector2){v.x, v.y - 1}, count) \
+		+ get_accessible_tiles_count(map, (t_vector2){v.x, v.y + 1}, count) + 1);
+}
+
+static t_bool	init_visited_map(t_map *map)
+{
+	size_t	index;
+
+	map->visited = (t_bool **)ft_calloc(map->height, sizeof(t_bool *));
+	if (map->visited == NULL)
+		return (FAILURE);
+	index = 0;
+	while (index < map->height)
+	{
+		map->visited[index] = (t_bool *)ft_calloc(map->width, sizeof(t_bool));
+		if (map->visited[index] == NULL)
+			return (free_double_array((void **)map->visited, index));
+		++index;
+	}
+	return (SUCCESS);
 }
 
 t_bool	spawn_coin_entities(t_game *game, t_map *map)
 {
-	size_t		count;
 	t_entity	*coin;
-	t_bool		visited[map->height][map->width];
-	t_vector2	pos;
+	t_vector2	v;
 
-	ft_bzero(visited, (map->height * map->width) * sizeof(t_bool));
-	count = get_accessible_tiles_count(map, map->start_coords, visited, 0);
-	pos.y = 0;
-	while ((size_t)pos.y < map->height)
+	v.y = 0;
+	while ((size_t)v.y < map->height)
 	{
-		pos.x = 0;
-		while ((size_t)pos.x < map->width)
+		v.x = 0;
+		while ((size_t)v.x < map->width)
 		{
-			if (visited[pos.y][pos.x] == TRUE && !(pos.x == map->start_coords.x \
-				&& pos.y == map->start_coords.y))
+			if (map->visited[v.y][v.x] == TRUE \
+				&& !(v.x == map->start_coords.x && v.y == map->start_coords.y))
 			{
 				coin = spawn_entity(game, &orbe_update, &orbe_minimap, NULL);
 				if (coin == NULL)
 					return (FAILURE);
-				set_entity_pos(coin, (float)pos.x + 0.5, (float)pos.y + 0.5);
+				set_entity_pos(coin, (float)v.x + 0.5, (float)v.y + 0.5);
 			}
-			++pos.x;
+			++v.x;
 		}
-		++pos.y;
+		++v.y;
 	}
 	return (SUCCESS);
 }
@@ -71,19 +84,52 @@ static t_bool	spawn_coin_entities(t_game *game)
 }
 */
 
+static t_vector2	get_farthest_tile(t_game *game, t_map *map)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	(void)game;
+	(void)map;
+	return ((t_vector2){x, y});
+}
+
+static t_bool	spawn_enemy_entities(t_game *game, t_map *map)
+{
+	size_t		index;
+	t_entity	*enemy;
+	t_vector2	pos;
+
+	pos = get_farthest_tile(game, map);
+	index = 0;
+	while (index < 4)
+	{
+		enemy = spawn_entity(game, &ghost_update, &ghost_minimap, NULL);
+		if (enemy == NULL)
+			return (FAILURE);
+		set_entity_pos(enemy, (float)pos.x + 0.5, (float)pos.y + 0.5);
+		++index;
+	}
+	return (SUCCESS);
+}
+
 t_bool	spawn_entities(t_game *game)
 {
+	size_t		count;
 	t_entity	*player;
-	t_entity	*enemy[4];
 
 	player = spawn_entity(game, &player_update, &player_minimap, NULL);
-	enemy[0] = spawn_entity(game, &ghost_update, &ghost_minimap, NULL);
-	enemy[1] = spawn_entity(game, &ghost_update, &ghost_minimap, NULL);
-	enemy[2] = spawn_entity(game, &ghost_update, &ghost_minimap, NULL);
-	enemy[3] = spawn_entity(game, &ghost_update, &ghost_minimap, NULL);
-	if (spawn_coin_entities(game, game->engine.map) == FAILURE)
+	if (player == NULL)
 		return (FAILURE);
-	if (!(player && enemy[0] && enemy[1] && enemy[2] && enemy[3]))
+	if (init_visited_map(game->engine.map) == FAILURE)
+		return (FAILURE);
+	count = get_accessible_tiles_count(game->engine.map, \
+		game->engine.map->start_coords, 0);
+	if (spawn_enemy_entities(game, game->engine.map) == FAILURE)
+		return (FAILURE);
+	if (spawn_coin_entities(game, game->engine.map) == FAILURE)
 		return (FAILURE);
 	game->player = player;
 	return (SUCCESS);
