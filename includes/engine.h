@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:37:47 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/18 15:57:32 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/06 13:55:41 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_ray
 	float		x_t;
 	int			side_hit;
 	t_tile_id	tile_id;
+	//t_entity	*entity;
 }				t_ray;
 
 typedef struct s_ray_calc
