@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:15:55 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/18 11:20:17 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:19:16 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_entity
 }				t_entity;
 */
 
-t_bool	spawn_coin_entities(t_map *map);
+t_bool	spawn_coin_entities(t_game *game, t_map *map);
 
 t_bool	spawn_entities(t_game *game);
 

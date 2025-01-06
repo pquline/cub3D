@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spawn_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/06 13:19:12 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/06 14:44:18 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,33 @@ static size_t	get_accessible_tiles_count(t_map *map, t_vector2 v, \
 		count) + 1);
 }
 
-static void	print_visited(t_map *map, t_bool visited[][map->width])
+t_bool	spawn_coin_entities(t_game *game, t_map *map)
 {
-	dprintf(2, "\n\n----------------- VISITED\n");
-	for (size_t i = 0; i < map->height; ++i)
-	{
-		for (size_t j = 0; j < map->width; ++j)
-			dprintf(2, "%d", visited[i][j] == TRUE ? 0 : 1);
-		dprintf(2, "\n");
-	}
-}
-
-t_bool	spawn_coin_entities(t_map *map)
-{
-	t_bool	visited[map->height][map->width];
-	size_t	count;
+	size_t		count;
+	t_entity	*coin;
+	t_bool		visited[map->height][map->width];
+	t_vector2	pos;
 
 	ft_bzero(visited, (map->height * map->width) * sizeof(t_bool));
-	count = get_accessible_tiles_count(map, map->start_coords, visited, 0) / 2;
-	print_visited(map, visited);
-	dprintf(2, "count = %zu\n", count);
+	count = get_accessible_tiles_count(map, map->start_coords, visited, 0);
+	pos.y = 0;
+	while ((size_t)pos.y < map->height)
+	{
+		pos.x = 0;
+		while ((size_t)pos.x < map->width)
+		{
+			if (visited[pos.y][pos.x] == TRUE && !(pos.x == map->start_coords.x \
+				&& pos.y == map->start_coords.y))
+			{
+				coin = spawn_entity(game, &orbe_update, &orbe_minimap, NULL);
+				if (coin == NULL)
+					return (FAILURE);
+				set_entity_pos(coin, (float)pos.x + 0.5, (float)pos.y + 0.5);
+			}
+			++pos.x;
+		}
+		++pos.y;
+	}
 	return (SUCCESS);
 }
 
@@ -74,11 +81,7 @@ t_bool	spawn_entities(t_game *game)
 	enemy[1] = spawn_entity(game, &ghost_update, &ghost_minimap, NULL);
 	enemy[2] = spawn_entity(game, &ghost_update, &ghost_minimap, NULL);
 	enemy[3] = spawn_entity(game, &ghost_update, &ghost_minimap, NULL);
-
-	t_entity *temp =spawn_entity(game, &orbe_update, &orbe_minimap, NULL);//Todo change
-	set_entity_pos(temp, game->engine.camera.x, game->engine.camera.y);
-
-	if (spawn_coin_entities(game->engine.map) == FAILURE)
+	if (spawn_coin_entities(game, game->engine.map) == FAILURE)
 		return (FAILURE);
 	if (!(player && enemy[0] && enemy[1] && enemy[2] && enemy[3]))
 		return (FAILURE);
