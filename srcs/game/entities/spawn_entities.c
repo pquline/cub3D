@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spawn_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/18 16:17:28 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/06 13:19:12 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,14 @@ t_bool	spawn_entities(t_game *game)
 	enemy[1] = spawn_entity(game, &ghost_update, &ghost_minimap, NULL);
 	enemy[2] = spawn_entity(game, &ghost_update, &ghost_minimap, NULL);
 	enemy[3] = spawn_entity(game, &ghost_update, &ghost_minimap, NULL);
+
+	t_entity *temp =spawn_entity(game, &orbe_update, &orbe_minimap, NULL);//Todo change
+	set_entity_pos(temp, game->engine.camera.x, game->engine.camera.y);
+
 	if (spawn_coin_entities(game->engine.map) == FAILURE)
 		return (FAILURE);
-	return (player && enemy[0] && enemy[1] && enemy[2] && enemy[3]);
+	if (!(player && enemy[0] && enemy[1] && enemy[2] && enemy[3]))
+		return (FAILURE);
+	game->player = player;
+	return (SUCCESS);
 }
