@@ -87,6 +87,7 @@ t_bool		game_init(t_game *game, t_window *window, t_map *map);
 void		destroy_game(t_game *game);
 t_bool		load_assets(t_assets *assets, t_window *window);
 void		draw_minimap(t_game *game);
+t_coords	mask_minimap(t_coords coords);
 
 t_entity	*spawn_entity(t_game *game,
 	void (*update)(t_entity *entity),

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/03 12:10:25 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/06 13:16:58 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ t_bool	game_init(t_game *game, t_window *window, t_map *map)
 	game->engine.render_block[DOOR_HOR] = &render_door;
 	game->engine.render_block[DOOR_VER] = &render_door;
 	game->engine.render_block[WALL] = &render_wall;
-	game->player = spawn_entity(game, &player_update, &player_minimap, NULL);
-	if (!game->player)
+	if (!spawn_entities(game))
 		return (FAILURE);
 	set_entity_pos(game->player, game->engine.camera.x, game->engine.camera.y);
 	game->player->dir = game->engine.camera.dir;
