@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/06 15:43:49 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:45:02 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,6 @@ t_bool	spawn_coin_entities(t_game *game, t_map *map)
 	}
 	return (SUCCESS);
 }
-
-/*
-static t_bool	spawn_coin_entities(t_game *game)
-{
-	bool			visited[game->engine.map->height][game->engine.map->width];
-
-	ft_bzero(visited, game->engine.map->height * game->engine.map->width);
-	const size_t	count = get_accessible_tiles_count(game->engine.map->grid, \
-		game->engine.map->start_coords, visited, 0) / 2 - 1;
-
-	dprintf(2, "count = %zu\n", count);
-	return (SUCCESS);
-}
-*/
 
 static float	get_distance(size_t x, size_t y, t_vector2 v)
 {

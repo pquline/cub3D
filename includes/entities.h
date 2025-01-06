@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:15:55 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/06 14:19:16 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:52:32 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define ENTITIES_H
 
 # include <cub3D.h>
+
+# define ENTITY_SPEED	0.01
 
 /*
 typedef struct s_entity

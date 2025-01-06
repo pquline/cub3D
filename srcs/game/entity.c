@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:00:37 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/17 10:13:28 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:01:41 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_entity	*spawn_entity(t_game *game,
 		return NULL;
 	}
 	ft_lstadd_back(&game->engine.entities, new);
+	entity->data = NULL;
 	return entity;
 }
 

@@ -3,19 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ghost.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/06 13:36:14 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/06 15:57:00 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
+#include <entities.h>
 
 void ghost_update(t_entity *entity)
 {
-	(void)entity;
-
+	if (entity->game->player->pos[0] < entity->pos[0])
+		add_move(entity, -ENTITY_SPEED, 0);
+	else if (entity->game->player->pos[0] > entity->pos[0])
+		add_move(entity, ENTITY_SPEED, 0);
+	if (entity->game->player->pos[1] < entity->pos[1])
+		add_move(entity, 0, -ENTITY_SPEED);
+	else if (entity->game->player->pos[1] > entity->pos[1])
+		add_move(entity, 0, ENTITY_SPEED);
 }
 void ghost_minimap(t_entity *entity)
 {

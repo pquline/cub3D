@@ -68,6 +68,7 @@ typedef struct s_entity
 	float		mov_dir;
 	float		anim;
 	float		anim_map;
+	void		*data;
 	void		(*update)(struct s_entity *entity);
 	void		(*minimap)(struct s_entity *entity);
 }				t_entity;
