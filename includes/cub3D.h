@@ -25,6 +25,9 @@
 # include <parsing.h>
 # include "engine.h"
 
+# define SPRITE_SIZE		640
+# define MAP_SPRITE_SIZE	48
+
 typedef struct timeval t_time;
 
 typedef struct s_assets

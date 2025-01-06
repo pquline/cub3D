@@ -6,33 +6,44 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:35 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/03 12:03:13 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/04 12:14:22 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
+static t_bool	load_map_sprites(t_texture *texture, t_window *window, \
+	t_sprite *sprite[4], size_t offset)
+{
+	size_t	index;
+
+	index = 0;
+	while (index < 4)
+	{
+		sprite[index] = mlxe_create_sprite(window, texture, (t_rect){(index + offset) \
+			* MAP_SPRITE_SIZE, 0, MAP_SPRITE_SIZE, MAP_SPRITE_SIZE}, TRUE);
+		if (sprite == NULL)
+			return (FAILURE);
+		++index;
+	}
+	return (SUCCESS);
+}
+
 static t_bool	load_map_assets(t_assets *assets, t_window *window)
 {
-	assets->map_xpm = mlxe_load_texture(window, "assets/UI/minimap.xpm", TRUE);//TODO check if it's loaded
+	assets->map_xpm = mlxe_load_texture(window, "assets/UI/minimap.xpm", TRUE);
 	if (assets->map_xpm == NULL)
 		return (FAILURE);
-	assets->map_enemy[0] = mlxe_create_sprite(window, assets->map_xpm, (t_rect){0*48,0,48,48}, TRUE);
-	assets->map_enemy[1] = mlxe_create_sprite(window, assets->map_xpm, (t_rect){1*48,0,48,48}, TRUE);
-	assets->map_enemy[2] = mlxe_create_sprite(window, assets->map_xpm, (t_rect){2*48,0,48,48}, TRUE);
-	assets->map_enemy[3] = mlxe_create_sprite(window, assets->map_xpm, (t_rect){3*48,0,48,48}, TRUE);
-	assets->map_player[0] = mlxe_create_sprite(window, assets->map_xpm, (t_rect){4*48,0,48,48}, TRUE);
-	assets->map_player[1] = mlxe_create_sprite(window, assets->map_xpm, (t_rect){5*48,0,48,48}, TRUE);
-	assets->map_player[2] = mlxe_create_sprite(window, assets->map_xpm, (t_rect){6*48,0,48,48}, TRUE);
-	assets->map_player[3] = mlxe_create_sprite(window, assets->map_xpm, (t_rect){7*48,0,48,48}, TRUE);
-	assets->map_coin = mlxe_create_sprite(window, assets->map_xpm, (t_rect){8*48,0,48,48}, TRUE);
+	load_map_sprites(assets->map_xpm, window, assets->map_enemy, 0);
+	load_map_sprites(assets->map_xpm, window, assets->map_player, 4);
+	assets->map_coin = mlxe_create_sprite(window, assets->map_xpm, \
+		(t_rect){8 * MAP_SPRITE_SIZE, 0, MAP_SPRITE_SIZE, MAP_SPRITE_SIZE}, \
+		TRUE);
+	if (assets->map_coin == NULL)
+		return (FAILURE);
 	assets->map_player[4] = assets->map_player[2];
 	assets->map_player[5] = assets->map_player[1];
-	return (assets->map_player[0] && assets->map_player[1] \
-		&& assets->map_player[2] && assets->map_player[3] \
-		&& assets->map_enemy[0] && assets->map_enemy[1] \
-		&& assets->map_enemy[2] && assets->map_enemy[3] \
-		&& assets->map_coin);
+	return (SUCCESS);
 }
 
 static t_bool	load_world_textures(t_assets *assets, t_window *window)
@@ -47,8 +58,9 @@ static t_bool	load_world_textures(t_assets *assets, t_window *window)
 		"assets/world/red.xpm", TRUE);
 	assets->door_xpm = mlxe_load_texture(window, "assets/world/door.xpm", TRUE);
 	assets->coin_xpm = mlxe_load_texture(window, "assets/world/coin.xpm", TRUE);
-	return (assets->enemy_xpm[0] && assets->enemy_xpm[1] && assets->enemy_xpm[2] \
-		&& assets->enemy_xpm[3] && assets->door_xpm && assets->coin_xpm);
+	return (assets->enemy_xpm[0] && assets->enemy_xpm[1] \
+		&& assets->enemy_xpm[2] && assets->enemy_xpm[3] && assets->door_xpm \
+		&& assets->coin_xpm);
 }
 
 static t_bool	load_world_enemy_sprites(t_assets *assets, t_window *window)
@@ -63,8 +75,8 @@ static t_bool	load_world_enemy_sprites(t_assets *assets, t_window *window)
 		while (index_sprite < 4)
 		{
 			assets->enemy[index_tex][index_sprite] = mlxe_create_sprite(window,\
-				assets->enemy_xpm[index_tex], (t_rect){index_sprite * 640, 0, \
-				640, 640}, TRUE);
+				assets->enemy_xpm[index_tex], (t_rect){index_sprite \
+				* SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
 			if (assets->enemy[index_tex][index_sprite] == NULL)
 				return (FAILURE);
 			++index_sprite;
@@ -77,21 +89,21 @@ static t_bool	load_world_enemy_sprites(t_assets *assets, t_window *window)
 static t_bool	load_world_door_and_coin_sprites(t_assets *assets, t_window *window)
 {
 	assets->door[0] = mlxe_create_sprite(window, assets->door_xpm, \
-		(t_rect){0 * 640, 0, 640, 640}, TRUE);
+		(t_rect){0 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
 	assets->door[1] = mlxe_create_sprite(window, assets->door_xpm, \
-		(t_rect){1 * 640, 0, 640, 640}, TRUE);
+		(t_rect){1 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
 	assets->door[2] = mlxe_create_sprite(window, assets->door_xpm, \
-		(t_rect){2 * 640, 0, 640, 640}, TRUE);
+		(t_rect){2 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
 	assets->door[3] = mlxe_create_sprite(window, assets->door_xpm, \
-		(t_rect){3 * 640, 0, 640, 640}, TRUE);
+		(t_rect){3 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
 	assets->coin[0] = mlxe_create_sprite(window, assets->coin_xpm, \
-		(t_rect){0 * 640, 0, 640, 640}, TRUE);
+		(t_rect){0 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
 	assets->coin[1] = mlxe_create_sprite(window, assets->coin_xpm, \
-		(t_rect){1 * 640, 0, 640, 640}, TRUE);
+		(t_rect){1 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
 	assets->coin[2] = mlxe_create_sprite(window, assets->coin_xpm, \
-		(t_rect){2 * 640, 0, 640, 640}, TRUE);
+		(t_rect){2 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
 	assets->coin[3] = mlxe_create_sprite(window, assets->coin_xpm, \
-		(t_rect){3 * 640, 0, 640, 640}, TRUE);
+		(t_rect){3 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
 	return (assets->door[0] && assets->door[1] && assets->door[2] \
 		&& assets->door[3] && assets->coin[0] && assets->coin[1] \
 		&& assets->coin[2] && assets->coin[2]);

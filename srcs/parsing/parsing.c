@@ -6,15 +6,13 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:07:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/18 09:48:42 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/04 12:01:50 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parsing.h>
-#include <entities.h>
 
 /*
-*/
 void	print_list(t_list *list)
 {
 	while (list)
@@ -70,6 +68,7 @@ void	debug_parsing(t_parsing *parsing)
 	print_map(parsing->map);
 	spawn_coin_entities(parsing->map);
 }
+*/
 
 t_map	*parsing(char *path)
 {
@@ -82,7 +81,7 @@ t_map	*parsing(char *path)
 		free_parsing(&parsing);
 		return (free_map(parsing.map));
 	}
-	debug_parsing(&parsing);
+	//debug_parsing(&parsing);
 	free_parsing(&parsing);
 	if (map_is_valid(parsing.map) == FALSE)
 		return (free_map(parsing.map));
