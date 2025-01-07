@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/07 14:45:09 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/07 17:42:47 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,41 @@ static t_vector2	get_farthest_tile(t_map *map)
 	return (tile);
 }
 
+/**
+ * TODO: red algorithm: chase
+ * TODO: pink algorithm: ambush (4 tiles ahead of pacman's position related to its direction)
+ * TODO: blue algorithm: compute
+ * TODO: orange algorithm: random moves
+ * TODO: frightened mode: random next target
+ */
+
+t_vector2	get_next_target(enemy, type)
+{
+	if (type == RED)
+	{
+
+	}
+}
+
+static t_bool	init_enemy_data(t_entity *enemy, t_enemy_type type)
+{
+	t_enemy	*ghost;
+
+	ghost = (t_enemy *)ft_calloc(1, sizeof(t_enemy));
+	if (ghost == NULL)
+		return (FAILURE);
+	ghost->type = type;
+	ghost->mode = CHASING;
+	ghost->red = NULL;
+	enemy->data = ghost;
+}
+
 static t_bool	spawn_enemy_entities(t_game *game, t_map *map)
 {
 	size_t		index;
+	t_enemy		*data;
 	t_entity	*enemy;
+	t_entity	*red;
 	t_vector2	pos;
 
 	pos = get_farthest_tile(map);
@@ -118,6 +149,14 @@ static t_bool	spawn_enemy_entities(t_game *game, t_map *map)
 		if (enemy == NULL)
 			return (FAILURE);
 		set_entity_pos(enemy, (float)pos.x + 0.5, (float)pos.y + 0.5);
+		if (init_enemy_data(enemy, index) == FAILURE)
+			return (FAILURE);
+		data = (t_enemy *)enemy->data;
+		if (index == RED)
+			red = enemy;
+		else
+			data->red = red;
+		data->target = get_next_target(enemy, index);
 		++index;
 	}
 	return (SUCCESS);

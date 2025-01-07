@@ -28,7 +28,29 @@
 # define SPRITE_SIZE		640
 # define MAP_SPRITE_SIZE	48
 
+typedef enum e_enemy_type
+{
+	RED,
+	BLUE,
+	PINK,
+	ORANGE,
+}	t_enemy_type;
+
+typedef enum e_enemy_mode
+{
+	CHASING,
+	FRIGHTENED,
+}	t_enemy_mode;
+
 typedef struct timeval t_time;
+
+typedef struct s_enemy
+{
+	t_vector2		target;
+	t_enemy_type	type;
+	t_enemy_mode	mode;
+	t_entity		*red;
+}	t_enemy;
 
 typedef struct s_assets
 {
