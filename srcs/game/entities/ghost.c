@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/06 17:07:01 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:39:05 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void ghost_update(t_entity *entity)
 	else if (entity->game->player->pos[1] > entity->pos[1])
 		add_move(entity, 0, ENTITY_SPEED);
 }
+
 void ghost_minimap(t_entity *entity)
 {
 	t_camera *camera;
