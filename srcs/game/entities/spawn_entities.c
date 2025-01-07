@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spawn_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/06 15:45:02 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/07 15:07:28 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_bool	spawn_coin_entities(t_game *game, t_map *map)
 			if (map->visited[v.y][v.x] == TRUE \
 				&& !(v.x == map->start_coords.x && v.y == map->start_coords.y))
 			{
-				coin = spawn_entity(game, &orbe_update, &orbe_minimap, NULL);
+				coin = spawn_entity(game, &orbe_update, &orbe_minimap, game->assets.coin[0]);
 				if (coin == NULL)
 					return (FAILURE);
 				set_entity_pos(coin, (float)v.x + 0.5, (float)v.y + 0.5);
@@ -118,7 +118,7 @@ static t_bool	spawn_enemy_entities(t_game *game, t_map *map)
 	index = 0;
 	while (index < 4)
 	{
-		enemy = spawn_entity(game, &ghost_update, &ghost_minimap, NULL);
+		enemy = spawn_entity(game, &ghost_update, &ghost_minimap, game->assets.enemy[index][0]);
 		if (enemy == NULL)
 			return (FAILURE);
 		set_entity_pos(enemy, (float)pos.x + 0.5, (float)pos.y + 0.5);

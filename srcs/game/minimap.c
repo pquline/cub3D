@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:54:36 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/03 12:04:55 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:39:57 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,6 @@
 
 t_coords mask_minimap(t_coords coords)
 {
-	//tronquer les coordonnées si elles dépassent 0,0 -> 100,100
-	/*if (coords.dest.x < 0)
-	{
-		coords.src.x -= coords.dest.x;
-		coords.src.width += coords.dest.x;
-		coords.dest.x = 0;
-	}
-	if (coords.dest.y < 0)
-	{
-		coords.src.y -= coords.dest.y;
-		coords.src.height += coords.dest.y;
-		coords.dest.y = 0;
-	}*/
 	if (coords.dest.x + coords.dest.width > 100)
 	{
 		coords.src.width -= (coords.dest.x + coords.dest.width) - 100;
@@ -54,41 +41,6 @@ void	minimap_entities(t_game *game)
 	}
 }
 
-/*void draw_minimap(t_game *game)
-{
-	size_t		y;
-	size_t		x;
-	t_camera	*camera;
-	t_coords	coords;
-
-	camera = &game->engine.camera;
-	y = 0;
-	while (y < game->engine.map->height)
-	{
-		x = 0;
-		while (x < game->engine.map->width)
-		{
-			coords = mask_minimap((t_coords){(t_rect){(x * 10) - (camera->x * 10) + 50,(y * 10) - (camera->y * 10) + 50, 10, 10},
-				(t_rect){x * 10, y * 10, 10, 10}});
-			if (game->engine.map->grid[y][x].id == WALL)
-				mlxe_draw_fillrect(game->window, coords.dest, mlxe_color(0, 0, 255));
-			else if (game->engine.map->grid[y][x].id == DOOR)
-				mlxe_draw_fillrect(game->window, coords.dest, mlxe_color(0, 255, 0));
-			x++;
-		}
-		y++;
-	}
-	//mlxe_draw_fillrect(game->window, (t_rect){(camera->x * 10) - 2, (camera->y * 10) - 2, 4, 4}, mlxe_color(255, 0, 0));
-	//mlxe_draw_line(game->window, (t_vector2){camera->x * 10, camera->y * 10}, (t_vector2){camera->x * 10 + 10 * cos(camera->dir), camera->y * 10 + 10 * sin(camera->dir)}, mlxe_color(255, 0, 0));
-	//mlxe_draw_sprite(game->window, game->assets.player[0], camera->x * 10, camera->y * 10);
-	draw_subtexture_size_angle(game->window,
-		game->assets.player[0]->texture,
-		(t_coords){game->assets.player[(int)game->assets.player_anim]->rect, (t_rect){camera->x * 10, camera->y * 10, 10, 10}}, camera->dir);
-	game->assets.player_anim += 0.05;
-	if (game->assets.player_anim >= 6)
-		game->assets.player_anim = 0;
-}*/
-
 void draw_minimap(t_game *game)
 {
 	t_vector2 iter;
@@ -113,4 +65,6 @@ void draw_minimap(t_game *game)
 		iter.y++;
 	}
 	minimap_entities(game);
+	mlxe_draw_rect(game->window, (t_rect){0, 0, 100, 100}, mlxe_color(14*4,5*4,58*4));
+	mlxe_draw_rect(game->window, (t_rect){1, 1, 100, 100}, mlxe_color(14*4,5*4,58*4));
 }

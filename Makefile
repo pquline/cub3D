@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+         #
+#    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2025/01/03 12:13:02 by pfischof         ###   ########.fr        #
+#    Updated: 2025/01/07 16:40:17 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,10 @@ SRCS += ${SRC}game/entities/spawn_entities.c
 SRCS += ${SRC}engine/engine.c
 SRCS += ${SRC}engine/raycast.c
 SRCS += ${SRC}engine/render.c
+
+SRCS += ${SRC}sp_mlxe/draw_sprite_mask.c
+SRCS += ${SRC}sp_mlxe/draw_sprite_size_angle.c
+SRCS += ${SRC}sp_mlxe/draw_subtexture_size_z.c
 
 SRCS += ${SRC}parsing/frees.c
 SRCS += ${SRC}parsing/get_cub.c

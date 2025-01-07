@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ghost.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/06 17:07:01 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:37:59 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 #include <entities.h>
+#include <sp_mlxe.h>
 
 void ghost_update(t_entity *entity)
 {
@@ -35,5 +36,5 @@ void ghost_minimap(t_entity *entity)
 	((entity->pos[1] - camera->y + 5) *10) - 8,
 	16, 16}};
 	coords = mask_minimap(coords);
-	mlxe_draw_subtexture_size(entity->game->window, entity->game->assets.map_enemy[monster_id]->texture, coords, mlxe_color(255, 255, 255));
+	draw_sprite_mask(entity->game->window, entity->game->assets.map_enemy[monster_id], coords);
 }

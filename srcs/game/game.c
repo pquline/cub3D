@@ -6,46 +6,18 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/06 13:54:57 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/07 15:24:49 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 #include <entities.h>
 
-void	sort_entities(t_list **entities)
-{
-	t_list	*current;
-	t_list	*next;
-	t_entity	*entity;
-	t_entity	*next_entity;
-
-	current = *entities;
-	while (current)
-	{
-		next = current->next;
-		while (next)
-		{
-			entity = (t_entity *)current->content;
-			next_entity = (t_entity *)next->content;
-			if (entity->pos[0] +  (entity->pos[1] * entity->game->engine.map->width) > next_entity->pos[0] + (next_entity->pos[1] * entity->game->engine.map->width))
-			{
-				current->content = next_entity;
-				next->content = entity;
-				entity = next_entity;
-			}
-			next = next->next;
-		}
-		current = current->next;
-	}
-}
-
 void	update_entities(t_game *game)
 {
 	t_list	*current;
 	t_entity	*entity;
 
-	//sort_entities(&game->engine.entities);
 	current = game->engine.entities;
 	while (current)
 	{
@@ -112,7 +84,8 @@ t_bool	game_init(t_game *game, t_window *window, t_map *map)
 	game->window = window;
 	if (!load_assets(&game->assets, window))
 		return (FAILURE);
-	engine_init(&game->engine, window, map);
+	if (!engine_init(&game->engine, window, map))
+		return (FAILURE);
 	game->engine.game = (void*)game;
 	game->assets.walls[0] = mlxe_load_texture(window, map->no, TRUE);
 	game->assets.walls[1] = mlxe_load_texture(window, map->ea, TRUE);

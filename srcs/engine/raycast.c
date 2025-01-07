@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:42:12 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/06 13:55:48 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/07 12:37:37 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	raycast_init_dir(t_ray_calc *ray_calc)
 
 static void	raycast_init(t_engine *engine, float angle, t_ray_calc *ray_calc)
 {
-	//ray_calc->ray.entity = NULL;
 	ray_calc->ray.hit = FALSE;
 	ray_calc->ray.dir = angle;
 	ray_calc->ray.x = engine->camera.x;
@@ -87,11 +86,6 @@ static int	raycast_loop(t_engine *engine, t_ray_calc *ray_calc)
 		ray_calc->ray.tile_id = engine->map->grid[ray_calc->map_y][ray_calc->map_x].id;
 		if (engine->map->grid[ray_calc->map_y][ray_calc->map_x].id != EMPTY)
 			hit = 1;
-		/*else if (engine->map->grid[ray_calc->map_y][ray_calc->map_x].entities != NULL)
-		{
-			ray_calc->ray.entity = engine->map->grid[ray_calc->map_y][ray_calc->map_x].entities->content;
-			hit = 1;
-		}*/
 		iter++;
 	}
 	return (hit);
