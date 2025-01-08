@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ghost.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 16:09:28 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 17:06:54 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	get_next_target(t_entity *enemy, t_enemy_type type, \
 		temp.x = fmax(0, fmin(temp.x, game->engine.map->width - 1));
 		temp.y = fmax(0, fmin(temp.y, game->engine.map->height - 1));
 	}
-	else if (type == ENEMY_BLUE)
+	else if (type == ENEMY_CYAN)
 	{
 		temp.x = player_pos.x + 2 * (player_pos.x - (int)data->red->pos[0]);
 		temp.y = player_pos.y + 2 * (player_pos.y - (int)data->red->pos[1]);

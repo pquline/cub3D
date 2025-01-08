@@ -34,9 +34,10 @@ typedef struct s_entity	t_entity;
 typedef enum e_enemy_type
 {
 	ENEMY_RED,
-	ENEMY_BLUE,
+	ENEMY_CYAN,
 	ENEMY_PINK,
 	ENEMY_ORANGE,
+	ENEMY_WHITE,
 }	t_enemy_type;
 
 typedef enum e_enemy_mode
@@ -56,14 +57,14 @@ typedef struct s_enemy
 typedef struct s_assets
 {
 	t_sprite	*map_player[6];
-	t_sprite	*map_enemy[4];
+	t_sprite	*map_enemy[5];
 	t_sprite	*map_coin;
-	t_sprite	*enemy[4][4];
+	t_sprite	*enemy[5][4];
 	t_sprite	*door[4];
 	t_texture	*walls[4];
 	t_sprite	*coin[4];
 	t_texture	*map_xpm;
-	t_texture	*enemy_xpm[4];
+	t_texture	*enemy_xpm[5];
 	t_texture	*door_xpm;
 	t_texture	*coin_xpm;
 	t_font		*main_font;

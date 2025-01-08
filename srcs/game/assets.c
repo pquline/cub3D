@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assets.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:35 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 14:26:42 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 17:06:49 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,14 @@ static t_bool	load_map_assets(t_assets *assets, t_window *window)
 	assets->map_xpm = mlxe_load_texture(window, "assets/UI/minimap.xpm", TRUE);
 	if (assets->map_xpm == NULL)
 		return (FAILURE);
-	load_map_sprites(assets->map_xpm, window, assets->map_enemy, 0);
-	load_map_sprites(assets->map_xpm, window, assets->map_player, 4);
+	if (load_map_sprites(assets->map_xpm, window, \
+			assets->map_enemy, 0) == FAILURE)
+		return (FAILURE);
+	if (load_map_sprites(assets->map_xpm, window, \
+			assets->map_player, 5) == FAILURE)
+		return (FAILURE);
 	assets->map_coin = mlxe_create_sprite(window, assets->map_xpm, \
-		(t_rect){8 * MAP_SPRITE_SIZE, 0, MAP_SPRITE_SIZE, MAP_SPRITE_SIZE}, \
+		(t_rect){9 * MAP_SPRITE_SIZE, 0, MAP_SPRITE_SIZE, MAP_SPRITE_SIZE}, \
 		TRUE);
 	if (assets->map_coin == NULL)
 		return (FAILURE);
@@ -49,18 +53,21 @@ static t_bool	load_map_assets(t_assets *assets, t_window *window)
 
 static t_bool	load_world_textures(t_assets *assets, t_window *window)
 {
-	assets->enemy_xpm[0] = mlxe_load_texture(window, \
-		"assets/world/blue.xpm", TRUE);
-	assets->enemy_xpm[1] = mlxe_load_texture(window, \
-		"assets/world/green.xpm", TRUE);
-	assets->enemy_xpm[2] = mlxe_load_texture(window, \
-		"assets/world/pink.xpm", TRUE);
-	assets->enemy_xpm[3] = mlxe_load_texture(window, \
+	assets->enemy_xpm[ENEMY_RED] = mlxe_load_texture(window, \
 		"assets/world/red.xpm", TRUE);
+	assets->enemy_xpm[ENEMY_CYAN] = mlxe_load_texture(window, \
+		"assets/world/cyan.xpm", TRUE);
+	assets->enemy_xpm[ENEMY_PINK] = mlxe_load_texture(window, \
+		"assets/world/pink.xpm", TRUE);
+	assets->enemy_xpm[ENEMY_ORANGE] = mlxe_load_texture(window, \
+		"assets/world/orange.xpm", TRUE);
+	assets->enemy_xpm[ENEMY_WHITE] = mlxe_load_texture(window, \
+		"assets/world/white.xpm", TRUE);
 	assets->door_xpm = mlxe_load_texture(window, "assets/world/door.xpm", TRUE);
 	assets->coin_xpm = mlxe_load_texture(window, "assets/world/coin.xpm", TRUE);
-	return (assets->enemy_xpm[0] && assets->enemy_xpm[1] \
-		&& assets->enemy_xpm[2] && assets->enemy_xpm[3] && assets->door_xpm \
+	return (assets->enemy_xpm[ENEMY_RED] && assets->enemy_xpm[ENEMY_CYAN] \
+		&& assets->enemy_xpm[ENEMY_PINK] && assets->enemy_xpm[ENEMY_ORANGE] \
+		&& assets->enemy_xpm[ENEMY_WHITE] && assets->door_xpm \
 		&& assets->coin_xpm);
 }
 
