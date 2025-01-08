@@ -6,7 +6,7 @@
 #    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2025/01/08 11:35:15 by lfarhi           ###   ########.fr        #
+#    Updated: 2025/01/08 11:58:20 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS += ${SRC}game/entities/spawn_entities.c
 SRCS += ${SRC}engine/engine.c
 SRCS += ${SRC}engine/raycast.c
 SRCS += ${SRC}engine/render.c
+SRCS += ${SRC}engine/render_entities.c
 SRCS += ${SRC}engine/entity.c
 
 SRCS += ${SRC}engine/sp_mlxe/draw_sprite_mask.c
