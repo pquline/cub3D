@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:54:36 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 11:47:23 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 11:59:58 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void draw_minimap(t_game *game)
 		iter.x = 0;
 		while (iter.x < (int)game->engine.map->width)
 		{
-			//t_rect rect = {(iter.x - camera->x + 5) *10, (iter.y - camera->y + 5) *10, 10, 10};
 			t_coords coords = {(t_rect){iter.x * 10, iter.y * 10, 10, 10},(t_rect){(iter.x - camera->x + 5) *10, (iter.y - camera->y + 5) *10, 10, 10}};
 			t_rect rect = mask_minimap(coords).dest;
 			if (game->engine.map->grid[iter.y][iter.x].id == WALL)
