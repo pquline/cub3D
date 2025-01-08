@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:50:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/03 12:11:10 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/08 13:44:26 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	render_behind(t_engine *engine, t_rendering *r, t_tile *tile)
 
 	old = tile->id;
 	tile->id = EMPTY;
-	r->ray_calc = raycast_calc(engine, r->ray_angle);
+	r->ray_calc = raycast(engine, r->ray_angle);
 	render_line(engine, r);
 	tile->id = old;
 }

@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:12:10 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 11:40:29 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 13:44:46 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	check_door(t_entity *entity, t_game *game)
 {
 	if (mlxe_is_key_down(game->window, XK_space) || mlxe_is_key_down(game->window, MOUSE_LEFT))
 	{
-		t_ray ray = raycast(&game->engine, entity->dir);
-		if (ray.dist > 2)
+		t_ray ray = raycast(&game->engine, entity->dir).ray;
+		if (ray.hit ==FALSE || ray.dist > 2)
 			return ;
 		if (ray.tile_id == DOOR)
 		{

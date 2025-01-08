@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:42:12 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/07 12:37:37 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 13:43:43 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	raycast_init(t_engine *engine, float angle, t_ray_calc *ray_calc)
 	raycast_init_dir(ray_calc);
 }
 
-static int	raycast_loop(t_engine *engine, t_ray_calc *ray_calc)
+static int	raycast_loop(t_engine *engine, t_ray_calc *rc)
 {
 	int	hit;
 	int	iter;
@@ -71,20 +71,20 @@ static int	raycast_loop(t_engine *engine, t_ray_calc *ray_calc)
 	iter = 0;
 	while (!hit && iter < 500)
 	{
-		if (ray_calc->side_dist_x < ray_calc->side_dist_y)
+		if (rc->side_dist_x < rc->side_dist_y)
 		{
-			ray_calc->side_dist_x += ray_calc->delta_dist_x;
-			ray_calc->map_x += ray_calc->step_x;
-			ray_calc->side = 0;
+			rc->side_dist_x += rc->delta_dist_x;
+			rc->map_x += rc->step_x;
+			rc->side = 0;
 		}
 		else
 		{
-			ray_calc->side_dist_y += ray_calc->delta_dist_y;
-			ray_calc->map_y += ray_calc->step_y;
-			ray_calc->side = 1;
+			rc->side_dist_y += rc->delta_dist_y;
+			rc->map_y += rc->step_y;
+			rc->side = 1;
 		}
-		ray_calc->ray.tile_id = engine->map->grid[ray_calc->map_y][ray_calc->map_x].id;
-		if (engine->map->grid[ray_calc->map_y][ray_calc->map_x].id != EMPTY)
+		rc->ray.tile_id = engine->map->grid[rc->map_y][rc->map_x].id;
+		if (engine->map->grid[rc->map_y][rc->map_x].id != EMPTY)
 			hit = 1;
 		iter++;
 	}
@@ -119,7 +119,7 @@ void	raycast_side(t_ray_calc *ray_calc)
 	}
 }
 
-t_ray_calc	raycast_calc(t_engine *engine, float angle)
+t_ray_calc	raycast(t_engine *engine, float angle)
 {
 	t_ray_calc	ray_calc;
 	int			hit;
@@ -139,9 +139,4 @@ t_ray_calc	raycast_calc(t_engine *engine, float angle)
 		ray_calc.ray.hit = FALSE;
 	}
 	return (ray_calc);
-}
-
-t_ray	raycast(t_engine *engine, float angle)
-{
-	return (raycast_calc(engine, angle).ray);
 }

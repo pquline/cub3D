@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:14 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 11:37:34 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 13:44:07 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_bool	want_to_move(t_entity *entity, float x, float y)
     }
 
 	float mov_dir = atan2(y - entity->pos[1], x - entity->pos[0]);
-	t_ray ray = raycast(engine, mov_dir);
+	t_ray ray = raycast(engine, mov_dir).ray;
 	float dist = sqrt(pow(entity->pos[0] - x, 2) + pow(entity->pos[1] - y, 2));
 	if (ray.hit && ray.dist < dist)
 	{

@@ -45,32 +45,36 @@ static void	change_bounds(t_window *window,
 		coords->dest.height = window->buffer->size.y - coords->dest.y;
 }
 
+static void	setup_bounds(float *ratio, t_coords *coords,
+	t_engine *engine, t_texture *texture)
+{
+	ratio[0] = (float)coords->src.width / (float)coords->dest.width;
+	ratio[1] = (float)coords->src.height / (float)coords->dest.height;
+	change_bounds_neg(coords, ratio[0], ratio[1]);
+	change_bounds(engine->window, coords, texture);
+}
+
 void	draw_subtexture_size_z(t_engine *engine,
 			t_texture *texture, t_coords coords, float z)
 {
-	float		x_ratio;
-	float		y_ratio;
+	float		ratio[2];
 	t_vector2	inc;
 	t_color		texture_color;
 
-	x_ratio = (float)coords.src.width / (float)coords.dest.width;
-	y_ratio = (float)coords.src.height / (float)coords.dest.height;
-	change_bounds_neg(&coords, x_ratio, y_ratio);
-	change_bounds(engine->window, &coords, texture);
+	setup_bounds(ratio, &coords, engine, texture);
 	inc.x = 0;
 	while (inc.x < coords.dest.width)
 	{
-		int x_dest = coords.dest.x + inc.x;
-		if (engine->z_buffer[x_dest] >= z)
+		inc.y = 0;
+		if (engine->z_buffer[coords.dest.x + inc.x] >= z)
 		{
-			inc.y = 0;
 			while (inc.y < coords.dest.height)
 			{
-				texture_color = mlxe_read_pixel(texture, coords.src.x
-						+ (inc.x * x_ratio), coords.src.y + (inc.y * y_ratio));
+				texture_color = mlxe_read_pixel(texture, coords.src.x + (inc.x
+							* ratio[0]), coords.src.y + (inc.y * ratio[1]));
 				if (!(texture_color & 0xFF000000))
-					mlxe_write_pixel(engine->window->buffer, coords.dest.x + inc.x,
-						coords.dest.y + inc.y, texture_color);
+					mlxe_write_pixel(engine->window->buffer, coords.dest.x
+						+ inc.x, coords.dest.y + inc.y, texture_color);
 				inc.y++;
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:49:50 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 11:54:22 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 13:38:45 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,14 @@ static void	clear_screen(t_window *window, t_color top, t_color bottom)
 	int		j;
 
 	i = 0;
-	while (i < window->buffer->size.y/2)
+	while (i < window->buffer->size.y / 2)
 	{
 		j = 0;
 		while (j < window->buffer->size.x)
 		{
 			mlxe_write_pixel(window->buffer, j, i, top);
-			mlxe_write_pixel(window->buffer, j, window->buffer->size.y - i - 1, bottom);
+			mlxe_write_pixel(window->buffer, j,
+				window->buffer->size.y - i - 1, bottom);
 			j++;
 		}
 		i++;
@@ -65,7 +66,8 @@ static void	clear_screen(t_window *window, t_color top, t_color bottom)
 
 void	render_engine(t_engine *engine)
 {
-	ft_memset(engine->z_buffer, 0, sizeof(float) * engine->window->buffer->size.x);
+	ft_memset(engine->z_buffer, 0,
+		sizeof(float) * engine->window->buffer->size.x);
 	clear_screen(engine->window, engine->map->c, engine->map->f);
 	draw_map(engine);
 	draw_entities(engine);
