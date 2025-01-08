@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 15:06:39 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/07 12:59:00 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 13:44:56 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static t_bool	line_init(t_engine *engine, t_rendering *r)
 	t_ltxt	res;
 
 	r->line_height = (int)(engine->window->buffer->size.y
-			/ fmax(r->ray_calc.ray.dist * tan(engine->camera.fov / 2.0f), 0.1f));
+			/ fmax(r->ray_calc.ray.dist
+				* tan(engine->camera.fov / 2.0f), 0.1f));
 	r->draw_start = -r->line_height / 2 + engine->window->buffer->size.y / 2;
 	r->draw_end = r->line_height / 2 + engine->window->buffer->size.y / 2;
 	if (r->draw_start < 0)
@@ -61,22 +62,8 @@ void	render_line(t_engine *engine, t_rendering *r)
 	{
 		r->ray_calc.ray.dist *= cos(r->ray_calc.ray.dir - engine->camera.dir);
 		if (line_init(engine, r))
-			draw_line(engine,r);
+			draw_line(engine, r);
 	}
-}
-
-void	render_copy(t_rendering *from, t_rendering *to)
-{
-	to->ray_calc = from->ray_calc;
-	to->camera_plane = from->camera_plane;
-	to->camera_x = from->camera_x;
-	to->ray_angle = from->ray_angle;
-	to->line_height = from->line_height;
-	to->draw_start = from->draw_start;
-	to->draw_end = from->draw_end;
-	to->tex_x = from->tex_x;
-	to->screen_x = from->screen_x;
-	to->texture = from->texture;
 }
 
 void	draw_map(t_engine *engine)
@@ -89,7 +76,7 @@ void	draw_map(t_engine *engine)
 	{
 		r.camera_x = 2 * r.screen_x / (float)engine->window->buffer->size.x - 1;
 		r.ray_angle = engine->camera.dir + r.camera_x * r.camera_plane;
-		r.ray_calc = raycast_calc(engine, r.ray_angle);
+		r.ray_calc = raycast(engine, r.ray_angle);
 		render_line(engine, &r);
 		r.screen_x++;
 	}

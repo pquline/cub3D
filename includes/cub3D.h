@@ -80,7 +80,7 @@ typedef struct s_game
 	t_entity	*player;
 }	t_game;
 
-t_time		get_time();
+t_time		get_time(void);
 float		get_delta(t_time start, t_time end);
 int			get_fps(t_time start, t_time end);
 float		adaptive_speed(float speed, float delta);
@@ -102,12 +102,12 @@ void		set_entity_pos(t_entity *entity, float x, float y);
 void		main_loop(t_window *window, void *data);
 
 /*Menu*/
-void	main_menu_loop(t_window *window, void *data);
-void	pause_menu_loop(t_window *window, void *data);
-void	gameover_loop(t_window *window, void *data);
+void		main_menu_loop(t_window *window, void *data);
+void		pause_menu_loop(t_window *window, void *data);
+void		gameover_loop(t_window *window, void *data);
 
 /*render blocks*/
-t_ltxt	render_door(t_engine *engine, t_rendering *r);
-t_ltxt	render_wall(t_engine *engine, t_rendering *r);
+t_ltxt		render_door(t_engine *engine, t_rendering *r);
+t_ltxt		render_wall(t_engine *engine, t_rendering *r);
 
 #endif

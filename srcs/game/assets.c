@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assets.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:35 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/04 12:14:22 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:26:42 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ static t_bool	load_map_sprites(t_texture *texture, t_window *window, \
 	index = 0;
 	while (index < 4)
 	{
-		sprite[index] = mlxe_create_sprite(window, texture, (t_rect){(index + offset) \
-			* MAP_SPRITE_SIZE, 0, MAP_SPRITE_SIZE, MAP_SPRITE_SIZE}, TRUE);
+		sprite[index] = mlxe_create_sprite(window, texture,
+				(t_rect){(index + offset) * MAP_SPRITE_SIZE, 0,
+				MAP_SPRITE_SIZE, MAP_SPRITE_SIZE}, TRUE);
 		if (sprite == NULL)
 			return (FAILURE);
 		++index;
@@ -74,9 +75,9 @@ static t_bool	load_world_enemy_sprites(t_assets *assets, t_window *window)
 		index_sprite = 0;
 		while (index_sprite < 4)
 		{
-			assets->enemy[index_tex][index_sprite] = mlxe_create_sprite(window,\
-				assets->enemy_xpm[index_tex], (t_rect){index_sprite \
-				* SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
+			assets->enemy[index_tex][index_sprite] = mlxe_create_sprite(window,
+					assets->enemy_xpm[index_tex], (t_rect){index_sprite
+					* SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
 			if (assets->enemy[index_tex][index_sprite] == NULL)
 				return (FAILURE);
 			++index_sprite;
@@ -86,7 +87,8 @@ static t_bool	load_world_enemy_sprites(t_assets *assets, t_window *window)
 	return (SUCCESS);
 }
 
-static t_bool	load_world_door_and_coin_sprites(t_assets *assets, t_window *window)
+static t_bool	load_world_door_and_coin_sprites(
+	t_assets *assets, t_window *window)
 {
 	assets->door[0] = mlxe_create_sprite(window, assets->door_xpm, \
 		(t_rect){0 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
@@ -119,7 +121,8 @@ t_bool	load_assets(t_assets *assets, t_window *window)
 		return (FAILURE);
 	if (load_world_door_and_coin_sprites(assets, window) == FAILURE)
 		return (FAILURE);
-	assets->main_font = mlxe_create_font(window, "assets/UI/pacman_font.xpm", TRUE);
+	assets->main_font = mlxe_create_font(window,
+			"assets/UI/pacman_font.xpm", TRUE);
 	if (assets->main_font == NULL)
 		return (FAILURE);
 	return (SUCCESS);
