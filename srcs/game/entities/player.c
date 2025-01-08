@@ -6,13 +6,12 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:12:10 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/07 16:39:45 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 11:26:23 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 #include <entities.h>
-#include <sp_mlxe.h>
 
 void	check_door(t_entity *entity, t_game *game)
 {

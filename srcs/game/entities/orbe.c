@@ -6,12 +6,11 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:52 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/07 16:38:16 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 11:26:09 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
-#include <sp_mlxe.h>
 
 void orbe_update(t_entity *entity)
 {

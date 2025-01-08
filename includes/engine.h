@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:37:47 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/07 12:55:26 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 11:24:53 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,13 @@ void		render_copy(t_rendering *from, t_rendering *to);
 t_ray_calc	raycast_calc(t_engine *engine, float angle);
 t_ray		raycast(t_engine *engine, float angle);
 void		draw_map(t_engine *engine);
+
+void	draw_subtexture_size_z(t_engine *engine,
+			t_texture *texture, t_coords coords, float z);
+
+void	draw_sprite_size_angle(t_window *window,
+			t_sprite *sprite, t_coords coords, float angle);
+
+void	draw_sprite_mask(t_window *window, t_sprite *sprite, t_coords coords);
 
 #endif // ENGINE_H

@@ -6,11 +6,11 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:35:51 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/07 16:41:11 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 11:26:54 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sp_mlxe.h>
+#include <engine.h>
 #include <math.h>
 
 static void	change_bounds(t_window *window,
@@ -47,8 +47,6 @@ void	draw_sprite_size_angle(t_window *window,
 					+ (inc.x * x_ratio), coords.src.y + (inc.y * y_ratio));
 			if (!(texture_color & 0xFF000000))
 			{
-				//t_vector2	pos = {coords.dest.x + inc.x, coords.dest.y + inc.y};
-				//rotate
 				t_vector2	new_pos = {coords.dest.x + (inc.x - coords.dest.width / 2) * cos(angle) - (inc.y - coords.dest.height / 2) * sin(angle),
 					coords.dest.y + (inc.x - coords.dest.width / 2) * sin(angle) + (inc.y - coords.dest.height / 2) * cos(angle)};
 				mlxe_write_pixel(window->buffer, new_pos.x,

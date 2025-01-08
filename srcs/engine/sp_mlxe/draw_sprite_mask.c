@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sp_mlxe.h>
+#include <engine.h>
 
 static void	change_bounds_neg(t_coords *coords,
 	float x_ratio, float y_ratio)
@@ -44,8 +44,8 @@ static void	change_bounds(t_window *window,
 		coords->dest.height = window->buffer->size.y - coords->dest.y;
 }
 
-void	draw_subtexture_size_z(t_window *window,
-			t_texture *texture, t_coords coords, float *z_buffer, float z)
+void	draw_sprite_mask(t_window *window,
+			t_sprite *sprite, t_coords coords)
 {
 	float		x_ratio;
 	float		y_ratio;
@@ -55,26 +55,20 @@ void	draw_subtexture_size_z(t_window *window,
 	x_ratio = (float)coords.src.width / (float)coords.dest.width;
 	y_ratio = (float)coords.src.height / (float)coords.dest.height;
 	change_bounds_neg(&coords, x_ratio, y_ratio);
-	change_bounds(window, &coords, texture);
-	inc.x = 0;
-	while (inc.x < coords.dest.width)
+	change_bounds(window, &coords, sprite->texture);
+	inc.y = 0;
+	while (inc.y < coords.dest.height)
 	{
-		int x_dest = coords.dest.x + inc.x;
-		if (z_buffer[x_dest] < z)
+		inc.x = 0;
+		while (inc.x < coords.dest.width)
 		{
-			inc.x++;
-			continue;
-		}
-		inc.y = 0;
-		while (inc.y < coords.dest.height)
-		{
-			texture_color = mlxe_read_pixel(texture, coords.src.x
+			texture_color = mlxe_read_pixel(sprite->texture, coords.src.x
 					+ (inc.x * x_ratio), coords.src.y + (inc.y * y_ratio));
 			if (!(texture_color & 0xFF000000))
 				mlxe_write_pixel(window->buffer, coords.dest.x + inc.x,
 					coords.dest.y + inc.y, texture_color);
-			inc.y++;
+			inc.x++;
 		}
-		inc.x++;
+		inc.y++;
 	}
 }
