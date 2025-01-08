@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collider.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:14 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/03 12:10:54 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:37:34 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_bool	check_collider_block(t_tile *tile)
 
 t_bool	want_to_move(t_entity *entity, float x, float y)
 {
-	t_engine *engine = &entity->game->engine;
+	t_engine *engine = &((t_game*)entity->game)->engine;
 
 	if (x < 0 || x >= engine->map->width || y < 0 || y >= engine->map->height)
 		return (FAILURE);

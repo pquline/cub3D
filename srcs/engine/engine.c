@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:49:50 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/07 18:10:39 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 11:31:17 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_bool	engine_init(t_engine *engine, t_window *window, t_map *map)
 void	destory_engine(t_engine *engine)
 {
 	free(engine->z_buffer);
-	ft_lstclear(&engine->entities, free);
+	ft_lstclear(&engine->entities, free_entity);
 	engine->entities = NULL;
 }
 
@@ -146,9 +146,6 @@ void sort_entities(t_list **entities, t_entity *player)
     *entities = quick_sort(*entities, player);
 }
 
-
-#include <sp_mlxe.h>
-
 void draw_entities(t_engine *engine)
 {
 	sort_entities(&engine->entities, ((t_game*)engine->game)->player);
@@ -198,8 +195,8 @@ void draw_entities(t_engine *engine)
             t_rect rect = {screen_x - line_height / 2, screen_y, line_height, line_height};
 
             // Dessiner l'entité
-			draw_subtexture_size_z(engine->window, entity->sprites->texture,
-                                      (t_coords){entity->sprites->rect, rect},engine->z_buffer, corrected_dist);
+			draw_subtexture_size_z(engine, entity->sprites->texture,
+                                      (t_coords){entity->sprites->rect, rect}, corrected_dist);
 
         }
 

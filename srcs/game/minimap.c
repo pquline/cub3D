@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:54:36 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/07 16:39:57 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 11:47:23 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	minimap_entities(t_game *game)
 	while (current)
 	{
 		entity = (t_entity *)current->content;
-		entity->minimap(entity);
+		entity->efunc.minimap(entity);
 		current = current->next;
 	}
 }

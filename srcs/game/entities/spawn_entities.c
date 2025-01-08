@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/08 11:38:13 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:52:36 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_bool	spawn_coin_entities(t_game *game, t_map *map)
 			if (map->visited[v.y][v.x] == TRUE \
 				&& !(v.x == map->start_coords.x && v.y == map->start_coords.y))
 			{
-				coin = spawn_entity(game, &orbe_update, &orbe_minimap, game->assets.coin[0]);
+				coin = spawn_entity(&game->engine, game, (t_efunc){&orbe_update, &orbe_minimap, NULL}, game->assets.coin[0]);
 				if (coin == NULL)
 					return (FAILURE);
 				set_entity_pos(coin, (float)v.x + 0.5, (float)v.y + 0.5);
@@ -130,7 +130,7 @@ static t_bool	spawn_enemy_entities(t_game *game, t_map *map)
 	index = 0;
 	while (index < 4)
 	{
-		enemy = spawn_entity(game, &ghost_update, &ghost_minimap, game->assets.enemy[index][0]);
+		enemy = spawn_entity(&game->engine, game, (t_efunc){&ghost_update, &ghost_minimap, free}, game->assets.enemy[index][0]);
 		if (enemy == NULL)
 			return (FAILURE);
 		set_entity_pos(enemy, (float)pos.x + 0.5, (float)pos.y + 0.5);
@@ -151,7 +151,7 @@ t_bool	spawn_entities(t_game *game)
 {
 	t_entity	*player;
 
-	player = spawn_entity(game, &player_update, &player_minimap, NULL);
+	player = spawn_entity(&game->engine, game, (t_efunc){&player_update, &player_minimap, NULL}, NULL);
 	if (player == NULL)
 		return (FAILURE);
 	if (init_accessible_map(game->engine.map) == FAILURE)

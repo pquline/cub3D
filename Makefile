@@ -6,7 +6,7 @@
 #    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2025/01/07 16:40:17 by lfarhi           ###   ########.fr        #
+#    Updated: 2025/01/08 11:35:15 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ SRCS += ${SRC}game/fps.c
 SRCS += ${SRC}game/collider.c
 SRCS += ${SRC}game/assets.c
 SRCS += ${SRC}game/minimap.c
-SRCS += ${SRC}game/entity.c
 
 SRCS += ${SRC}game/blocks/wall.c
 SRCS += ${SRC}game/blocks/door.c
@@ -32,10 +31,11 @@ SRCS += ${SRC}game/entities/spawn_entities.c
 SRCS += ${SRC}engine/engine.c
 SRCS += ${SRC}engine/raycast.c
 SRCS += ${SRC}engine/render.c
+SRCS += ${SRC}engine/entity.c
 
-SRCS += ${SRC}sp_mlxe/draw_sprite_mask.c
-SRCS += ${SRC}sp_mlxe/draw_sprite_size_angle.c
-SRCS += ${SRC}sp_mlxe/draw_subtexture_size_z.c
+SRCS += ${SRC}engine/sp_mlxe/draw_sprite_mask.c
+SRCS += ${SRC}engine/sp_mlxe/draw_sprite_size_angle.c
+SRCS += ${SRC}engine/sp_mlxe/draw_subtexture_size_z.c
 
 SRCS += ${SRC}parsing/frees.c
 SRCS += ${SRC}parsing/get_cub.c
