@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 15:06:39 by lfarhi            #+#    #+#             */
-/*   Updated: 2024/12/18 15:57:26 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/07 12:59:00 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	draw_line(t_engine *engine, t_rendering *r)
 		mlxe_draw_pixel(engine->window->buffer, r->screen_x, y, color);
 		y++;
 	}
+	engine->z_buffer[r->screen_x] = r->ray_calc.ray.dist;
 }
 
 void	render_line(t_engine *engine, t_rendering *r)

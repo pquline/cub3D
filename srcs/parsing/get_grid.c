@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_grid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:40:23 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/18 09:48:42 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/07 18:11:33 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static t_bool	parse_grid_line(t_parsing *parsing, char *line, size_t y)
 			parsing->map->grid[y][index].id = VOID;
 		else
 			parsing->map->grid[y][index].id = EMPTY;
-		parsing->map->grid[y][index].entities = NULL;
 		parsing->map->grid[y][index].data = 0;
 		++index;
 	}

@@ -6,12 +6,13 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 11:20:48 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:25:44 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 #include <entities.h>
+#include <sp_mlxe.h>
 
 /**
  * TODO: red algorithm: chase
@@ -106,7 +107,7 @@ void	ghost_minimap(t_entity *enemy)
 				(t_rect){((enemy->pos[0] - camera->x + 5) *10) - 8,
 				((enemy->pos[1] - camera->y + 5) *10) - 8, 16, 16}};
 	coords = mask_minimap(coords);
-	mlxe_draw_subtexture_size(enemy->game->window, \
-		enemy->game->assets.map_enemy[monster_id]->texture, \
-		coords, mlxe_color(255, 255, 255));
+	draw_sprite_mask(enemy->game->window, \
+		enemy->game->assets.map_enemy[monster_id], \
+		coords);
 }

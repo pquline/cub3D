@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:37:47 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/06 13:55:41 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/07 12:55:26 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_ray
 	float		x_t;
 	int			side_hit;
 	t_tile_id	tile_id;
-	//t_entity	*entity;
 }				t_ray;
 
 typedef struct s_ray_calc
@@ -81,13 +80,14 @@ typedef struct s_engine
 {
 	void		*game;
 	t_window	*window;
+	float		*z_buffer;
 	t_camera	camera;
 	t_map		*map;
 	t_list		*entities;
 	t_ltxt		(*render_block[LEN_TILE_ID])(struct s_engine *engine, t_rendering *r);
 }				t_engine;
 
-void		engine_init(t_engine *engine, t_window *window, t_map *map);
+t_bool		engine_init(t_engine *engine, t_window *window, t_map *map);
 void		destory_engine(t_engine *engine);
 void		render_engine(t_engine *engine);
 void		render_line(t_engine *engine, t_rendering *r);
