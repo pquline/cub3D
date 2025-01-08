@@ -69,8 +69,6 @@ typedef struct s_assets
 	t_font		*main_font;
 }	t_assets;
 
-typedef struct s_entity	t_entity;
-
 typedef struct s_game
 {
 	t_window	*window;
@@ -81,20 +79,6 @@ typedef struct s_game
 	t_time		current_time;
 	t_entity	*player;
 }	t_game;
-
-typedef struct s_entity
-{
-	t_game		*game;
-	t_sprite	*sprites;
-	float		pos[2];
-	float		dir;
-	float		mov_dir;
-	float		anim;
-	float		anim_map;
-	void		*data;
-	void		(*update)(struct s_entity *entity);
-	void		(*minimap)(struct s_entity *entity);
-}				t_entity;
 
 t_time		get_time();
 float		get_delta(t_time start, t_time end);
@@ -113,10 +97,6 @@ t_bool		load_assets(t_assets *assets, t_window *window);
 void		draw_minimap(t_game *game);
 t_coords	mask_minimap(t_coords coords);
 
-t_entity	*spawn_entity(t_game *game,
-	void (*update)(t_entity *entity),
-	void (*minimap)(t_entity *entity),
-	t_sprite *sprites);
 void		set_entity_pos(t_entity *entity, float x, float y);
 
 void		main_loop(t_window *window, void *data);

@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/07 15:24:49 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 11:46:57 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	update_entities(t_game *game)
 	while (current)
 	{
 		entity = (t_entity *)current->content;
-		entity->update(entity);
+		entity->efunc.update(entity);
 		current = current->next;
 	}
 }

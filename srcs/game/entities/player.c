@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:12:10 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 11:26:23 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 11:40:29 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void player_update(t_entity *entity)
 		entity->dir -= speed_move;
 	if (mlxe_is_key_pressed(game->window, XK_Right))
 		entity->dir += speed_move;
-	entity->game->engine.camera.x = entity->pos[0];
-	entity->game->engine.camera.y = entity->pos[1];
-	entity->game->engine.camera.dir = entity->dir;
+	game->engine.camera.x = entity->pos[0];
+	game->engine.camera.y = entity->pos[1];
+	game->engine.camera.dir = entity->dir;
 	check_door(entity, game);
 }
 void player_minimap(t_entity *entity)

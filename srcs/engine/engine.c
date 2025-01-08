@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:49:50 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 11:26:34 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 11:31:17 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_bool	engine_init(t_engine *engine, t_window *window, t_map *map)
 void	destory_engine(t_engine *engine)
 {
 	free(engine->z_buffer);
-	ft_lstclear(&engine->entities, free);
+	ft_lstclear(&engine->entities, free_entity);
 	engine->entities = NULL;
 }
 

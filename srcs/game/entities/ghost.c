@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 11:29:24 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 11:40:04 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void	get_next_target(t_entity *enemy, t_enemy_type type, \
 {
 	t_enemy		*data;
 	t_vector2	temp;
+	t_game *game;
 
+	game = (t_game *)enemy->game;
 	data = (t_enemy *)enemy->data;
 	temp = player_pos;
 	if (type == ENEMY_PINK)
@@ -68,23 +70,25 @@ void	get_next_target(t_entity *enemy, t_enemy_type type, \
 	}
 	else if (type == ENEMY_ORANGE)
 	{
-		temp.x = rand() % enemy->game->engine.map->width;
-		temp.y = rand() % enemy->game->engine.map->height;
+		temp.x = rand() % game->engine.map->width;
+		temp.y = rand() % game->engine.map->height;
 	}
 	data->target = find_next_tile((t_vector2){(int)enemy->pos[0], \
-		(int)enemy->pos[1]}, temp, enemy->game->engine.map);
+		(int)enemy->pos[1]}, temp, game->engine.map);
 }
 
 void	ghost_update(t_entity *enemy)
 {
 	t_enemy	*data;
+	t_game *game;
 
+	game = (t_game *)enemy->game;
 	data = (t_enemy *)enemy->data;
 	if (data->target.x + 0.5 - enemy->pos[0] < 0.1 \
 			&& data->target.y + 0.5 - enemy->pos[1] < 0.1)
 		get_next_target(enemy, data->type, \
-			(t_vector2){(int)enemy->game->player->pos[0], \
-			(int)enemy->game->player->pos[1]}, enemy->game->player->mov_dir);
+			(t_vector2){(int)game->player->pos[0], \
+			(int)game->player->pos[1]}, game->player->mov_dir);
 	if (data->target.x < enemy->pos[0])
 		add_move(enemy, -ENTITY_SPEED, 0);
 	else if (data->target.x > enemy->pos[0])
@@ -100,13 +104,15 @@ void	ghost_minimap(t_entity *enemy)
 	int			monster_id = 0;
 	t_camera	*camera;
 	t_coords	coords;
+	t_game *game;
 
-	camera = &enemy->game->engine.camera;
-	coords = (t_coords){enemy->game->assets.map_enemy[monster_id]->rect, \
+	game = (t_game *)enemy->game;
+	camera = &game->engine.camera;
+	coords = (t_coords){game->assets.map_enemy[monster_id]->rect, \
 				(t_rect){((enemy->pos[0] - camera->x + 5) *10) - 8,
 				((enemy->pos[1] - camera->y + 5) *10) - 8, 16, 16}};
 	coords = mask_minimap(coords);
-	draw_sprite_mask(enemy->game->window, \
-		enemy->game->assets.map_enemy[monster_id], \
+	draw_sprite_mask(game->window, \
+		game->assets.map_enemy[monster_id], \
 		coords);
 }
