@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:37:47 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 13:43:54 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 13:53:59 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ typedef struct s_engine
 	t_ltxt		(*render_block[LEN_TILE_ID])(struct s_engine *engine, t_rendering *r);
 }				t_engine;
 
-typedef struct s_entity t_entity;
+typedef struct s_entity	t_entity;
 
 typedef struct s_efunc
 {
@@ -113,20 +113,22 @@ t_bool		engine_init(t_engine *engine, t_window *window, t_map *map);
 void		destory_engine(t_engine *engine);
 void		render_engine(t_engine *engine);
 void		render_line(t_engine *engine, t_rendering *r);
-t_ray_calc		raycast(t_engine *engine, float angle);
+t_ray_calc	raycast(t_engine *engine, float angle);
 void		draw_map(t_engine *engine);
 
-void	draw_subtexture_size_z(t_engine *engine,
-			t_texture *texture, t_coords coords, float z);
+void		draw_subtexture_size_z(t_engine *engine,
+				t_texture *texture, t_coords coords, float z);
 
-void	draw_sprite_size_angle(t_window *window,
-			t_sprite *sprite, t_coords coords, float angle);
+void		draw_sprite_size_angle(t_window *window,
+				t_sprite *sprite, t_coords coords, float angle);
 
-void	draw_sprite_mask(t_window *window, t_sprite *sprite, t_coords coords);
+void		draw_sprite_mask(t_window *window,
+				t_sprite *sprite, t_coords coords);
 
-t_entity	*spawn_entity(t_engine *engine, void *game, t_efunc efunc, t_sprite *sprites);
-void	free_entity(void *entity);
-void draw_entities(t_engine *engine);
-t_list *quick_sort_render(t_list *head, t_camera *camera);
+t_entity	*spawn_entity(t_engine *engine,
+				void *game, t_efunc efunc, t_sprite *sprites);
+void		free_entity(void *entity);
+void		draw_entities(t_engine *engine);
+t_list		*quick_sort_render(t_list *head, t_camera *camera);
 
-#endif // ENGINE_H
+#endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:44:28 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/03 12:11:04 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:08:20 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_ltxt	render_wall(t_engine *engine, t_rendering *r)
 {
-	t_game	*game;
+	t_game		*game;
 	t_ltxt		res;
 
 	game = (t_game *)engine->game;
