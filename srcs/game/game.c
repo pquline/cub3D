@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 14:14:59 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 16:16:34 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	main_loop(t_window *window, void *data)
 		mlxe_mouse_move(window, window->width / 2, window->height / 2);
 		return ;
 	}
+	//if (game.re)
 	mlxe_render(window);
 	mlxe_mouse_move(window, window->width / 2, window->height);
 	end = get_time();

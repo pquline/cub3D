@@ -105,6 +105,7 @@ void		main_loop(t_window *window, void *data);
 void		main_menu_loop(t_window *window, void *data);
 void		pause_menu_loop(t_window *window, void *data);
 void		gameover_loop(t_window *window, void *data);
+void		you_win_loop(t_window *window, void *data);
 
 /*render blocks*/
 t_ltxt		render_door(t_engine *engine, t_rendering *r);
