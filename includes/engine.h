@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:37:47 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 13:53:59 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 15:42:04 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,8 @@ t_entity	*spawn_entity(t_engine *engine,
 				void *game, t_efunc efunc, t_sprite *sprites);
 void		free_entity(void *entity);
 void		draw_entities(t_engine *engine);
+void		delete_entity(t_engine *engine, t_entity *entity);
+void		remove_empty_entities(t_engine *engine);
 t_list		*quick_sort_render(t_list *head, t_camera *camera);
 
 #endif

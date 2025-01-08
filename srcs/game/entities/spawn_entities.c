@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spawn_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/08 11:52:36 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/08 15:30:32 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_bool	spawn_coin_entities(t_game *game, t_map *map)
 				if (coin == NULL)
 					return (FAILURE);
 				set_entity_pos(coin, (float)v.x + 0.5, (float)v.y + 0.5);
+				game->remaning_orbs++;
 			}
 			++v.x;
 		}

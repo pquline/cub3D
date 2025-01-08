@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ghost.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 14:07:53 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/08 15:52:46 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,18 +117,19 @@ void	ghost_update(t_entity *enemy)
 
 void	ghost_minimap(t_entity *enemy)
 {
-	int			monster_id = 0;
+	t_enemy		*data;
 	t_camera	*camera;
 	t_coords	coords;
 	t_game *game;
 
 	game = (t_game *)enemy->game;
+	data = (t_enemy *)enemy->data;
 	camera = &game->engine.camera;
-	coords = (t_coords){game->assets.map_enemy[monster_id]->rect, \
+	coords = (t_coords){game->assets.map_enemy[data->type]->rect, \
 				(t_rect){((enemy->pos[0] - camera->x + 5) *10) - 8,
-				((enemy->pos[1] - camera->y + 5) *10) - 8, 16, 16}};
+				((enemy->pos[1] - camera->y + 5) *10) - 8, 12, 12}};
 	coords = mask_minimap(coords);
 	draw_sprite_mask(game->window, \
-		game->assets.map_enemy[monster_id], \
+		game->assets.map_enemy[data->type], \
 		coords);
 }

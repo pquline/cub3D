@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:50:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 15:15:12 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 16:04:06 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,24 @@ t_ltxt	render_door(t_engine *engine, t_rendering *r)
 	tile = &engine->map->grid[(int)r->ray_calc.ray.y][(int)r->ray_calc.ray.x];
 	res = door_texture(engine, r, tile, door);
 	return (res);
+}
+
+void	toggle_door(t_game	*game, t_tile *tile)
+{
+	if (tile->id == DOOR)
+	{
+		if (tile->data == 100)
+		{
+			tile->data = -96;
+		}
+		else if (tile->data == 0)
+			tile->data = 4;
+	}
+}
+
+t_bool	door_is_open(t_tile *tile)
+{
+	if (tile->id == DOOR && tile->data > 0)
+		return (TRUE);
+	return (FALSE);
 }

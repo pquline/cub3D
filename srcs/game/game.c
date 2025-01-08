@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 14:14:59 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 15:42:45 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	update_entities(t_game *game)
 		entity->efunc.update(entity);
 		current = current->next;
 	}
+	remove_empty_entities(&game->engine);
 }
 
 void	update_map(t_game *game)
@@ -103,6 +104,7 @@ t_bool	game_init(t_game *game, t_window *window, t_map *map)
 		return (FAILURE);
 	set_entity_pos(game->player, game->engine.camera.x, game->engine.camera.y);
 	game->player->dir = game->engine.camera.dir;
+	game->remaning_orbs = 0;
 	return (SUCCESS);
 }
 

@@ -78,6 +78,7 @@ typedef struct s_game
 	float		delta_time;
 	t_time		current_time;
 	t_entity	*player;
+	int			remaning_orbs;
 }	t_game;
 
 t_time		get_time(void);
@@ -100,6 +101,9 @@ t_coords	mask_minimap(t_coords coords);
 void		set_entity_pos(t_entity *entity, float x, float y);
 
 void		main_loop(t_window *window, void *data);
+
+void		toggle_door(t_game	*game, t_tile *tile);
+t_bool		door_is_open(t_tile *tile);
 
 /*Menu*/
 void		main_menu_loop(t_window *window, void *data);
