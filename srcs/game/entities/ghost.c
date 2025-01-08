@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 15:52:46 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 16:09:28 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	ghost_update(t_entity *enemy)
 		add_move(enemy, 0, -ENTITY_SPEED);
 	else if (dy > 0.01)
 		add_move(enemy, 0, ENTITY_SPEED);
+	enemy->sprites = game->assets.enemy[data->type][game->current_time.tv_usec / 200000 % 4];
 }
 
 void	ghost_minimap(t_entity *enemy)

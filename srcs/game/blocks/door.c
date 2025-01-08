@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:50:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 16:04:06 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 16:08:16 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_ltxt	render_door(t_engine *engine, t_rendering *r)
 	t_sprite	*door;
 
 	game = (t_game *)engine->game;
-	door = game->assets.door[game->current_time.tv_usec / 200000 % 4];
+	door = game->assets.door[game->current_time.tv_usec / 100000 % 4];
 	tile = &engine->map->grid[(int)r->ray_calc.ray.y][(int)r->ray_calc.ray.x];
 	res = door_texture(engine, r, tile, door);
 	return (res);
@@ -69,6 +69,7 @@ t_ltxt	render_door(t_engine *engine, t_rendering *r)
 
 void	toggle_door(t_game	*game, t_tile *tile)
 {
+	(void)game;
 	if (tile->id == DOOR)
 	{
 		if (tile->data == 100)
