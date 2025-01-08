@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:00:37 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 13:39:41 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 15:41:35 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,42 @@ void	free_entity(void *entity)
 	if (e->data && e->efunc.free_data)
 		e->efunc.free_data(e->data);
 	free(e);
+}
+
+void	delete_entity(t_engine *engine, t_entity *entity)
+{
+	t_list	*current;
+
+	current = engine->entities;
+	while (current)
+	{
+		if (current->content == entity)
+		{
+			free_entity(current->content);
+			current->content = NULL;
+			return ;
+		}
+		current = current->next;
+	}
+}
+
+void	remove_empty_entities(t_engine *engine)
+{
+	t_list	*curr;
+	t_list	*prev;
+
+	curr = engine->entities;
+	prev = NULL;
+	while (curr)
+	{
+		if (curr->content == NULL)
+		{
+			if (prev)
+				prev->next = curr->next;
+			else
+				engine->entities = curr->next;
+		}
+		prev = curr;
+		curr = curr->next;
+	}
 }

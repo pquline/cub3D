@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:15:55 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 11:13:52 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/08 15:47:31 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <cub3D.h>
 
-# define ENTITY_SPEED	0.01
+# define ENTITY_SPEED	0.03
 
 /*
 typedef struct s_entity

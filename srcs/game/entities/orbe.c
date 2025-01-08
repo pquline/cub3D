@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:52 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 14:00:35 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 16:07:22 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,19 @@
 
 void	orbe_update(t_entity *entity)
 {
-	(void)entity;
+	t_game		*game;
+	t_vector2	orb_pos;
+	t_vector2	player_pos;
+
+	game = entity->game;
+	orb_pos = (t_vector2){entity->pos[0], entity->pos[1]};
+	player_pos = (t_vector2){game->player->pos[0], game->player->pos[1]};
+	if (orb_pos.x == player_pos.x && orb_pos.y == player_pos.y)
+	{
+		game->remaning_orbs--;
+		delete_entity(&game->engine, entity);
+	}
+	entity->sprites = game->assets.coin[game->current_time.tv_usec / 200000 % 4];
 }
 
 void	orbe_minimap(t_entity *entity)

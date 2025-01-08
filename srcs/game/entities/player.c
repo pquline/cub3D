@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:12:10 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 13:59:27 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 16:02:13 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ static void	check_door(t_entity *entity, t_game *game)
 		if (ray.tile_id == DOOR)
 		{
 			tile = &game->engine.map->grid[(int)ray.y][(int)ray.x];
-			if (tile->data == 100)
-				tile->data = -96;
-			else if (tile->data == 0)
-				tile->data = 4;
+			toggle_door(game, tile);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:14 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 14:59:20 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 16:00:51 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@ static t_bool	check_collider_block(t_tile *tile)
 {
 	if (tile->id == EMPTY)
 		return (SUCCESS);
-	if (tile->id == DOOR)
-	{
-		if (tile->data > 0)
-			return (SUCCESS);
-	}
+	if (tile->id == DOOR && door_is_open(tile))
+		return (SUCCESS);
 	return (FAILURE);
 }
 
