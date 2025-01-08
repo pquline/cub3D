@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 11:25:44 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:50:09 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
  * TODO: frightened mode: random next target
  */
 
-t_vector2	find_next_tile(t_vector2 current_pos, t_vector2 target_pos, t_map *map)
+t_vector2	find_next_tile(t_vector2 current_pos, t_vector2 target_pos, \
+	t_map *map)
 {
 	t_vector2	next_pos;
 	int			dx;
@@ -43,8 +44,9 @@ t_vector2	find_next_tile(t_vector2 current_pos, t_vector2 target_pos, t_map *map
 			next_pos.x = current_pos.x + (dx > 0 ? 1 : -1);
 			next_pos.y = current_pos.y;
 		}
-		dx = next_pos.x - current_pos.x;
-		dy = next_pos.y - current_pos.y;
+		current_pos = next_pos;
+		dx = target_pos.x - current_pos.x;
+		dy = target_pos.y - current_pos.y;
 	}
 	return (next_pos);
 }
@@ -81,18 +83,20 @@ void	ghost_update(t_entity *enemy)
 	t_enemy	*data;
 
 	data = (t_enemy *)enemy->data;
-	if (data->target.x + 0.5 - enemy->pos[0] < 0.1 \
-			&& data->target.y + 0.5 - enemy->pos[1] < 0.1)
+	if (data->target.x + 0.5 - enemy->pos[0] < 0.2 \
+			&& data->target.y + 0.5 - enemy->pos[1] < 0.2)
 		get_next_target(enemy, data->type, \
 			(t_vector2){(int)enemy->game->player->pos[0], \
 			(int)enemy->game->player->pos[1]}, enemy->game->player->mov_dir);
-	if (data->target.x < enemy->pos[0])
+	dprintf(2, "enemy.x = %f\nenemy.y = %f\n\n", enemy->pos[0], enemy->pos[1]);
+	dprintf(2, "target.x = %d\ntarget.y = %d\n\n", data->target.x, data->target.y);
+	if (data->target.x + 0.5 < enemy->pos[0])
 		add_move(enemy, -ENTITY_SPEED, 0);
-	else if (data->target.x > enemy->pos[0])
+	else if (data->target.x + 0.5 > enemy->pos[0])
 		add_move(enemy, ENTITY_SPEED, 0);
-	else if (data->target.y < enemy->pos[1])
+	else if (data->target.y + 0.5 < enemy->pos[1])
 		add_move(enemy, 0, -ENTITY_SPEED);
-	else if (data->target.y > enemy->pos[1])
+	else if (data->target.y + 0.5 > enemy->pos[1])
 		add_move(enemy, 0, ENTITY_SPEED);
 }
 

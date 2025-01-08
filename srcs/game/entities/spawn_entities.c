@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/08 11:25:52 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:38:13 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,22 +118,6 @@ static t_bool	init_enemy_data(t_entity *enemy, t_enemy_type type)
 	return (SUCCESS);
 }
 
-static float	get_player_dir(t_map *map)
-{
-	float	player_dir;
-
-	player_dir = 0;
-	if (map->start_direction == 'N')
-		player_dir = M_PI_2;
-	else if (map->start_direction == 'E')
-		player_dir = 0;
-	else if (map->start_direction == 'S')
-		player_dir = -M_PI_2;
-	else if (map->start_direction == 'W')
-		player_dir = M_PI;
-	return (player_dir);
-}
-
 static t_bool	spawn_enemy_entities(t_game *game, t_map *map)
 {
 	size_t		index;
@@ -157,7 +141,7 @@ static t_bool	spawn_enemy_entities(t_game *game, t_map *map)
 			red = enemy;
 		else
 			data->red = red;
-		get_next_target(enemy, index, map->start_coords, get_player_dir(map));
+		data->target = (t_vector2){(int)enemy->pos[0], (int)enemy->pos[1]};
 		++index;
 	}
 	return (SUCCESS);
