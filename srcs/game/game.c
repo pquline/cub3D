@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 16:17:12 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/08 16:20:54 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,12 @@ void	main_loop(t_window *window, void *data)
 		mlxe_mouse_move(window, window->width / 2, window->height / 2);
 		return ;
 	}
-	//if (game.re)
+	if (game->remaning_orbs == 0)
+	{
+		window->funct_ptr = you_win_loop;
+		mlxe_mouse_move(window, window->width / 2, window->height / 2);
+		return ;
+	}
 	mlxe_render(window);
 	mlxe_mouse_move(window, window->width / 2, window->height);
 	end = get_time();
@@ -101,11 +106,11 @@ t_bool	game_init(t_game *game, t_window *window, t_map *map)
 	}
 	game->engine.render_block[DOOR] = &render_door;
 	game->engine.render_block[WALL] = &render_wall;
+	game->remaning_orbs = 0;
 	if (!spawn_entities(game))
 		return (FAILURE);
 	set_entity_pos(game->player, game->engine.camera.x, game->engine.camera.y);
 	game->player->dir = game->engine.camera.dir;
-	game->remaning_orbs = 0;
 	return (SUCCESS);
 }
 
