@@ -6,20 +6,12 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 11:52:32 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/08 12:01:52 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 #include <entities.h>
-
-/**
- * TODO: red algorithm: chase
- * TODO: pink algorithm: ambush (4 tiles ahead of pacman's position related to its direction)
- * TODO: blue algorithm: compute
- * TODO: orange algorithm: random moves
- * TODO: frightened mode: random next target
- */
 
 t_vector2	find_next_tile(t_vector2 current_pos, t_vector2 target_pos, \
 	t_map *map)
@@ -31,7 +23,9 @@ t_vector2	find_next_tile(t_vector2 current_pos, t_vector2 target_pos, \
 	next_pos = current_pos;
 	dx = target_pos.x - current_pos.x;
 	dy = target_pos.y - current_pos.y;
-	while (map->grid[next_pos.y][next_pos.x].id != EMPTY)
+	dprintf(2, "1 = %s\n2 = %s\ndebug (%d, %d)\n", (next_pos.x != target_pos.x || next_pos.y != target_pos.y) ? "true" : "false", map->grid[next_pos.y][next_pos.x].id == WALL ? "true" : "false", next_pos.x, next_pos.y);
+	while ((next_pos.x != target_pos.x || next_pos.y != target_pos.y) \
+		&& map->grid[next_pos.y][next_pos.x].id == WALL)
 	{
 		if (abs(dx) > abs(dy))
 		{
