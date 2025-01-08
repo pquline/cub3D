@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:00:37 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/06 17:01:41 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:06:15 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_entity	*spawn_entity(t_game *game,
 	entity->pos[0] = 0;
 	entity->pos[1] = 0;
 	entity->dir = 0;
+	entity->mov_dir = 0;
 	entity->update = update;
 	entity->minimap = minimap;
 	entity->anim = 0;

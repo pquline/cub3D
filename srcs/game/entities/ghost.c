@@ -6,68 +6,107 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/07 17:35:46 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:20:48 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 #include <entities.h>
 
-void	blue_ghost_move(t_entity *entity)
+/**
+ * TODO: red algorithm: chase
+ * TODO: pink algorithm: ambush (4 tiles ahead of pacman's position related to its direction)
+ * TODO: blue algorithm: compute
+ * TODO: orange algorithm: random moves
+ * TODO: frightened mode: random next target
+ */
+
+t_vector2	find_next_tile(t_vector2 current_pos, t_vector2 target_pos, t_map *map)
 {
-	if (entity->game->player->pos[0] < entity->pos[0])
-		add_move(entity, -ENTITY_SPEED, 0);
-	else if (entity->game->player->pos[0] > entity->pos[0])
-		add_move(entity, ENTITY_SPEED, 0);
-	if (entity->game->player->pos[1] < entity->pos[1])
-		add_move(entity, 0, -ENTITY_SPEED);
-	else if (entity->game->player->pos[1] > entity->pos[1])
-		add_move(entity, 0, ENTITY_SPEED);
-}
+	t_vector2	next_pos;
+	int			dx;
+	int			dy;
 
-void	pink_ghost_move(t_entity *entity)
-{
-
-}
-
-void	orange_ghost_move(t_entity *entity)
-{
-
-}
-
-void	red_ghost_move(t_entity *entity)
-{
-
-}
-
-void ghost_update(t_entity *entity)
-{
-	const t_enemy_type	type[4] = {BLUE, PINK, ORANGE, RED};
-	void				(*function[4])(t_entity *) = {blue_ghost_move, pink_ghost_move, \
-										orange_ghost_move, red_ghost_move};
-	size_t				index;
-	t_enemy				*enemy;
-
-	enemy = (t_enemy *)entity->data;
-	index = 0;
-	while (index < 4)
+	next_pos = current_pos;
+	dx = target_pos.x - current_pos.x;
+	dy = target_pos.y - current_pos.y;
+	while (map->grid[next_pos.y][next_pos.x].id != EMPTY)
 	{
-		if (type[index] == enemy->type)
-			function[index](entity);
-		++index;
+		if (abs(dx) > abs(dy))
+		{
+			next_pos.x = current_pos.x;
+			next_pos.y = current_pos.y + (dy > 0 ? 1 : -1);
+		}
+		else
+		{
+			next_pos.x = current_pos.x + (dx > 0 ? 1 : -1);
+			next_pos.y = current_pos.y;
+		}
+		dx = next_pos.x - current_pos.x;
+		dy = next_pos.y - current_pos.y;
 	}
+	return (next_pos);
 }
 
-void ghost_minimap(t_entity *entity)
+void	get_next_target(t_entity *enemy, t_enemy_type type, \
+	t_vector2 player_pos, float player_dir)
 {
-	t_camera *camera;
-	int monster_id = 0;
+	t_enemy		*data;
+	t_vector2	temp;
 
-	camera = &entity->game->engine.camera;
-	t_coords coords = (t_coords){entity->game->assets.map_enemy[monster_id]->rect,
-	(t_rect){((entity->pos[0] - camera->x + 5) *10) - 8,
-	((entity->pos[1] - camera->y + 5) *10) - 8,
-	16, 16}};
+	data = (t_enemy *)enemy->data;
+	temp = player_pos;
+	if (type == ENEMY_PINK)
+	{
+		temp.x = player_pos.x + 4 * cos(player_dir);
+		temp.y = player_pos.y + 4 * sin(player_dir);
+	}
+	else if (type == ENEMY_BLUE)
+	{
+		temp.x = player_pos.x + (player_pos.x - (int)data->red->pos[0]);
+		temp.y = player_pos.y + (player_pos.y - (int)data->red->pos[1]);
+	}
+	else if (type == ENEMY_ORANGE)
+	{
+		temp.x = rand() % enemy->game->engine.map->width;
+		temp.y = rand() % enemy->game->engine.map->height;
+	}
+	data->target = find_next_tile((t_vector2){(int)enemy->pos[0], \
+		(int)enemy->pos[1]}, temp, enemy->game->engine.map);
+}
+
+void	ghost_update(t_entity *enemy)
+{
+	t_enemy	*data;
+
+	data = (t_enemy *)enemy->data;
+	if (data->target.x + 0.5 - enemy->pos[0] < 0.1 \
+			&& data->target.y + 0.5 - enemy->pos[1] < 0.1)
+		get_next_target(enemy, data->type, \
+			(t_vector2){(int)enemy->game->player->pos[0], \
+			(int)enemy->game->player->pos[1]}, enemy->game->player->mov_dir);
+	if (data->target.x < enemy->pos[0])
+		add_move(enemy, -ENTITY_SPEED, 0);
+	else if (data->target.x > enemy->pos[0])
+		add_move(enemy, ENTITY_SPEED, 0);
+	else if (data->target.y < enemy->pos[1])
+		add_move(enemy, 0, -ENTITY_SPEED);
+	else if (data->target.y > enemy->pos[1])
+		add_move(enemy, 0, ENTITY_SPEED);
+}
+
+void	ghost_minimap(t_entity *enemy)
+{
+	int			monster_id = 0;
+	t_camera	*camera;
+	t_coords	coords;
+
+	camera = &enemy->game->engine.camera;
+	coords = (t_coords){enemy->game->assets.map_enemy[monster_id]->rect, \
+				(t_rect){((enemy->pos[0] - camera->x + 5) *10) - 8,
+				((enemy->pos[1] - camera->y + 5) *10) - 8, 16, 16}};
 	coords = mask_minimap(coords);
-	mlxe_draw_subtexture_size(entity->game->window, entity->game->assets.map_enemy[monster_id]->texture, coords, mlxe_color(255, 255, 255));
+	mlxe_draw_subtexture_size(enemy->game->window, \
+		enemy->game->assets.map_enemy[monster_id]->texture, \
+		coords, mlxe_color(255, 255, 255));
 }

@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/07 17:42:47 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:23:00 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,22 +104,6 @@ static t_vector2	get_farthest_tile(t_map *map)
 	return (tile);
 }
 
-/**
- * TODO: red algorithm: chase
- * TODO: pink algorithm: ambush (4 tiles ahead of pacman's position related to its direction)
- * TODO: blue algorithm: compute
- * TODO: orange algorithm: random moves
- * TODO: frightened mode: random next target
- */
-
-t_vector2	get_next_target(enemy, type)
-{
-	if (type == RED)
-	{
-
-	}
-}
-
 static t_bool	init_enemy_data(t_entity *enemy, t_enemy_type type)
 {
 	t_enemy	*ghost;
@@ -128,9 +112,26 @@ static t_bool	init_enemy_data(t_entity *enemy, t_enemy_type type)
 	if (ghost == NULL)
 		return (FAILURE);
 	ghost->type = type;
-	ghost->mode = CHASING;
+	ghost->mode = ENEMY_CHASING;
 	ghost->red = NULL;
 	enemy->data = ghost;
+	return (SUCCESS);
+}
+
+static float	get_player_dir(t_map *map)
+{
+	float	player_dir;
+
+	player_dir = 0;
+	if (map->start_direction == 'N')
+		player_dir = M_PI_2;
+	else if (map->start_direction == 'E')
+		player_dir = 0;
+	else if (map->start_direction == 'S')
+		player_dir = -M_PI_2;
+	else if (map->start_direction == 'W')
+		player_dir = M_PI;
+	return (player_dir);
 }
 
 static t_bool	spawn_enemy_entities(t_game *game, t_map *map)
@@ -152,11 +153,11 @@ static t_bool	spawn_enemy_entities(t_game *game, t_map *map)
 		if (init_enemy_data(enemy, index) == FAILURE)
 			return (FAILURE);
 		data = (t_enemy *)enemy->data;
-		if (index == RED)
+		if (index == ENEMY_RED)
 			red = enemy;
 		else
 			data->red = red;
-		data->target = get_next_target(enemy, index);
+		get_next_target(enemy, index, map->start_coords, get_player_dir(map));
 		++index;
 	}
 	return (SUCCESS);
