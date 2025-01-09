@@ -3,108 +3,102 @@
 /*                                                        :::      ::::::::   */
 /*   ghost.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 16:40:13 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/09 17:06:53 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 #include <entities.h>
 
-static t_bool	tile_is_accessible(t_vector2 next_pos, \
-	t_vector2 current_pos, t_map *map)
+static t_bool	tile_is_accessible(t_vector2 next, \
+	t_vector2 curr, t_map *map)
 {
-	if (next_pos.x < 0 || next_pos.x >= (int)map->width \
-			|| next_pos.y < 0 || next_pos.y >= (int)map->height)
+	if (next.x < 0 || next.x >= (int)map->width || next.y < 0 \
+			|| next.y >= (int)map->height)
 		return (FALSE);
-	if (map->grid[(int)current_pos.y][(int)next_pos.x].id == WALL)
+	if (map->grid[(int)curr.y][(int)next.x].id == WALL)
 		return (FALSE);
-	if (map->grid[(int)current_pos.y][(int)next_pos.x].id == DOOR \
-			&& !door_is_open(&map->grid[(int)current_pos.y][(int)next_pos.x]))
+	if (map->grid[(int)curr.y][(int)next.x].id == DOOR \
+			&& !door_is_open(&map->grid[(int)curr.y][(int)next.x]))
 		return (FALSE);
 	return (TRUE);
 }
 
-static t_vector2	move_horizontally(t_vector2 target_pos, \
-	t_vector2 current_pos, t_map *map)
+static t_vector2	move_horizontally(t_vector2 target, \
+	t_vector2 curr, t_map *map)
 {
-	t_vector2	next_pos;
-	const float	dx = target_pos.x - current_pos.x;
-	const float	dy = target_pos.y - current_pos.y;
+	t_vector2	next;
+	const float	dx = target.x - curr.x;
+	const float	dy = target.y - curr.y;
 
-	next_pos.x = current_pos.x + (dx > 0 ? 1 : -1);
-	next_pos.y = current_pos.y;
-	if (tile_is_accessible(next_pos, current_pos, map) \
-		&& map->grid[(int)current_pos.y][(int)next_pos.x].id != WALL)
-	{
-		next_pos.y = current_pos.y;
-		return (next_pos);
-	}
-	next_pos.x = current_pos.x;
-	next_pos.y = current_pos.y + (dy > 0 ? 1 : -1);
-	if (tile_is_accessible(next_pos, current_pos, map) \
-			&& map->grid[(int)next_pos.y][(int)current_pos.x].id != WALL)
-		return (next_pos);
-	return (current_pos);
+	next.x = curr.x + (dx > 0 ? 1 : -1);
+	next.y = curr.y;
+	if (tile_is_accessible(next, curr, map) \
+			&& map->visited[(int)curr.y][(int)next.x] == TRUE)
+		return (next);
+	next.x = curr.x;
+	next.y = curr.y + (dy > 0 ? 1 : -1);
+	if (tile_is_accessible(next, curr, map) \
+			&& map->visited[(int)next.y][(int)curr.x] == TRUE)
+		return (next);
+	return (curr);
 }
 
-static t_vector2	move_vertically(t_vector2 target_pos, \
-	t_vector2 current_pos, t_map *map)
+static t_vector2	move_vertically(t_vector2 target, \
+	t_vector2 curr, t_map *map)
 {
-	t_vector2	next_pos;
-	const float	dx = target_pos.x - current_pos.x;
-	const float	dy = target_pos.y - current_pos.y;
+	t_vector2	next;
+	const float	dx = target.x - curr.x;
+	const float	dy = target.y - curr.y;
 
-	next_pos.x = current_pos.x;
-	next_pos.y = current_pos.y + (dy > 0 ? 1 : -1);
-	if (tile_is_accessible(next_pos, current_pos, map) \
-			&& map->grid[(int)next_pos.y][(int)current_pos.x].id != WALL)
-	{
-		next_pos.x = current_pos.x;
-		return (next_pos);
-	}
-	next_pos.x = current_pos.x + (dx > 0 ? 1 : -1);
-	next_pos.y = current_pos.y;
-	if (tile_is_accessible(next_pos, current_pos, map) \
-			&& map->grid[(int)current_pos.y][(int)next_pos.x].id != WALL)
-		return (next_pos);
-	return (current_pos);
+	next.x = curr.x;
+	next.y = curr.y + (dy > 0 ? 1 : -1);
+	if (tile_is_accessible(next, curr, map) \
+			&& map->visited[(int)next.y][(int)curr.x] == TRUE)
+		return (next);
+	next.x = curr.x + (dx > 0 ? 1 : -1);
+	next.y = curr.y;
+	if (tile_is_accessible(next, curr, map) \
+			&& map->visited[(int)curr.y][(int)next.x] == TRUE)
+		return (next);
+	return (curr);
 }
 
-t_vector2	find_next_tile(t_vector2 current_pos, t_vector2 target_pos, \
+t_vector2	find_next_tile(t_vector2 curr, t_vector2 target, \
 	t_map *map)
 {
-	t_vector2	next_pos;
-	const float	dx = target_pos.x - current_pos.x;
-	const float	dy = target_pos.y - current_pos.y;
+	t_vector2	next;
+	const float	dx = target.x - curr.x;
+	const float	dy = target.y - curr.y;
 
 	if (fabs(dx) >= fabs(dy))
-		next_pos = move_horizontally(target_pos, current_pos, map);
+		next = move_horizontally(target, curr, map);
 	else
-		next_pos = move_vertically(target_pos, current_pos, map);
-	return (next_pos);
+		next = move_vertically(target, curr, map);
+	return (next);
 }
 
 void	get_next_target(t_entity *enemy, t_enemy_type type, \
-	t_vector2 player_pos, float player_dir)
+	t_vector2 pos, float dir)
 {
 	t_enemy			*data;
 	const t_game	*game = (t_game *)enemy->game;
 	t_vector2		temp;
 
 	data = (t_enemy *)enemy->data;
-	temp = player_pos;
+	temp = pos;
 	if (type == ENEMY_PINK)
 	{
-		temp.x = player_pos.x + 4 * cos(player_dir);
-		temp.y = player_pos.y + 4 * sin(player_dir);
+		temp.x = pos.x + 4 * cos(dir);
+		temp.y = pos.y + 4 * sin(dir);
 	}
 	else if (type == ENEMY_CYAN)
 	{
-		temp.x = player_pos.x + 2 * (player_pos.x - (int)data->red->pos[0]);
-		temp.y = player_pos.y + 2 * (player_pos.y - (int)data->red->pos[1]);
+		temp.x = pos.x + 2 * (pos.x - (int)data->red->pos[0]);
+		temp.y = pos.y + 2 * (pos.y - (int)data->red->pos[1]);
 	}
 	else if (type == ENEMY_ORANGE)
 	{

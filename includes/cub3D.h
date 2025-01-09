@@ -32,15 +32,6 @@
 typedef struct timeval	t_time;
 typedef struct s_entity	t_entity;
 
-typedef enum e_visited
-{
-	VISITED_FALSE,
-	VISITED_TRUE,
-	VISITED_DOOR,
-	VISITED_ORB,
-	VISITED_BIG_ORB,
-}	t_visited;
-
 typedef enum e_enemy_type
 {
 	ENEMY_RED,

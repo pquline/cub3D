@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/09 16:09:26 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:22:37 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 static void	get_accessible_tiles(t_map *map, t_vector2 v)
 {
-	if (map->visited[v.y][v.x] == VISITED_TRUE \
-			|| map->grid[v.y][v.x].id != EMPTY)
+	if (map->visited[v.y][v.x] == TRUE \
+			|| (map->grid[v.y][v.x].id != EMPTY \
+			&& map->grid[v.y][v.x].id != DOOR))
 		return ;
-	map->visited[v.y][v.x] = VISITED_TRUE;
+	map->visited[v.y][v.x] = TRUE;
 	get_accessible_tiles(map, (t_vector2){v.x - 1, v.y});
 	get_accessible_tiles(map, (t_vector2){v.x + 1, v.y});
 	get_accessible_tiles(map, (t_vector2){v.x, v.y - 1});
@@ -29,14 +30,14 @@ static t_bool	init_accessible_map(t_map *map)
 {
 	size_t	index;
 
-	map->visited = (t_visited **)ft_calloc(map->height, sizeof(t_visited *));
+	map->visited = (t_bool **)ft_calloc(map->height, sizeof(t_bool *));
 	if (map->visited == NULL)
 		return (FAILURE);
 	index = 0;
 	while (index < map->height)
 	{
 		map->visited[index] = \
-			(t_visited *)ft_calloc(map->width, sizeof(t_visited));
+			(t_bool *)ft_calloc(map->width, sizeof(t_bool));
 		if (map->visited[index] == NULL)
 			return (free_double_array((void **)map->visited, index));
 		++index;
@@ -55,14 +56,14 @@ t_bool	spawn_coin_entities(t_game *game, t_map *map)
 		v.x = 0;
 		while ((size_t)v.x < map->width)
 		{
-			if (map->visited[v.y][v.x] == VISITED_TRUE \
+			if (map->visited[v.y][v.x] == TRUE \
 				&& !(v.x == map->start_coords.x && v.y == map->start_coords.y))
 			{
-				if (game->remaning_orbs % 9 != 0)
+				if (game->remaning_orbs % 9 != 0 && map->grid[v.y][v.x].id != DOOR)
 					coin = spawn_entity(&game->engine, game, \
 						(t_efunc){&orbe_update, &orbe_minimap, NULL}, \
 						game->assets.coin[0]);
-				else
+				else if (map->grid[v.y][v.x].id != DOOR)
 					coin = spawn_entity(&game->engine, game, \
 						(t_efunc){&big_orb_update, &big_orb_minimap, NULL}, \
 						game->assets.big_orb[0]);
@@ -88,30 +89,29 @@ static float	get_distance(size_t x, size_t y, t_vector2 v)
 
 static t_vector2	get_farthest_tile(t_map *map)
 {
-	size_t		x;
-	size_t		y;
+	t_vector2	curr;
 	t_vector2	tile;
-	float		current;
+	float		distance;
 	float		max;
 
-	y = 0;
+	curr.y = 0;
 	max = 0;
 	tile = map->start_coords;
-	while (y < map->height)
+	while (curr.y < (int)map->height)
 	{
-		x = 0;
-		while (x < map->width)
+		curr.x = 0;
+		while (curr.x < (int)map->width)
 		{
-			current = get_distance(x, y, map->start_coords);
-			if (current > max && map->visited[y][x] == VISITED_TRUE)
+			distance = get_distance(curr.x, curr.y, map->start_coords);
+			if (distance > max && map->visited[curr.y][curr.x] == TRUE)
 			{
-				tile.x = x;
-				tile.y = y;
-				max = current;
+				tile.x = curr.x;
+				tile.y = curr.y;
+				max = distance;
 			}
-			++x;
+			++curr.x;
 		}
-		++y;
+		++curr.y;
 	}
 	return (tile);
 }
