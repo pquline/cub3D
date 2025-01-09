@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/09 18:06:25 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 18:07:46 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_bool	spawn_coin_entities(t_game *game, t_map *map)
 							game->assets.coin[0]);
 					else
 						coin = spawn_entity(&game->engine, game, \
-							(t_efunc){&big_orb_update, &big_orb_minimap, NULL}, \
+							(t_efunc){&big_orb_update, &big_orb_minimap, NULL},\
 							game->assets.big_orb[0]);
 					if (coin == NULL)
 						return (FAILURE);
