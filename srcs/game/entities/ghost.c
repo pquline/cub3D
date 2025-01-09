@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 17:56:10 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 20:00:46 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,22 +94,15 @@ void	get_next_target(t_entity *enemy, t_enemy_type type, \
 		temp = get_farthest_tile(game->engine.map, \
 			(t_vector2){(int)game->player->pos[0], (int)game->player->pos[1]});
 	else if (type == ENEMY_PINK)
-	{
-		temp.x = pos.x + 4 * cos(dir);
-		temp.y = pos.y + 4 * sin(dir);
-	}
+		temp = (t_vector2){pos.x + 4 * cos(dir), pos.y + 4 * sin(dir)};
 	else if (type == ENEMY_CYAN)
-	{
-		temp.x = pos.x + 2 * (pos.x - (int)data->red->pos[0]);
-		temp.y = pos.y + 2 * (pos.y - (int)data->red->pos[1]);
-	}
+		temp = (t_vector2){pos.x + 2 * (pos.x - (int)data->red->pos[0]), \
+			pos.y + 2 * (pos.y - (int)data->red->pos[1])};
 	else if (type == ENEMY_ORANGE)
-	{
-		temp.x = rand() % game->engine.map->width;
-		temp.y = rand() % game->engine.map->height;
-	}
-	temp.x = fmax(0, fmin(temp.x, game->engine.map->width - 1));
-	temp.y = fmax(0, fmin(temp.y, game->engine.map->height - 1));
+		temp = (t_vector2){rand() % game->engine.map->width, \
+			rand() % game->engine.map->height};
+	temp = (t_vector2){fmax(0, fmin(temp.x, game->engine.map->width - 1)), \
+		fmax(0, fmin(temp.y, game->engine.map->height - 1))};
 	data->target = find_next_tile((t_vector2){(int)enemy->pos[0], \
 		(int)enemy->pos[1]}, temp, game->engine.map);
 }

@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:15:55 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 19:04:22 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 20:11:16 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <cub3D.h>
 
 # define ENTITY_SPEED	0.03
-# define BIG_ORBS_DIST	7
+# define BIG_ORBS_DIST	5
 
 /*
 typedef struct s_entity
