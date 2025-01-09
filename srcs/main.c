@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 15:04:23 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/09 12:38:25 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,55 +34,6 @@ t_bool	set_error(t_game *game, char *msg)
 	return (FAILURE);
 }
 
-t_map* test_map()
-{
-	t_map *map = malloc(sizeof(t_map));
-	map->no = "./assets/tests/missing_n.xpm";
-	map->so = "./assets/tests/missing_s.xpm";
-	map->we = "./assets/tests/missing_w.xpm";
-	map->ea = "./assets/tests/missing_e.xpm";
-	map->c = mlxe_color(139, 170, 173);
-	map->f = mlxe_color(77, 77, 71);
-	map->width = 10;
-	map->height = 10;
-	map->grid = malloc(sizeof(t_tile *) * map->height);
-	for (size_t i = 0; i < map->height; i++)
-	{
-		map->grid[i] = malloc(sizeof(t_tile) * map->width);
-		for (size_t j = 0; j < map->width; j++)
-		{
-			map->grid[i][j].id = EMPTY;
-		}
-	}
-	for (size_t i = 0; i < map->height; i++)
-	{
-		map->grid[i][0].id = WALL;
-		map->grid[i][map->width - 1].id = WALL;
-	}
-	for (size_t j = 0; j < map->width; j++)
-	{
-		map->grid[0][j].id = WALL;
-		map->grid[map->height - 1][j].id = WALL;
-	}
-	//spawn random WALL
-	//reset random seed
-	struct timeval tv;
-    struct timezone tz;
-	gettimeofday(&tv, &tz);
-	srand(tv.tv_usec);
-	for (size_t i = 1; i < map->height - 1; i++)
-	{
-		for (size_t j = 1; j < map->width - 1; j++)
-		{
-			if (rand() % 5 == 0)
-				map->grid[i][j].id = WALL;
-		}
-	}
-	map->grid[5][5].id = EMPTY;
-	map->start_coords = (t_vector2){5, 5};
-	map->start_direction = 'N';
-	return map;
-}
 
 int	main(int ac, char **av)
 {
