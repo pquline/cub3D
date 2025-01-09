@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
+#    By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2025/01/08 13:26:31 by lfarhi           ###   ########.fr        #
+#    Updated: 2025/01/09 15:50:09 by pfischof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS += ${SRC}game/blocks/wall.c
 SRCS += ${SRC}game/blocks/door.c
 
 SRCS += ${SRC}game/entities/orbe.c
+SRCS += ${SRC}game/entities/big_orb.c
 SRCS += ${SRC}game/entities/ghost.c
 SRCS += ${SRC}game/entities/player.c
 SRCS += ${SRC}game/entities/spawn_entities.c

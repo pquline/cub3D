@@ -1,5 +1,6 @@
 # TODO
 
 - rename "orbe" to "orb"
-- impove logic of monsters movements with target in entity->data
-- replace rand() by own random
+- rename "coin" to "orb"
+- rename "game->remaning_orbs" to "game->remaining_orbs"
+- replace rand() by ft_random function

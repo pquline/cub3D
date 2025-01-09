@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:15:55 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 15:47:31 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/09 15:49:51 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ void	get_next_target(t_entity *enemy, t_enemy_type type, \
 
 void	player_update(t_entity *entity);
 void	player_minimap(t_entity *entity);
+
+void	big_orb_update(t_entity *entity);
+void	big_orb_minimap(t_entity *entity);
 
 void	orbe_update(t_entity *entity);
 void	orbe_minimap(t_entity *entity);

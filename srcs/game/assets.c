@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:35 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 17:06:49 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:37:00 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ static t_bool	load_map_assets(t_assets *assets, t_window *window)
 	assets->map_coin = mlxe_create_sprite(window, assets->map_xpm, \
 		(t_rect){9 * MAP_SPRITE_SIZE, 0, MAP_SPRITE_SIZE, MAP_SPRITE_SIZE}, \
 		TRUE);
-	if (assets->map_coin == NULL)
+	assets->map_big_orb = mlxe_create_sprite(window, assets->map_xpm, \
+		(t_rect){10 * MAP_SPRITE_SIZE, 0, MAP_SPRITE_SIZE, MAP_SPRITE_SIZE}, \
+		TRUE);
+	if (assets->map_coin == NULL || assets->map_big_orb == NULL)
 		return (FAILURE);
 	assets->map_player[4] = assets->map_player[2];
 	assets->map_player[5] = assets->map_player[1];
@@ -65,10 +68,12 @@ static t_bool	load_world_textures(t_assets *assets, t_window *window)
 		"assets/world/white.xpm", TRUE);
 	assets->door_xpm = mlxe_load_texture(window, "assets/world/door.xpm", TRUE);
 	assets->coin_xpm = mlxe_load_texture(window, "assets/world/coin.xpm", TRUE);
+	assets->big_orb_xpm = mlxe_load_texture(window, \
+		"assets/world/big_orb.xpm", TRUE);
 	return (assets->enemy_xpm[ENEMY_RED] && assets->enemy_xpm[ENEMY_CYAN] \
 		&& assets->enemy_xpm[ENEMY_PINK] && assets->enemy_xpm[ENEMY_ORANGE] \
 		&& assets->enemy_xpm[ENEMY_WHITE] && assets->door_xpm \
-		&& assets->coin_xpm);
+		&& assets->coin_xpm && assets->big_orb_xpm);
 }
 
 static t_bool	load_world_enemy_sprites(t_assets *assets, t_window *window)
@@ -94,28 +99,33 @@ static t_bool	load_world_enemy_sprites(t_assets *assets, t_window *window)
 	return (SUCCESS);
 }
 
-static t_bool	load_world_door_and_coin_sprites(
-	t_assets *assets, t_window *window)
+static t_bool	load_four_sprites(t_sprite **sprite, t_window *window, \
+	t_texture *texture)
 {
-	assets->door[0] = mlxe_create_sprite(window, assets->door_xpm, \
-		(t_rect){0 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
-	assets->door[1] = mlxe_create_sprite(window, assets->door_xpm, \
-		(t_rect){1 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
-	assets->door[2] = mlxe_create_sprite(window, assets->door_xpm, \
-		(t_rect){2 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
-	assets->door[3] = mlxe_create_sprite(window, assets->door_xpm, \
-		(t_rect){3 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
-	assets->coin[0] = mlxe_create_sprite(window, assets->coin_xpm, \
-		(t_rect){0 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
-	assets->coin[1] = mlxe_create_sprite(window, assets->coin_xpm, \
-		(t_rect){1 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
-	assets->coin[2] = mlxe_create_sprite(window, assets->coin_xpm, \
-		(t_rect){2 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
-	assets->coin[3] = mlxe_create_sprite(window, assets->coin_xpm, \
-		(t_rect){3 * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
-	return (assets->door[0] && assets->door[1] && assets->door[2] \
-		&& assets->door[3] && assets->coin[0] && assets->coin[1] \
-		&& assets->coin[2] && assets->coin[2]);
+	size_t	index;
+
+	index = 0;
+	while (index < 4)
+	{
+		sprite[index] = mlxe_create_sprite(window, texture, \
+			(t_rect){index * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
+		if (sprite[index] == NULL)
+			return (FAILURE);
+		++index;
+	}
+	return (SUCCESS);
+}
+
+static t_bool	load_world_door_and_coin_sprites(t_assets *assets, \
+	t_window *window)
+{
+	if (load_four_sprites(assets->door, window, assets->door_xpm) == FAILURE)
+		return (FAILURE);
+	if (load_four_sprites(assets->coin, window, assets->coin_xpm) == FAILURE)
+		return (FAILURE);
+	if (load_four_sprites(assets->big_orb, window, assets->big_orb_xpm) == FAILURE)
+		return (FAILURE);
+	return (SUCCESS);
 }
 
 t_bool	load_assets(t_assets *assets, t_window *window)

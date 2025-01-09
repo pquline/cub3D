@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/09 14:20:21 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:53:34 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,14 @@ t_bool	spawn_coin_entities(t_game *game, t_map *map)
 			if (map->visited[v.y][v.x] == TRUE \
 				&& !(v.x == map->start_coords.x && v.y == map->start_coords.y))
 			{
-				coin = spawn_entity(&game->engine, game, \
-					(t_efunc){&orbe_update, &orbe_minimap, NULL}, \
-					game->assets.coin[0]);
+				if (game->remaning_orbs % 9 != 0)
+					coin = spawn_entity(&game->engine, game, \
+						(t_efunc){&orbe_update, &orbe_minimap, NULL}, \
+						game->assets.coin[0]);
+				else
+					coin = spawn_entity(&game->engine, game, \
+						(t_efunc){&big_orb_update, &big_orb_minimap, NULL}, \
+						game->assets.big_orb[0]);
 				if (coin == NULL)
 					return (FAILURE);
 				set_entity_pos(coin, (float)v.x + 0.5, (float)v.y + 0.5);

@@ -59,15 +59,18 @@ typedef struct s_assets
 	t_sprite	*map_player[6];
 	t_sprite	*map_enemy[5];
 	t_sprite	*map_coin;
+	t_sprite	*map_big_orb;
 	t_sprite	*enemy[5][4];
 	t_sprite	*door[4];
-	t_texture	*walls[4];
 	t_sprite	*coin[4];
+	t_sprite	*big_orb[4];
 	t_texture	*map_xpm;
 	t_texture	*enemy_xpm[5];
 	t_texture	*door_xpm;
 	t_texture	*coin_xpm;
+	t_texture	*big_orb_xpm;
 	t_font		*main_font;
+	t_texture	*walls[4];
 }	t_assets;
 
 typedef struct s_game
