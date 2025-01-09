@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 16:37:22 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/09 20:15:16 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	main_loop(t_window *window, void *data)
 		return ;
 	}
 	mlxe_render(window);
-	mlxe_mouse_move(window, window->width / 2, window->height);
+	mlxe_mouse_move(window, window->width / 2, window->height - 200);
 	end = get_time();
 	game->delta_time = get_delta(start, end);
 }
