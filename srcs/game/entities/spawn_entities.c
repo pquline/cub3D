@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/09 17:34:56 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 18:06:25 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 static void	get_accessible_tiles(t_map *map, t_vector2 v)
 {
-	if (map->visited[v.y][v.x] == TRUE \
+	if (map->visited[v.y][v.x] == VISITED_TRUE \
 			|| (map->grid[v.y][v.x].id != EMPTY \
 			&& map->grid[v.y][v.x].id != DOOR))
 		return ;
-	map->visited[v.y][v.x] = TRUE;
+	map->visited[v.y][v.x] = VISITED_TRUE;
 	get_accessible_tiles(map, (t_vector2){v.x - 1, v.y});
 	get_accessible_tiles(map, (t_vector2){v.x + 1, v.y});
 	get_accessible_tiles(map, (t_vector2){v.x, v.y - 1});
@@ -30,14 +30,14 @@ static t_bool	init_accessible_map(t_map *map)
 {
 	size_t	index;
 
-	map->visited = (t_bool **)ft_calloc(map->height, sizeof(t_bool *));
+	map->visited = (t_visited **)ft_calloc(map->height, sizeof(t_visited *));
 	if (map->visited == NULL)
 		return (FAILURE);
 	index = 0;
 	while (index < map->height)
 	{
 		map->visited[index] = \
-			(t_bool *)ft_calloc(map->width, sizeof(t_bool));
+			(t_visited *)ft_calloc(map->width, sizeof(t_visited));
 		if (map->visited[index] == NULL)
 			return (free_double_array((void **)map->visited, index));
 		++index;
@@ -56,21 +56,24 @@ t_bool	spawn_coin_entities(t_game *game, t_map *map)
 		v.x = 0;
 		while ((size_t)v.x < map->width)
 		{
-			if (map->visited[v.y][v.x] == TRUE \
+			if (map->visited[v.y][v.x] == VISITED_TRUE \
 				&& !(v.x == map->start_coords.x && v.y == map->start_coords.y))
 			{
-				if (game->remaning_orbs % 9 != 0 && map->grid[v.y][v.x].id != DOOR)
-					coin = spawn_entity(&game->engine, game, \
-						(t_efunc){&orbe_update, &orbe_minimap, NULL}, \
-						game->assets.coin[0]);
-				else if (map->grid[v.y][v.x].id != DOOR)
-					coin = spawn_entity(&game->engine, game, \
-						(t_efunc){&big_orb_update, &big_orb_minimap, NULL}, \
-						game->assets.big_orb[0]);
-				if (coin == NULL)
-					return (FAILURE);
-				set_entity_pos(coin, (float)v.x + 0.5, (float)v.y + 0.5);
-				game->remaning_orbs++;
+				if (map->grid[v.y][v.x].id != DOOR)
+				{
+					if (game->remaning_orbs % 9 != 0)
+						coin = spawn_entity(&game->engine, game, \
+							(t_efunc){&orbe_update, &orbe_minimap, NULL}, \
+							game->assets.coin[0]);
+					else
+						coin = spawn_entity(&game->engine, game, \
+							(t_efunc){&big_orb_update, &big_orb_minimap, NULL}, \
+							game->assets.big_orb[0]);
+					if (coin == NULL)
+						return (FAILURE);
+					set_entity_pos(coin, (float)v.x + 0.5, (float)v.y + 0.5);
+					game->remaning_orbs++;
+				}
 			}
 			++v.x;
 		}
@@ -103,7 +106,7 @@ t_vector2	get_farthest_tile(t_map *map, t_vector2 player)
 		while (curr.x < (int)map->width)
 		{
 			distance = get_distance(curr.x, curr.y, player);
-			if (distance > max && map->visited[curr.y][curr.x] == TRUE)
+			if (distance > max && map->visited[curr.y][curr.x] == VISITED_TRUE)
 			{
 				tile.x = curr.x;
 				tile.y = curr.y;
@@ -132,17 +135,17 @@ static t_bool	init_enemy_data(t_entity *enemy, t_enemy_type type)
 
 static t_bool	spawn_enemy_entities(t_game *game, t_map *map)
 {
-	size_t		index;
-	t_enemy		*data;
-	t_entity	*enemy;
-	t_entity	*red;
-	t_vector2	pos;
+	size_t			index;
+	t_enemy			*data;
+	t_entity		*enemy;
+	t_entity		*red;
+	const t_vector2	pos = get_farthest_tile(map, map->start_coords);
 
-	pos = get_farthest_tile(map, map->start_coords);
 	index = 0;
 	while (index < 4)
 	{
-		enemy = spawn_entity(&game->engine, game, (t_efunc){&ghost_update, &ghost_minimap, free}, game->assets.enemy[index][0]);
+		enemy = spawn_entity(&game->engine, game, (t_efunc){&ghost_update, \
+			&ghost_minimap, free}, game->assets.enemy[index][0]);
 		if (enemy == NULL)
 			return (FAILURE);
 		set_entity_pos(enemy, (float)pos.x + 0.5, (float)pos.y + 0.5);
@@ -163,7 +166,8 @@ t_bool	spawn_entities(t_game *game)
 {
 	t_entity	*player;
 
-	player = spawn_entity(&game->engine, game, (t_efunc){&player_update, &player_minimap, NULL}, NULL);
+	player = spawn_entity(&game->engine, game, (t_efunc){&player_update, \
+		&player_minimap, NULL}, NULL);
 	if (player == NULL)
 		return (FAILURE);
 	if (init_accessible_map(game->engine.map) == FAILURE)

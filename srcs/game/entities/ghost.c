@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 17:34:30 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:56:10 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static t_vector2	move_horizontally(t_vector2 target, \
 	next.x = curr.x + (dx > 0 ? 1 : -1);
 	next.y = curr.y;
 	if (tile_is_accessible(next, curr, map) \
-			&& map->visited[(int)curr.y][(int)next.x] == TRUE)
+			&& map->visited[(int)curr.y][(int)next.x] == VISITED_TRUE)
 		return (next);
 	next.x = curr.x;
 	next.y = curr.y + (dy > 0 ? 1 : -1);
 	if (tile_is_accessible(next, curr, map) \
-			&& map->visited[(int)next.y][(int)curr.x] == TRUE)
+			&& map->visited[(int)next.y][(int)curr.x] == VISITED_TRUE)
 		return (next);
 	return (curr);
 }
@@ -57,12 +57,12 @@ static t_vector2	move_vertically(t_vector2 target, \
 	next.x = curr.x;
 	next.y = curr.y + (dy > 0 ? 1 : -1);
 	if (tile_is_accessible(next, curr, map) \
-			&& map->visited[(int)next.y][(int)curr.x] == TRUE)
+			&& map->visited[(int)next.y][(int)curr.x] == VISITED_TRUE)
 		return (next);
 	next.x = curr.x + (dx > 0 ? 1 : -1);
 	next.y = curr.y;
 	if (tile_is_accessible(next, curr, map) \
-			&& map->visited[(int)curr.y][(int)next.x] == TRUE)
+			&& map->visited[(int)curr.y][(int)next.x] == VISITED_TRUE)
 		return (next);
 	return (curr);
 }

@@ -1,6 +1,7 @@
 # TODO
 
-- create function to flee from player (get to farthest tile)
+- rethink big orbs with map
+- pathfinding for one of the 2 chasing ghosts
 
 - rename "orbe" to "orb"
 - rename "coin" to "orb"

@@ -55,6 +55,14 @@ typedef struct s_enemy
 	t_entity		*red;
 }	t_enemy;
 
+typedef enum e_visited
+{
+	VISITED_FALSE,
+	VISITED_TRUE,
+	VISITED_ORB,
+	VISITED_BIG_ORB,
+}	t_visited;
+
 typedef struct s_assets
 {
 	t_sprite	*map_player[6];
