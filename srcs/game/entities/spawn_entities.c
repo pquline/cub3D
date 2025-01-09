@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spawn_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/08 15:30:32 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/09 11:22:11 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ static t_vector2	get_farthest_tile(t_map *map)
 	float		max;
 
 	y = 0;
+	max = 0;
 	while (y < map->height)
 	{
 		x = 0;

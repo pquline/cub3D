@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 17:06:54 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 11:15:46 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	ghost_update(t_entity *enemy)
 	data = (t_enemy *)enemy->data;
 	dx = fabs((data->target.x + 0.5) - enemy->pos[0]);
 	dy = fabs((data->target.y + 0.5) - enemy->pos[1]);
-	if (dx * dx + dy * dy < 0.01)
+	if (dx * dx + dy * dy < ENTITY_SPEED + 0.01)
 	{
 		get_next_target(enemy, data->type,
 			(t_vector2){(int)game->player->pos[0],
