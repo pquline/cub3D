@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 12:28:05 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:25:10 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static t_vector2	move_horizontally(t_vector2 target_pos, \
 	const float	dy = target_pos.y - current_pos.y;
 
 	next_pos.x = current_pos.x + (dx > 0 ? 1 : -1);
+	next_pos.y = current_pos.y;
 	if (tile_is_accessible(next_pos, current_pos, map) \
 		&& map->grid[(int)current_pos.y][(int)next_pos.x].id != WALL)
 	{
@@ -56,6 +57,7 @@ static t_vector2	move_vertically(t_vector2 target_pos, \
 	const float	dx = target_pos.x - current_pos.x;
 	const float	dy = target_pos.y - current_pos.y;
 
+	next_pos.x = current_pos.x;
 	next_pos.y = current_pos.y + (dy > 0 ? 1 : -1);
 	if (tile_is_accessible(next_pos, current_pos, map) \
 			&& map->grid[(int)next_pos.y][(int)current_pos.x].id != WALL)
@@ -63,8 +65,8 @@ static t_vector2	move_vertically(t_vector2 target_pos, \
 		next_pos.x = current_pos.x;
 		return (next_pos);
 	}
-	next_pos.y = current_pos.y;
 	next_pos.x = current_pos.x + (dx > 0 ? 1 : -1);
+	next_pos.y = current_pos.y;
 	if (tile_is_accessible(next_pos, current_pos, map) \
 			&& map->grid[(int)current_pos.y][(int)next_pos.x].id != WALL)
 		return (next_pos);

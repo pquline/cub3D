@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/09 12:46:45 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:20:21 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static t_vector2	get_farthest_tile(t_map *map)
 
 	y = 0;
 	max = 0;
+	tile = map->start_coords;
 	while (y < map->height)
 	{
 		x = 0;
