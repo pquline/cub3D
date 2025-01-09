@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/09 12:31:09 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 12:46:45 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 static void	get_accessible_tiles(t_map *map, t_vector2 v)
 {
-	if (map->visited[v.y][v.x] == TRUE || (map->grid[v.y][v.x].id != EMPTY \
-			&& map->grid[v.y][v.x].id != DOOR))
+	if (map->visited[v.y][v.x] == TRUE || map->grid[v.y][v.x].id != EMPTY)
 		return ;
 	map->visited[v.y][v.x] = TRUE;
 	get_accessible_tiles(map, (t_vector2){v.x - 1, v.y});
@@ -57,7 +56,9 @@ t_bool	spawn_coin_entities(t_game *game, t_map *map)
 			if (map->visited[v.y][v.x] == TRUE \
 				&& !(v.x == map->start_coords.x && v.y == map->start_coords.y))
 			{
-				coin = spawn_entity(&game->engine, game, (t_efunc){&orbe_update, &orbe_minimap, NULL}, game->assets.coin[0]);
+				coin = spawn_entity(&game->engine, game, \
+					(t_efunc){&orbe_update, &orbe_minimap, NULL}, \
+					game->assets.coin[0]);
 				if (coin == NULL)
 					return (FAILURE);
 				set_entity_pos(coin, (float)v.x + 0.5, (float)v.y + 0.5);
