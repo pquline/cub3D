@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/09 17:22:37 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:34:56 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static float	get_distance(size_t x, size_t y, t_vector2 v)
 	return (sqrtf(dx * dx + dy * dy));
 }
 
-static t_vector2	get_farthest_tile(t_map *map)
+t_vector2	get_farthest_tile(t_map *map, t_vector2 player)
 {
 	t_vector2	curr;
 	t_vector2	tile;
@@ -96,13 +96,13 @@ static t_vector2	get_farthest_tile(t_map *map)
 
 	curr.y = 0;
 	max = 0;
-	tile = map->start_coords;
+	tile = player;
 	while (curr.y < (int)map->height)
 	{
 		curr.x = 0;
 		while (curr.x < (int)map->width)
 		{
-			distance = get_distance(curr.x, curr.y, map->start_coords);
+			distance = get_distance(curr.x, curr.y, player);
 			if (distance > max && map->visited[curr.y][curr.x] == TRUE)
 			{
 				tile.x = curr.x;
@@ -138,7 +138,7 @@ static t_bool	spawn_enemy_entities(t_game *game, t_map *map)
 	t_entity	*red;
 	t_vector2	pos;
 
-	pos = get_farthest_tile(map);
+	pos = get_farthest_tile(map, map->start_coords);
 	index = 0;
 	while (index < 4)
 	{

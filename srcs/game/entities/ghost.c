@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 17:06:53 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:34:30 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ void	get_next_target(t_entity *enemy, t_enemy_type type, \
 
 	data = (t_enemy *)enemy->data;
 	temp = pos;
-	if (type == ENEMY_PINK)
+	if (player_is_invulnerable((t_game *)game))
+		temp = get_farthest_tile(game->engine.map, \
+			(t_vector2){(int)game->player->pos[0], (int)game->player->pos[1]});
+	else if (type == ENEMY_PINK)
 	{
 		temp.x = pos.x + 4 * cos(dir);
 		temp.y = pos.y + 4 * sin(dir);

@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:15:55 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 15:49:51 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:33:36 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,24 @@ typedef struct s_entity
 }				t_entity;
 */
 
-t_bool	spawn_coin_entities(t_game *game, t_map *map);
-t_bool	spawn_entities(t_game *game);
+t_bool		spawn_coin_entities(t_game *game, t_map *map);
+t_bool		spawn_entities(t_game *game);
 
-void	get_next_target(t_entity *enemy, t_enemy_type type, \
-	t_vector2 player_pos, float player_dir);
+t_vector2	get_farthest_tile(t_map *map, t_vector2 player);
 
-void	player_update(t_entity *entity);
-void	player_minimap(t_entity *entity);
+void		get_next_target(t_entity *enemy, t_enemy_type type, \
+				t_vector2 player_pos, float player_dir);
 
-void	big_orb_update(t_entity *entity);
-void	big_orb_minimap(t_entity *entity);
+void		player_update(t_entity *entity);
+void		player_minimap(t_entity *entity);
 
-void	orbe_update(t_entity *entity);
-void	orbe_minimap(t_entity *entity);
+void		big_orb_update(t_entity *entity);
+void		big_orb_minimap(t_entity *entity);
 
-void	ghost_update(t_entity *entity);
-void	ghost_minimap(t_entity *entity);
+void		orbe_update(t_entity *entity);
+void		orbe_minimap(t_entity *entity);
+
+void		ghost_update(t_entity *entity);
+void		ghost_minimap(t_entity *entity);
 
 #endif
