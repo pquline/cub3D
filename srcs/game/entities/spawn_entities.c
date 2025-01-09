@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/09 11:22:11 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 12:31:09 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 static void	get_accessible_tiles(t_map *map, t_vector2 v)
 {
-	if (map->visited[v.y][v.x] == TRUE || map->grid[v.y][v.x].id != EMPTY)
+	if (map->visited[v.y][v.x] == TRUE || (map->grid[v.y][v.x].id != EMPTY \
+			&& map->grid[v.y][v.x].id != DOOR))
 		return ;
 	map->visited[v.y][v.x] = TRUE;
 	get_accessible_tiles(map, (t_vector2){v.x - 1, v.y});
