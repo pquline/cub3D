@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 15:06:39 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 13:44:56 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/09 11:46:32 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,15 @@ void	draw_map(t_engine *engine)
 		render_line(engine, &r);
 		r.screen_x++;
 	}
+}
+
+void	render_behind(t_engine *engine, t_rendering *r, t_tile *tile)
+{
+	t_tile_id	old;
+
+	old = tile->id;
+	tile->id = EMPTY;
+	r->ray_calc = raycast(engine, r->ray_angle);
+	render_line(engine, r);
+	tile->id = old;
 }

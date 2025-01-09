@@ -103,7 +103,7 @@ void		set_entity_pos(t_entity *entity, float x, float y);
 
 void		main_loop(t_window *window, void *data);
 
-void		toggle_door(t_game	*game, t_tile *tile);
+void		toggle_door(t_game	*game, int x, int y);
 t_bool		door_is_open(t_tile *tile);
 
 /*Menu*/
