@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 14:32:41 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:41:51 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ void	ghost_update(t_entity *enemy)
 	t_game	*game;
 	float	dx;
 	float	dy;
-	float
 
 	game = (t_game *)enemy->game;
 	data = (t_enemy *)enemy->data;
