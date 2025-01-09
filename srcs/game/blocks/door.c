@@ -6,22 +6,11 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:50:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 16:08:16 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/09 11:54:37 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
-
-static void	render_behind(t_engine *engine, t_rendering *r, t_tile *tile)
-{
-	t_tile_id	old;
-
-	old = tile->id;
-	tile->id = EMPTY;
-	r->ray_calc = raycast(engine, r->ray_angle);
-	render_line(engine, r);
-	tile->id = old;
-}
 
 static t_ltxt	door_texture(t_engine *engine,
 	t_rendering *r, t_tile *tile, t_sprite *door)
@@ -67,17 +56,38 @@ t_ltxt	render_door(t_engine *engine, t_rendering *r)
 	return (res);
 }
 
-void	toggle_door(t_game	*game, t_tile *tile)
+static t_bool	check_entity_collider(t_game *game, int x, int y)
 {
-	(void)game;
+	t_list		*current;
+	t_entity	*entity;
+
+	current = game->engine.entities;
+	while (current)
+	{
+		entity = (t_entity *)current->content;
+		if ((int)entity->pos[0] == x && (int)entity->pos[1] == y)
+			return (TRUE);
+		current = current->next;
+	}
+	return (FALSE);
+}
+
+void	toggle_door(t_game	*game, int x, int y)
+{
+	t_tile	*tile;
+
+	tile = &game->engine.map->grid[y][x];
 	if (tile->id == DOOR)
 	{
 		if (tile->data == 100)
 		{
-			tile->data = -96;
+			if (!check_entity_collider(game, x, y))
+				tile->data = -96;
 		}
 		else if (tile->data == 0)
+		{
 			tile->data = 4;
+		}
 	}
 }
 

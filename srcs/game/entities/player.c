@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:12:10 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 16:02:13 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/09 11:54:24 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 static void	check_door(t_entity *entity, t_game *game)
 {
 	t_ray	ray;
-	t_tile	*tile;
 
 	if (mlxe_is_key_down(game->window, XK_space)
 		|| mlxe_is_key_down(game->window, MOUSE_LEFT))
@@ -25,10 +24,7 @@ static void	check_door(t_entity *entity, t_game *game)
 		if (ray.hit == FALSE || ray.dist > 2)
 			return ;
 		if (ray.tile_id == DOOR)
-		{
-			tile = &game->engine.map->grid[(int)ray.y][(int)ray.x];
-			toggle_door(game, tile);
-		}
+			toggle_door(game, (int)ray.x, (int)ray.y);
 	}
 }
 
