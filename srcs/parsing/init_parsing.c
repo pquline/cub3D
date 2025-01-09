@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:31:04 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/18 09:48:42 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 12:45:05 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_bool	init_parsing(t_parsing *parsing)
 	parsing->map->we = NULL;
 	parsing->map->ea = NULL;
 	parsing->map->grid = NULL;
+	parsing->map->visited = NULL;
 	parsing->map->f = UINT_MAX;
 	parsing->map->c = UINT_MAX;
 	parsing->map->width = 0;
