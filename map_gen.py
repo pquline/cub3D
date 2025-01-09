@@ -77,5 +77,5 @@ for i in range(height):
 		txt += str(_map[i][j])
 	txt += "\n"
 
-with open("maps/g_map.cub", "w") as f:
+with open("maps/gen_map.cub", "w") as f:
 	f.write(txt)

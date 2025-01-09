@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 16:20:54 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/09 16:37:22 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ t_bool	game_init(t_game *game, t_window *window, t_map *map)
 	game->engine.render_block[DOOR] = &render_door;
 	game->engine.render_block[WALL] = &render_wall;
 	game->remaning_orbs = 0;
+	game->invulanerability_time = get_time();
+	game->invulanerability_time.tv_sec -= INVULNERABILITY_TIME;
 	if (!spawn_entities(game))
 		return (FAILURE);
 	set_entity_pos(game->player, game->engine.camera.x, game->engine.camera.y);
