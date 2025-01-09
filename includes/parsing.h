@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/07 18:11:22 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/09 16:12:14 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@
 121 or 020\n\
 100    011"
 
+/* -------------------------------- TYPEDEFS -------------------------------- */
+
+typedef enum e_visited	t_visited;
+
 /* ---------------------------------- ENUMS --------------------------------- */
 
 typedef enum e_primary
@@ -123,7 +127,7 @@ typedef struct s_map
 	char		start_direction;
 	size_t		width;
 	size_t		height;
-	t_bool		**visited;
+	t_visited	**visited;
 	t_color		f;
 	t_color		c;
 	t_tile		**grid;

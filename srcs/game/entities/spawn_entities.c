@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/09 15:53:34 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 16:09:26 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 
 static void	get_accessible_tiles(t_map *map, t_vector2 v)
 {
-	if (map->visited[v.y][v.x] == TRUE || map->grid[v.y][v.x].id != EMPTY)
+	if (map->visited[v.y][v.x] == VISITED_TRUE \
+			|| map->grid[v.y][v.x].id != EMPTY)
 		return ;
-	map->visited[v.y][v.x] = TRUE;
+	map->visited[v.y][v.x] = VISITED_TRUE;
 	get_accessible_tiles(map, (t_vector2){v.x - 1, v.y});
 	get_accessible_tiles(map, (t_vector2){v.x + 1, v.y});
 	get_accessible_tiles(map, (t_vector2){v.x, v.y - 1});
@@ -28,13 +29,14 @@ static t_bool	init_accessible_map(t_map *map)
 {
 	size_t	index;
 
-	map->visited = (t_bool **)ft_calloc(map->height, sizeof(t_bool *));
+	map->visited = (t_visited **)ft_calloc(map->height, sizeof(t_visited *));
 	if (map->visited == NULL)
 		return (FAILURE);
 	index = 0;
 	while (index < map->height)
 	{
-		map->visited[index] = (t_bool *)ft_calloc(map->width, sizeof(t_bool));
+		map->visited[index] = \
+			(t_visited *)ft_calloc(map->width, sizeof(t_visited));
 		if (map->visited[index] == NULL)
 			return (free_double_array((void **)map->visited, index));
 		++index;
@@ -53,7 +55,7 @@ t_bool	spawn_coin_entities(t_game *game, t_map *map)
 		v.x = 0;
 		while ((size_t)v.x < map->width)
 		{
-			if (map->visited[v.y][v.x] == TRUE \
+			if (map->visited[v.y][v.x] == VISITED_TRUE \
 				&& !(v.x == map->start_coords.x && v.y == map->start_coords.y))
 			{
 				if (game->remaning_orbs % 9 != 0)
@@ -101,7 +103,7 @@ static t_vector2	get_farthest_tile(t_map *map)
 		while (x < map->width)
 		{
 			current = get_distance(x, y, map->start_coords);
-			if (current > max && map->visited[y][x] == TRUE)
+			if (current > max && map->visited[y][x] == VISITED_TRUE)
 			{
 				tile.x = x;
 				tile.y = y;
