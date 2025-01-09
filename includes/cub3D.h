@@ -25,8 +25,9 @@
 # include <parsing.h>
 # include "engine.h"
 
-# define SPRITE_SIZE		640
-# define MAP_SPRITE_SIZE	48
+# define SPRITE_SIZE			640
+# define MAP_SPRITE_SIZE		48
+# define INVULNERABILITY_TIME	10
 
 typedef struct timeval	t_time;
 typedef struct s_entity	t_entity;
@@ -81,6 +82,7 @@ typedef struct s_game
 	char		error_msg[256];
 	float		delta_time;
 	t_time		current_time;
+	t_time		invulanerability_time;
 	t_entity	*player;
 	int			remaning_orbs;
 }	t_game;
@@ -108,6 +110,8 @@ void		main_loop(t_window *window, void *data);
 
 void		toggle_door(t_game	*game, int x, int y);
 t_bool		door_is_open(t_tile *tile);
+
+t_bool		player_is_invulnerable(t_game *game);
 
 /*Menu*/
 void		main_menu_loop(t_window *window, void *data);

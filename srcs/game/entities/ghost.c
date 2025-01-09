@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ghost.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 14:41:51 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 16:40:13 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void	ghost_update(t_entity *enemy)
 	t_game	*game;
 	float	dx;
 	float	dy;
+	int		sp_idx;
 
 	game = (t_game *)enemy->game;
 	data = (t_enemy *)enemy->data;
@@ -140,7 +141,10 @@ void	ghost_update(t_entity *enemy)
 		add_move(enemy, 0, -ENTITY_SPEED);
 	else if (dy > 0.01)
 		add_move(enemy, 0, ENTITY_SPEED);
-	enemy->sprites = game->assets.enemy[data->type][game->current_time.tv_usec \
+	sp_idx = data->type;
+	if (player_is_invulnerable(game))
+		sp_idx = 4;
+	enemy->sprites = game->assets.enemy[sp_idx][game->current_time.tv_usec \
 		/ 200000 % 4];
 }
 
@@ -150,15 +154,19 @@ void	ghost_minimap(t_entity *enemy)
 	t_coords	coords;
 	t_enemy		*data;
 	t_game		*game;
+	int			sp_idx;
 
 	game = (t_game *)enemy->game;
 	data = (t_enemy *)enemy->data;
 	camera = &game->engine.camera;
-	coords = (t_coords){game->assets.map_enemy[data->type]->rect, \
+	sp_idx = data->type;
+	if (player_is_invulnerable(game))
+		sp_idx = 4;
+	coords = (t_coords){game->assets.map_enemy[sp_idx]->rect, \
 		(t_rect){((enemy->pos[0] - camera->x + 5) *10) - 8, \
 		((enemy->pos[1] - camera->y + 5) *10) - 8, 12, 12}};
 	coords = mask_minimap(coords);
 	draw_sprite_mask(game->window, \
-		game->assets.map_enemy[data->type], \
+		game->assets.map_enemy[sp_idx], \
 		coords);
 }

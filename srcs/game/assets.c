@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   assets.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:35 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 15:37:00 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 16:41:12 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
 static t_bool	load_map_sprites(t_texture *texture, t_window *window, \
-	t_sprite *sprite[4], size_t offset)
+	t_sprite **sprite, t_vector2 offset_count)
 {
-	size_t	index;
+	int	index;
 
 	index = 0;
-	while (index < 4)
+	while (index < offset_count.y)
 	{
 		sprite[index] = mlxe_create_sprite(window, texture,
-				(t_rect){(index + offset) * MAP_SPRITE_SIZE, 0,
+				(t_rect){(index + offset_count.x) * MAP_SPRITE_SIZE, 0,
 				MAP_SPRITE_SIZE, MAP_SPRITE_SIZE}, TRUE);
 		if (sprite == NULL)
 			return (FAILURE);
@@ -36,10 +36,10 @@ static t_bool	load_map_assets(t_assets *assets, t_window *window)
 	if (assets->map_xpm == NULL)
 		return (FAILURE);
 	if (load_map_sprites(assets->map_xpm, window, \
-			assets->map_enemy, 0) == FAILURE)
+			assets->map_enemy, (t_vector2){0,5}) == FAILURE)
 		return (FAILURE);
 	if (load_map_sprites(assets->map_xpm, window, \
-			assets->map_player, 5) == FAILURE)
+			assets->map_player, (t_vector2){5,4}) == FAILURE)
 		return (FAILURE);
 	assets->map_coin = mlxe_create_sprite(window, assets->map_xpm, \
 		(t_rect){9 * MAP_SPRITE_SIZE, 0, MAP_SPRITE_SIZE, MAP_SPRITE_SIZE}, \
@@ -82,7 +82,7 @@ static t_bool	load_world_enemy_sprites(t_assets *assets, t_window *window)
 	size_t	index_sprite;
 
 	index_tex = 0;
-	while (index_tex < 4)
+	while (index_tex < 5)
 	{
 		index_sprite = 0;
 		while (index_sprite < 4)
