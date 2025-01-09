@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/09 18:07:46 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/09 19:55:56 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,56 @@ static t_bool	init_accessible_map(t_map *map)
 	return (SUCCESS);
 }
 
-t_bool	spawn_coin_entities(t_game *game, t_map *map)
+t_bool	big_orb_can_spawn(t_map *map, t_vector2 min, t_vector2 max)
+{
+	t_vector2	save;
+
+	if (min.x <= 0)
+		min.x = 1;
+	if (min.y <= 0)
+		min.y = 1;
+	save = min;
+	if (max.x >= (int)map->width)
+		max.x = map->width - 1;
+	if (max.y >= (int)map->height)
+		max.y = map->height - 1;
+	while (min.y < max.y)
+	{
+		min.x = save.x;
+		while (min.x < max.x)
+		{
+			if (map->visited[min.y][min.x] == VISITED_BIG_ORB)
+				return (FALSE);
+			++min.x;
+		}
+		++min.y;
+	}
+	return (TRUE);
+}
+
+t_bool	spawn_coin_entity(t_game *game, t_map *map, t_vector2 v)
 {
 	t_entity	*coin;
+
+	if (big_orb_can_spawn(map, (t_vector2){v.x - BIG_ORBS_DIST, \
+		v.y - BIG_ORBS_DIST}, (t_vector2){v.x + BIG_ORBS_DIST, \
+		v.y + BIG_ORBS_DIST}))
+	{
+		coin = spawn_entity(&game->engine, game, (t_efunc){&big_orb_update, \
+			&big_orb_minimap, NULL}, game->assets.big_orb[0]);
+		map->visited[v.y][v.x] = VISITED_BIG_ORB;
+	}
+	else
+		coin = spawn_entity(&game->engine, game, (t_efunc){&orbe_update, \
+			&orbe_minimap, NULL}, game->assets.coin[0]);
+	if (coin == NULL)
+		return (FAILURE);
+	set_entity_pos(coin, (float)v.x + 0.5, (float)v.y + 0.5);
+	return (SUCCESS);
+}
+
+t_bool	spawn_coin_entities(t_game *game, t_map *map)
+{
 	t_vector2	v;
 
 	v.y = 0;
@@ -57,23 +104,13 @@ t_bool	spawn_coin_entities(t_game *game, t_map *map)
 		while ((size_t)v.x < map->width)
 		{
 			if (map->visited[v.y][v.x] == VISITED_TRUE \
-				&& !(v.x == map->start_coords.x && v.y == map->start_coords.y))
+				&& !(v.x == map->start_coords.x && v.y == map->start_coords.y) \
+				&& map->grid[v.y][v.x].id != DOOR)
 			{
-				if (map->grid[v.y][v.x].id != DOOR)
-				{
-					if (game->remaning_orbs % 9 != 0)
-						coin = spawn_entity(&game->engine, game, \
-							(t_efunc){&orbe_update, &orbe_minimap, NULL}, \
-							game->assets.coin[0]);
-					else
-						coin = spawn_entity(&game->engine, game, \
-							(t_efunc){&big_orb_update, &big_orb_minimap, NULL},\
-							game->assets.big_orb[0]);
-					if (coin == NULL)
-						return (FAILURE);
-					set_entity_pos(coin, (float)v.x + 0.5, (float)v.y + 0.5);
-					game->remaning_orbs++;
-				}
+				map->visited[v.y][v.x] = VISITED_ORB;
+				if (spawn_coin_entity(game, map, v) == FAILURE)
+					return (FAILURE);
+				game->remaning_orbs++;
 			}
 			++v.x;
 		}
