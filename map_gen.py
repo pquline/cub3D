@@ -1,8 +1,12 @@
 import random
 import sys, os
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-os.chdir(current_dir)
+#current_dir = os.path.dirname(os.path.abspath(__file__))
+#os.chdir(current_dir)
+
+if not os.path.exists("cub3D"):
+	print("Run this script from the root of the project")
+	sys.exit(1)
 
 class ARGS:
 	def __init__(self,sys_args):
