@@ -6,82 +6,12 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 13:12:11 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 13:16:31 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 #include <entities.h>
-
-static t_bool	tile_is_accessible(t_vector2 next, \
-	t_vector2 curr, t_map *map, t_visited visited)
-{
-	if (next.x < 0 || next.x >= (int)map->width || next.y < 0 \
-			|| next.y >= (int)map->height)
-		return (FALSE);
-	if (visited == VISITED_FALSE)
-		return (FALSE);
-	if (map->grid[(int)curr.y][(int)next.x].id == WALL)
-		return (FALSE);
-	if (map->grid[(int)curr.y][(int)next.x].id == DOOR \
-			&& !door_is_open(&map->grid[(int)curr.y][(int)next.x]))
-		return (FALSE);
-	return (TRUE);
-}
-
-static t_vector2	move_horizontally(t_vector2 target, \
-	t_vector2 curr, t_map *map)
-{
-	t_vector2	next;
-	const float	dx = target.x - curr.x;
-	const float	dy = target.y - curr.y;
-
-	next.x = curr.x + (dx > 0 ? 1 : -1);
-	next.y = curr.y;
-	if (tile_is_accessible(next, curr, map, \
-			map->visited[(int)curr.y][(int)next.x]))
-		return (next);
-	next.x = curr.x;
-	next.y = curr.y + (dy > 0 ? 1 : -1);
-	if (tile_is_accessible(next, curr, map, \
-			map->visited[(int)next.y][(int)curr.x]))
-		return (next);
-	return (curr);
-}
-
-static t_vector2	move_vertically(t_vector2 target, \
-	t_vector2 curr, t_map *map)
-{
-	t_vector2	next;
-	const float	dx = target.x - curr.x;
-	const float	dy = target.y - curr.y;
-
-	next.x = curr.x;
-	next.y = curr.y + (dy > 0 ? 1 : -1);
-	if (tile_is_accessible(next, curr, map, \
-			map->visited[(int)next.y][(int)curr.x]))
-		return (next);
-	next.x = curr.x + (dx > 0 ? 1 : -1);
-	next.y = curr.y;
-	if (tile_is_accessible(next, curr, map, \
-			map->visited[(int)curr.y][(int)next.x]))
-		return (next);
-	return (curr);
-}
-
-t_vector2	find_next_tile(t_vector2 curr, t_vector2 target, \
-	t_map *map)
-{
-	t_vector2	next;
-	const float	dx = target.x - curr.x;
-	const float	dy = target.y - curr.y;
-
-	if (fabs(dx) >= fabs(dy))
-		next = move_horizontally(target, curr, map);
-	else
-		next = move_vertically(target, curr, map);
-	return (next);
-}
 
 void	get_next_target(t_entity *enemy, t_enemy_type type, \
 	t_vector2 pos, float dir)
