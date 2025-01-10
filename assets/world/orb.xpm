@@ -1,5 +1,5 @@
 /* XPM */
-static char *coin[] = {
+static char *orb[] = {
 /* columns rows colors chars-per-pixel */
 "2560 640 39 1 ",
 "  c #EFB937",

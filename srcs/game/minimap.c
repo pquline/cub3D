@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:54:36 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 15:06:00 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:54:13 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 t_coords	mask_minimap(t_coords coords)
 {
-	if (coords.dest.x + coords.dest.width > 1000)
+	if (coords.dest.x + coords.dest.width > 200)
 	{
-		coords.src.width -= (coords.dest.x + coords.dest.width) - 100;
-		coords.dest.width -= (coords.dest.x + coords.dest.width) - 100;
+		coords.src.width -= (coords.dest.x + coords.dest.width) - 200;
+		coords.dest.width -= (coords.dest.x + coords.dest.width) - 200;
 	}
-	if (coords.dest.y + coords.dest.height > 1000)
+	if (coords.dest.y + coords.dest.height > 200)
 	{
-		coords.src.height -= (coords.dest.y + coords.dest.height) - 100;
-		coords.dest.height -= (coords.dest.y + coords.dest.height) - 100;
+		coords.src.height -= (coords.dest.y + coords.dest.height) - 200;
+		coords.dest.height -= (coords.dest.y + coords.dest.height) - 200;
 	}
 	return (coords);
 }
@@ -47,8 +47,8 @@ static void	draw_minimap_blocks(t_game *game, t_vector2 iter, t_camera *camera)
 	t_rect		rect;
 
 	coords = (t_coords){(t_rect){iter.x * 10, iter.y * 10, 10, 10},
-		(t_rect){(iter.x - camera->x + 5) * 10,
-		(iter.y - camera->y + 5) * 10, 10, 10}};
+		(t_rect){(iter.x - camera->x + 10) * 10,
+		(iter.y - camera->y + 10) * 10, 10, 10}};
 	rect = mask_minimap(coords).dest;
 	if (game->engine.map->grid[iter.y][iter.x].id == WALL)
 		mlxe_draw_fillrect(game->window, rect, mlxe_color(0, 0, 255));
@@ -80,8 +80,8 @@ void	draw_minimap(t_game *game)
 		iter.y++;
 	}
 	minimap_entities(game);
-	mlxe_draw_rect(game->window, (t_rect){0, 0, 100, 100},
+	mlxe_draw_rect(game->window, (t_rect){0, 0, 200, 200},
 		mlxe_color(14 * 4, 5 * 4, 58 * 4));
-	mlxe_draw_rect(game->window, (t_rect){1, 1, 100, 100},
+	mlxe_draw_rect(game->window, (t_rect){1, 1, 200, 200},
 		mlxe_color(14 * 4, 5 * 4, 58 * 4));
 }

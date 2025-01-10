@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 15:43:06 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:55:10 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,8 @@ void	ghost_minimap(t_entity *enemy)
 	if (player_is_invulnerable(game))
 		sp_idx = 4;
 	coords = (t_coords){game->assets.map_enemy[sp_idx]->rect, \
-		(t_rect){((enemy->pos[0] - camera->x + 5) *10) - 8, \
-		((enemy->pos[1] - camera->y + 5) *10) - 8, 12, 12}};
+		(t_rect){((enemy->pos[0] - camera->x + 10) *10) - 8, \
+		((enemy->pos[1] - camera->y + 10) *10) - 8, 12, 12}};
 	coords = mask_minimap(coords);
 	draw_sprite_mask(game->window, \
 		game->assets.map_enemy[sp_idx], \

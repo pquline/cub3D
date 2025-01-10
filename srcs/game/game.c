@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 20:15:16 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:46:16 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	main_loop(t_window *window, void *data)
 		mlxe_mouse_move(window, window->width / 2, window->height / 2);
 		return ;
 	}
-	if (game->remaning_orbs == 0)
+	if (game->remaining_orbs == 0)
 	{
 		window->funct_ptr = you_win_loop;
 		mlxe_mouse_move(window, window->width / 2, window->height / 2);
@@ -106,7 +106,7 @@ t_bool	game_init(t_game *game, t_window *window, t_map *map)
 	}
 	game->engine.render_block[DOOR] = &render_door;
 	game->engine.render_block[WALL] = &render_wall;
-	game->remaning_orbs = 0;
+	game->remaining_orbs = 0;
 	game->invulanerability_time = get_time();
 	game->invulanerability_time.tv_sec -= INVULNERABILITY_TIME;
 	if (!spawn_entities(game))

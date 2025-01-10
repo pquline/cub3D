@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:12:10 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 13:44:50 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/10 15:54:46 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	player_minimap(t_entity *entity)
 	draw_sprite_size_angle(game->window,
 		game->assets.map_player[0],
 		(t_coords){game->assets.map_player[(int)entity->anim_map]->rect,
-		(t_rect){50, 50, 10, 10}}, entity->dir);
+		(t_rect){100, 100, 10, 10}}, entity->dir);
 	entity->anim_map += 0.05;
 	if (entity->anim_map >= 6)
 		entity->anim_map = 0;

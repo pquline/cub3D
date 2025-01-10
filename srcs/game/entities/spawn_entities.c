@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/10 13:04:34 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:46:16 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,28 +72,28 @@ t_bool	big_orb_can_spawn(t_map *map, t_vector2 min, t_vector2 max)
 	return (TRUE);
 }
 
-t_bool	spawn_coin_entity(t_game *game, t_map *map, t_vector2 v)
+t_bool	spawn_orb_entity(t_game *game, t_map *map, t_vector2 v)
 {
-	t_entity	*coin;
+	t_entity	*orb;
 
 	if (big_orb_can_spawn(map, (t_vector2){v.x - BIG_ORBS_DIST, \
 		v.y - BIG_ORBS_DIST}, (t_vector2){v.x + BIG_ORBS_DIST, \
 		v.y + BIG_ORBS_DIST}))
 	{
-		coin = spawn_entity(&game->engine, game, (t_efunc){&big_orb_update, \
+		orb = spawn_entity(&game->engine, game, (t_efunc){&big_orb_update, \
 			&big_orb_minimap, NULL}, game->assets.big_orb[0]);
 		map->visited[v.y][v.x] = VISITED_BIG_ORB;
 	}
 	else
-		coin = spawn_entity(&game->engine, game, (t_efunc){&orbe_update, \
-			&orbe_minimap, NULL}, game->assets.coin[0]);
-	if (coin == NULL)
+		orb = spawn_entity(&game->engine, game, (t_efunc){&orb_update, \
+			&orb_minimap, NULL}, game->assets.orb[0]);
+	if (orb == NULL)
 		return (FAILURE);
-	set_entity_pos(coin, (float)v.x + 0.5, (float)v.y + 0.5);
+	set_entity_pos(orb, (float)v.x + 0.5, (float)v.y + 0.5);
 	return (SUCCESS);
 }
 
-t_bool	spawn_coin_entities(t_game *game, t_map *map)
+t_bool	spawn_orb_entities(t_game *game, t_map *map)
 {
 	t_vector2	v;
 
@@ -108,9 +108,9 @@ t_bool	spawn_coin_entities(t_game *game, t_map *map)
 				&& map->grid[v.y][v.x].id != DOOR)
 			{
 				map->visited[v.y][v.x] = VISITED_ORB;
-				if (spawn_coin_entity(game, map, v) == FAILURE)
+				if (spawn_orb_entity(game, map, v) == FAILURE)
 					return (FAILURE);
-				game->remaning_orbs++;
+				game->remaining_orbs++;
 			}
 			++v.x;
 		}
@@ -212,7 +212,7 @@ t_bool	spawn_entities(t_game *game)
 	get_accessible_tiles(game->engine.map, game->engine.map->start_coords);
 	if (spawn_enemy_entities(game, game->engine.map) == FAILURE)
 		return (FAILURE);
-	if (spawn_coin_entities(game, game->engine.map) == FAILURE)
+	if (spawn_orb_entities(game, game->engine.map) == FAILURE)
 		return (FAILURE);
 	game->player = player;
 	return (SUCCESS);

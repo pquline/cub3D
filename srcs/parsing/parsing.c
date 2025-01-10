@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:07:32 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/04 12:01:50 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:46:03 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	debug_parsing(t_parsing *parsing)
 	print_list(parsing->cub);
 	printf("\n");
 	print_map(parsing->map);
-	spawn_coin_entities(parsing->map);
+	spawn_orb_entities(parsing->map);
 }
 */
 

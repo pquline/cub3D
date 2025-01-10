@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assets.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:35 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 13:37:36 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/10 15:46:03 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ static t_bool	load_map_assets(t_assets *assets, t_window *window)
 	if (load_map_sprites(assets->map_xpm, window, \
 			assets->map_player, (t_vector2){5, 4}) == FAILURE)
 		return (FAILURE);
-	assets->map_coin = mlxe_create_sprite(window, assets->map_xpm, \
+	assets->map_orb = mlxe_create_sprite(window, assets->map_xpm, \
 		(t_rect){9 * MAP_SPRITE_SIZE, 0, MAP_SPRITE_SIZE, MAP_SPRITE_SIZE}, \
 		TRUE);
 	assets->map_big_orb = mlxe_create_sprite(window, assets->map_xpm, \
 		(t_rect){10 * MAP_SPRITE_SIZE, 0, MAP_SPRITE_SIZE, MAP_SPRITE_SIZE}, \
 		TRUE);
-	if (assets->map_coin == NULL || assets->map_big_orb == NULL)
+	if (assets->map_orb == NULL || assets->map_big_orb == NULL)
 		return (FAILURE);
 	assets->map_player[4] = assets->map_player[2];
 	assets->map_player[5] = assets->map_player[1];
@@ -67,13 +67,13 @@ static t_bool	load_world_textures(t_assets *assets, t_window *window)
 	assets->enemy_xpm[ENEMY_WHITE] = mlxe_load_texture(window, \
 		"assets/world/white.xpm", TRUE);
 	assets->door_xpm = mlxe_load_texture(window, "assets/world/door.xpm", TRUE);
-	assets->coin_xpm = mlxe_load_texture(window, "assets/world/coin.xpm", TRUE);
+	assets->orb_xpm = mlxe_load_texture(window, "assets/world/orb.xpm", TRUE);
 	assets->big_orb_xpm = mlxe_load_texture(window, \
 		"assets/world/big_orb.xpm", TRUE);
 	return (assets->enemy_xpm[ENEMY_RED] && assets->enemy_xpm[ENEMY_CYAN] \
 		&& assets->enemy_xpm[ENEMY_PINK] && assets->enemy_xpm[ENEMY_ORANGE] \
 		&& assets->enemy_xpm[ENEMY_WHITE] && assets->door_xpm \
-		&& assets->coin_xpm && assets->big_orb_xpm);
+		&& assets->orb_xpm && assets->big_orb_xpm);
 }
 
 static t_bool	load_world_enemy_sprites(t_assets *assets, t_window *window)
@@ -116,12 +116,12 @@ static t_bool	load_four_sprites(t_sprite **sprite, t_window *window, \
 	return (SUCCESS);
 }
 
-static t_bool	load_world_door_and_coin_sprites(t_assets *assets, \
+static t_bool	load_world_door_and_orb_sprites(t_assets *assets, \
 	t_window *window)
 {
 	if (load_four_sprites(assets->door, window, assets->door_xpm) == FAILURE)
 		return (FAILURE);
-	if (load_four_sprites(assets->coin, window, assets->coin_xpm) == FAILURE)
+	if (load_four_sprites(assets->orb, window, assets->orb_xpm) == FAILURE)
 		return (FAILURE);
 	if (load_four_sprites(assets->big_orb,
 			window, assets->big_orb_xpm) == FAILURE)
@@ -137,7 +137,7 @@ t_bool	load_assets(t_assets *assets, t_window *window)
 		return (FAILURE);
 	if (load_world_enemy_sprites(assets, window) == FAILURE)
 		return (FAILURE);
-	if (load_world_door_and_coin_sprites(assets, window) == FAILURE)
+	if (load_world_door_and_orb_sprites(assets, window) == FAILURE)
 		return (FAILURE);
 	assets->main_font = mlxe_create_font(window,
 			"assets/UI/pacman_font.xpm", TRUE);

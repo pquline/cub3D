@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   big_orb.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:52 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 16:37:45 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/10 15:55:17 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	big_orb_update(t_entity *entity)
 	player_pos = (t_vector2){game->player->pos[0], game->player->pos[1]};
 	if (orb_pos.x == player_pos.x && orb_pos.y == player_pos.y)
 	{
-		game->remaning_orbs--;
+		game->remaining_orbs--;
 		delete_entity(&game->engine, entity);
 		game->invulanerability_time = get_time();
 	}
@@ -40,8 +40,8 @@ void	big_orb_minimap(t_entity *entity)
 	game = (t_game *)entity->game;
 	camera = &game->engine.camera;
 	coords = (t_coords){game->assets.map_big_orb->rect,
-		(t_rect){((entity->pos[0] - camera->x + 5) * 10) - 4,
-		((entity->pos[1] - camera->y + 5) * 10) - 4,
+		(t_rect){((entity->pos[0] - camera->x + 10) * 10) - 4,
+		((entity->pos[1] - camera->y + 10) * 10) - 4,
 		8, 8}};
 	coords = mask_minimap(coords);
 	draw_sprite_mask(game->window, game->assets.map_big_orb, coords);

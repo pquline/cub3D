@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   orbe.c                                             :+:      :+:    :+:   */
+/*   orb.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include <cub3D.h>
 
-void	orbe_update(t_entity *entity)
+void	orb_update(t_entity *entity)
 {
 	t_game		*game;
 	t_vector2	orb_pos;
@@ -23,14 +23,14 @@ void	orbe_update(t_entity *entity)
 	player_pos = (t_vector2){game->player->pos[0], game->player->pos[1]};
 	if (orb_pos.x == player_pos.x && orb_pos.y == player_pos.y)
 	{
-		game->remaning_orbs--;
+		game->remaining_orbs--;
 		delete_entity(&game->engine, entity);
 	}
-	entity->sprites = game->assets.coin[game->current_time.tv_usec
+	entity->sprites = game->assets.orb[game->current_time.tv_usec
 		/ 200000 % 4];
 }
 
-void	orbe_minimap(t_entity *entity)
+void	orb_minimap(t_entity *entity)
 {
 	t_camera	*camera;
 	t_game		*game;
@@ -38,10 +38,10 @@ void	orbe_minimap(t_entity *entity)
 
 	game = (t_game *)entity->game;
 	camera = &game->engine.camera;
-	coords = (t_coords){game->assets.map_coin->rect,
-		(t_rect){((entity->pos[0] - camera->x + 5) * 10) - 8,
-		((entity->pos[1] - camera->y + 5) * 10) - 8,
+	coords = (t_coords){game->assets.map_orb->rect,
+		(t_rect){((entity->pos[0] - camera->x + 10) * 10) - 8,
+		((entity->pos[1] - camera->y + 10) * 10) - 8,
 		16, 16}};
 	coords = mask_minimap(coords);
-	draw_sprite_mask(game->window, game->assets.map_coin, coords);
+	draw_sprite_mask(game->window, game->assets.map_orb, coords);
 }

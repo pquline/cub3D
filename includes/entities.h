@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:15:55 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 20:11:16 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:46:03 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_entity
 }				t_entity;
 */
 
-t_bool		spawn_coin_entities(t_game *game, t_map *map);
+t_bool		spawn_orb_entities(t_game *game, t_map *map);
 t_bool		spawn_entities(t_game *game);
 
 t_vector2	get_farthest_tile(t_map *map, t_vector2 player);
@@ -44,8 +44,8 @@ void		player_minimap(t_entity *entity);
 void		big_orb_update(t_entity *entity);
 void		big_orb_minimap(t_entity *entity);
 
-void		orbe_update(t_entity *entity);
-void		orbe_minimap(t_entity *entity);
+void		orb_update(t_entity *entity);
+void		orb_minimap(t_entity *entity);
 
 void		ghost_update(t_entity *entity);
 void		ghost_minimap(t_entity *entity);
