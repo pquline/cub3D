@@ -131,4 +131,10 @@ void		you_win_loop(t_window *window, void *data);
 t_ltxt		render_door(t_engine *engine, t_rendering *r);
 t_ltxt		render_wall(t_engine *engine, t_rendering *r);
 
+/*Path finding*/
+void	reset_path(t_game *game);
+void print_path(t_game *game);
+t_bool	exists_path(t_game *game, t_vector2 pos, t_vector2 dest);
+t_vector2	move_to(t_game *game, t_vector2 pos, t_vector2 dest);
+
 #endif

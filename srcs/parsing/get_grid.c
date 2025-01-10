@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:40:23 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/07 18:11:33 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/10 12:36:37 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static t_bool	parse_grid_line(t_parsing *parsing, char *line, size_t y)
 		else
 			parsing->map->grid[y][index].id = EMPTY;
 		parsing->map->grid[y][index].data = 0;
+		parsing->map->grid[y][index].path_f = 0;
 		++index;
 	}
 	return (SUCCESS);

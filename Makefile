@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+         #
+#    By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2025/01/09 15:50:09 by pfischof         ###   ########.fr        #
+#    Updated: 2025/01/10 12:35:17 by lfarhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS += ${SRC}game/fps.c
 SRCS += ${SRC}game/collider.c
 SRCS += ${SRC}game/assets.c
 SRCS += ${SRC}game/minimap.c
+SRCS += ${SRC}game/path_finding.c
 
 SRCS += ${SRC}game/blocks/wall.c
 SRCS += ${SRC}game/blocks/door.c
