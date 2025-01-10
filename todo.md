@@ -1,7 +1,6 @@
 # TODO
 
-- rethink big orbs with map
-- pathfinding for one of the 2 chasing ghosts
+- real pathfinding for one of the 2 chasing ghosts
 
 - rename "orbe" to "orb"
 - rename "coin" to "orb"
