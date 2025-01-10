@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:36:21 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/10 12:45:30 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 12:49:21 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_bool	parse_color(t_color *result, char *line)
 
 	index = 0;
 	color = RED;
-	if (result != NULL)
+	if (*result != UINT_MAX)
 		return (parsing_error(ERR_COLOR_MULT));
 	while (color < PRIMARY_END)
 	{
