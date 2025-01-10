@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:12:10 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 16:36:52 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/10 13:36:16 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ void	player_minimap(t_entity *entity)
 
 t_bool	player_is_invulnerable(t_game *game)
 {
-	if (game->invulanerability_time.tv_sec + INVULNERABILITY_TIME > game->current_time.tv_sec )
+	if (game->invulanerability_time.tv_sec
+		+ INVULNERABILITY_TIME > game->current_time.tv_sec)
 		return (TRUE);
 	return (FALSE);
 }
