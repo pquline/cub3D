@@ -6,7 +6,7 @@
 #    By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2025/01/10 16:00:58 by pfischof         ###   ########.fr        #
+#    Updated: 2025/01/10 19:21:13 by pfischof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,9 @@ SRCS += ${SRC}game/blocks/door.c
 
 SRCS += ${SRC}game/entities/orb.c
 SRCS += ${SRC}game/entities/big_orb.c
+SRCS += ${SRC}game/entities/entity_utils.c
 SRCS += ${SRC}game/entities/ghost.c
+SRCS += ${SRC}game/entities/ghost_move.c
 SRCS += ${SRC}game/entities/player.c
 SRCS += ${SRC}game/entities/spawn_entities.c
 

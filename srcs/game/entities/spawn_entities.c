@@ -6,71 +6,12 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/10 15:46:16 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 19:19:22 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 #include <entities.h>
-
-static void	get_accessible_tiles(t_map *map, t_vector2 v)
-{
-	if (map->visited[v.y][v.x] == VISITED_TRUE \
-			|| (map->grid[v.y][v.x].id != EMPTY \
-			&& map->grid[v.y][v.x].id != DOOR))
-		return ;
-	map->visited[v.y][v.x] = VISITED_TRUE;
-	get_accessible_tiles(map, (t_vector2){v.x - 1, v.y});
-	get_accessible_tiles(map, (t_vector2){v.x + 1, v.y});
-	get_accessible_tiles(map, (t_vector2){v.x, v.y - 1});
-	get_accessible_tiles(map, (t_vector2){v.x, v.y + 1});
-}
-
-static t_bool	init_accessible_map(t_map *map)
-{
-	size_t	index;
-
-	map->visited = (t_visited **)ft_calloc(map->height, sizeof(t_visited *));
-	if (map->visited == NULL)
-		return (FAILURE);
-	index = 0;
-	while (index < map->height)
-	{
-		map->visited[index] = \
-			(t_visited *)ft_calloc(map->width, sizeof(t_visited));
-		if (map->visited[index] == NULL)
-			return (free_double_array((void **)map->visited, index));
-		++index;
-	}
-	return (SUCCESS);
-}
-
-t_bool	big_orb_can_spawn(t_map *map, t_vector2 min, t_vector2 max)
-{
-	t_vector2	save;
-
-	if (min.x <= 0)
-		min.x = 1;
-	if (min.y <= 0)
-		min.y = 1;
-	save = min;
-	if (max.x >= (int)map->width)
-		max.x = map->width - 1;
-	if (max.y >= (int)map->height)
-		max.y = map->height - 1;
-	while (min.y < max.y)
-	{
-		min.x = save.x;
-		while (min.x < max.x)
-		{
-			if (map->visited[min.y][min.x] == VISITED_BIG_ORB)
-				return (FALSE);
-			++min.x;
-		}
-		++min.y;
-	}
-	return (TRUE);
-}
 
 t_bool	spawn_orb_entity(t_game *game, t_map *map, t_vector2 v)
 {
@@ -93,7 +34,7 @@ t_bool	spawn_orb_entity(t_game *game, t_map *map, t_vector2 v)
 	return (SUCCESS);
 }
 
-t_bool	spawn_orb_entities(t_game *game, t_map *map)
+static t_bool	spawn_orb_entities(t_game *game, t_map *map)
 {
 	t_vector2	v;
 
@@ -117,43 +58,6 @@ t_bool	spawn_orb_entities(t_game *game, t_map *map)
 		++v.y;
 	}
 	return (SUCCESS);
-}
-
-static float	get_distance(size_t x, size_t y, t_vector2 v)
-{
-	const float	dx = (float)x - (float)v.x;
-	const float	dy = (float)y - (float)v.y;
-
-	return (sqrtf(dx * dx + dy * dy));
-}
-
-t_vector2	get_farthest_tile(t_map *map, t_vector2 player)
-{
-	t_vector2	curr;
-	t_vector2	tile;
-	float		distance;
-	float		max;
-
-	curr.y = 0;
-	max = 0;
-	tile = player;
-	while (curr.y < (int)map->height)
-	{
-		curr.x = 0;
-		while (curr.x < (int)map->width)
-		{
-			distance = get_distance(curr.x, curr.y, player);
-			if (distance > max && map->visited[curr.y][curr.x] != VISITED_FALSE)
-			{
-				tile.x = curr.x;
-				tile.y = curr.y;
-				max = distance;
-			}
-			++curr.x;
-		}
-		++curr.y;
-	}
-	return (tile);
 }
 
 static t_bool	init_enemy_data(t_entity *enemy, t_enemy_type type)
