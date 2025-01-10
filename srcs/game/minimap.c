@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:54:36 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 13:02:26 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:06:00 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,13 @@ static void	draw_minimap_blocks(t_game *game, t_vector2 iter, t_camera *camera)
 	if (game->engine.map->grid[iter.y][iter.x].id == WALL)
 		mlxe_draw_fillrect(game->window, rect, mlxe_color(0, 0, 255));
 	if (game->engine.map->grid[iter.y][iter.x].id == DOOR)
-		mlxe_draw_fillrect(game->window, rect, mlxe_color(0, 255, 0));
+	{
+		if (door_is_open(&game->engine.map->grid[iter.y][iter.x]))
+			mlxe_draw_fillrect(game->window, rect, mlxe_color(0, 255, 0));
+		else
+			mlxe_draw_fillrect(game->window, rect, mlxe_color(255, 0, 255));
+	}
+
 }
 
 void	draw_minimap(t_game *game)

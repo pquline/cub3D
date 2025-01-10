@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 13:16:31 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:07:56 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	detect_collision(t_entity *enemy)
 	game = (t_game *)enemy->game;
 	dist = sqrt(pow(enemy->pos[0] - game->player->pos[0], 2) \
 		+ pow(enemy->pos[1] - game->player->pos[1], 2));
-	if (dist < 0.6)
+	if (dist < 0.75)
 	{
 		if (player_is_invulnerable(game))
 		{
@@ -62,6 +62,25 @@ static void	detect_collision(t_entity *enemy)
 		else
 			game->window->funct_ptr = gameover_loop;
 	}
+}
+
+static void	sp_add_move(t_entity *entity, float x, float y, t_vector2 target)
+{
+	float t[2];
+
+	t[0] = (float)target.x + 0.5;
+	t[1] = (float)target.y + 0.5;
+	if (fabs(entity->pos[0] - t[0]) < ENTITY_SPEED * 1.5)
+	{
+		want_to_move(entity, t[0], 0);
+		x = 0;
+	}
+	if (fabs(entity->pos[1] - t[1]) < ENTITY_SPEED * 1.5)
+	{
+		want_to_move(entity, 0, t[1]);
+		y = 0;
+	}
+	add_move(entity, x, y);
 }
 
 void	ghost_update(t_entity *enemy)
@@ -81,13 +100,13 @@ void	ghost_update(t_entity *enemy)
 			(t_vector2){(int)game->player->pos[0], \
 			(int)game->player->pos[1]}, game->player->mov_dir);
 	if (dx > 0.01 && data->target.x + 0.5 < enemy->pos[0])
-		add_move(enemy, -ENTITY_SPEED, 0);
+		sp_add_move(enemy, -ENTITY_SPEED, 0, data->target);
 	else if (dx > 0.01)
-		add_move(enemy, ENTITY_SPEED, 0);
+		sp_add_move(enemy, ENTITY_SPEED, 0, data->target);
 	if (dy > 0.01 && data->target.y + 0.5 < enemy->pos[1])
-		add_move(enemy, 0, -ENTITY_SPEED);
+		sp_add_move(enemy, 0, -ENTITY_SPEED, data->target);
 	else if (dy > 0.01)
-		add_move(enemy, 0, ENTITY_SPEED);
+		sp_add_move(enemy, 0, ENTITY_SPEED, data->target);
 	detect_collision(enemy);
 	sp_idx = data->type;
 	if (player_is_invulnerable(game))

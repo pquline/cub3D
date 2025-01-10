@@ -1,7 +1,6 @@
 # TODO
 
 - pathfinding
-- tp dead ghost
 
 - rename "orbe" to "orb"
 - rename "coin" to "orb"
