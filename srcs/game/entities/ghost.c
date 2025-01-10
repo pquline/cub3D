@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 15:34:15 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:37:54 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	get_next_target(t_entity *enemy, t_enemy_type type, \
 		temp = get_ambush_tile(game, game->player->mov_dir);
 		//temp = (t_vector2){pos.x + 4 * cos(dir), pos.y + 4 * sin(dir)};
 	else if (type == ENEMY_CYAN)
-		temp = get_ambush_tile(game, game->player->mov_dir+M_PI);
+		temp = get_ambush_tile(game, game->player->mov_dir + M_PI);
 		//temp = (t_vector2){pos.x + 2 * (pos.x - (int)data->red->pos[0]), \
 		//	pos.y + 2 * (pos.y - (int)data->red->pos[1])};
 	else if (type == ENEMY_ORANGE)
