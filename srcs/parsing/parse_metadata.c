@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:36:21 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/18 16:09:58 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 12:45:30 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ t_bool	parse_color(t_color *result, char *line)
 
 	index = 0;
 	color = RED;
+	if (result != NULL)
+		return (parsing_error(ERR_COLOR_MULT));
 	while (color < PRIMARY_END)
 	{
 		while (line[index] && ft_isspace(line[index]))

@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/09 17:54:15 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 12:46:51 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@
 # define ERR_CUB_OPEN		"Cannot open [.cub] file"
 # define ERR_TEXTURE_PATH	"Missing texture path"
 # define ERR_TEXTURE_MULT	"Multiple definitions of texture path"
+# define ERR_COLOR_MULT		"Multiple definitions of unique color"
 # define ERR_COLOR			"Invalid color format"
 # define ERR_TOO_BIG		"Map size must be less than INT_MAX"
 # define ERR_INVALID_CHAR	"Map can only contain valid tiles [0/1/2/N/S/W/E/ ]"

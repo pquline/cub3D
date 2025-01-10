@@ -1,6 +1,7 @@
 # TODO
 
-- real pathfinding for one of the 2 chasing ghosts
+- pathfinding
+- tp dead ghost
 
 - rename "orbe" to "orb"
 - rename "coin" to "orb"
