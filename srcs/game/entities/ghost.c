@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ghost.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 12:17:41 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/10 13:12:11 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,12 @@ t_vector2	find_next_tile(t_vector2 curr, t_vector2 target, \
 void	get_next_target(t_entity *enemy, t_enemy_type type, \
 	t_vector2 pos, float dir)
 {
-	t_enemy			*data;
-	const t_game	*game = (t_game *)enemy->game;
-	t_vector2		temp;
+	t_enemy		*data;
+	t_game		*game;
+	t_vector2	temp;
 
 	data = (t_enemy *)enemy->data;
+	game  = (t_game *)enemy->game;
 	temp = pos;
 	if (player_is_invulnerable((t_game *)game))
 		temp = get_farthest_tile(game->engine.map, \
@@ -105,23 +106,28 @@ void	get_next_target(t_entity *enemy, t_enemy_type type, \
 			rand() % game->engine.map->height};
 	temp = (t_vector2){fmax(0, fmin(temp.x, game->engine.map->width - 1)), \
 		fmax(0, fmin(temp.y, game->engine.map->height - 1))};
-	data->target = find_next_tile((t_vector2){(int)enemy->pos[0], \
-		(int)enemy->pos[1]}, temp, game->engine.map);
+	reset_path(game);
+	data->target = move_to(game, (t_vector2){(int)enemy->pos[0], \
+		(int)enemy->pos[1]}, temp);
 }
 
 static void	detect_collision(t_entity *enemy)
 {
-	t_game	*game;
-	float	dist;
+	t_game		*game;
+	float		dist;
+	t_vector2	pos;
 
 	game = (t_game *)enemy->game;
 	dist = sqrt(pow(enemy->pos[0] - game->player->pos[0], 2) \
 		+ pow(enemy->pos[1] - game->player->pos[1], 2));
-	if (dist < 0.5)
+	if (dist < 0.6)
 	{
 		if (player_is_invulnerable(game))
 		{
-			//Respawn Enemy
+			pos = get_farthest_tile(game->engine.map, \
+				(t_vector2){(int)game->player->pos[0], \
+				(int)game->player->pos[1]});
+			set_entity_pos(enemy, (float)pos.x + 0.5, (float)pos.y + 0.5);
 		}
 		else
 			game->window->funct_ptr = gameover_loop;

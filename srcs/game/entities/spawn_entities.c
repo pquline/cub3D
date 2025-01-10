@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spawn_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/10 12:37:26 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/10 13:04:34 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ t_vector2	get_farthest_tile(t_map *map, t_vector2 player)
 		while (curr.x < (int)map->width)
 		{
 			distance = get_distance(curr.x, curr.y, player);
-			if (distance > max && map->visited[curr.y][curr.x] == VISITED_TRUE)
+			if (distance > max && map->visited[curr.y][curr.x] != VISITED_FALSE)
 			{
 				tile.x = curr.x;
 				tile.y = curr.y;

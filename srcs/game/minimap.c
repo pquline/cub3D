@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:54:36 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 14:30:05 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/10 13:02:26 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 t_coords	mask_minimap(t_coords coords)
 {
-	if (coords.dest.x + coords.dest.width > 100)
+	if (coords.dest.x + coords.dest.width > 1000)
 	{
 		coords.src.width -= (coords.dest.x + coords.dest.width) - 100;
 		coords.dest.width -= (coords.dest.x + coords.dest.width) - 100;
 	}
-	if (coords.dest.y + coords.dest.height > 100)
+	if (coords.dest.y + coords.dest.height > 1000)
 	{
 		coords.src.height -= (coords.dest.y + coords.dest.height) - 100;
 		coords.dest.height -= (coords.dest.y + coords.dest.height) - 100;
