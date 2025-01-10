@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assets.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:35 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 15:46:03 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 16:18:57 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,12 @@ static t_bool	load_map_assets(t_assets *assets, t_window *window)
 	return (SUCCESS);
 }
 
-static t_bool	load_world_textures(t_assets *assets, t_window *window)
+static t_bool	load_world_textures(t_assets *assets, t_map *map, t_window *window)
 {
+	assets->walls[0] = mlxe_load_texture(window, map->no, TRUE);
+	assets->walls[1] = mlxe_load_texture(window, map->ea, TRUE);
+	assets->walls[2] = mlxe_load_texture(window, map->so, TRUE);
+	assets->walls[3] = mlxe_load_texture(window, map->we, TRUE);
 	assets->enemy_xpm[ENEMY_RED] = mlxe_load_texture(window, \
 		"assets/world/red.xpm", TRUE);
 	assets->enemy_xpm[ENEMY_CYAN] = mlxe_load_texture(window, \
@@ -70,7 +74,9 @@ static t_bool	load_world_textures(t_assets *assets, t_window *window)
 	assets->orb_xpm = mlxe_load_texture(window, "assets/world/orb.xpm", TRUE);
 	assets->big_orb_xpm = mlxe_load_texture(window, \
 		"assets/world/big_orb.xpm", TRUE);
-	return (assets->enemy_xpm[ENEMY_RED] && assets->enemy_xpm[ENEMY_CYAN] \
+	return (assets->walls[0] && assets->walls[1] && assets->walls[2] \
+		&& assets->walls[3] && assets->enemy_xpm[ENEMY_RED]
+		&& assets->enemy_xpm[ENEMY_CYAN] \
 		&& assets->enemy_xpm[ENEMY_PINK] && assets->enemy_xpm[ENEMY_ORANGE] \
 		&& assets->enemy_xpm[ENEMY_WHITE] && assets->door_xpm \
 		&& assets->orb_xpm && assets->big_orb_xpm);
@@ -129,11 +135,11 @@ static t_bool	load_world_door_and_orb_sprites(t_assets *assets, \
 	return (SUCCESS);
 }
 
-t_bool	load_assets(t_assets *assets, t_window *window)
+t_bool	load_assets(t_assets *assets, t_map *map, t_window *window)
 {
 	if (load_map_assets(assets, window) == FAILURE)
 		return (FAILURE);
-	if (load_world_textures(assets, window) == FAILURE)
+	if (load_world_textures(assets, map, window) == FAILURE)
 		return (FAILURE);
 	if (load_world_enemy_sprites(assets, window) == FAILURE)
 		return (FAILURE);

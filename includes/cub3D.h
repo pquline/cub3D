@@ -87,7 +87,6 @@ typedef struct s_game
 	t_window	*window;
 	t_engine	engine;
 	t_assets	assets;
-	char		error_msg[256];
 	float		delta_time;
 	t_time		current_time;
 	t_time		invulanerability_time;
@@ -104,11 +103,10 @@ t_bool		want_to_move(t_entity *entity, float x, float y);
 t_bool		add_move(t_entity *entity, float x, float y);
 
 int			print_error(char *msg);
-t_bool		set_error(t_game *game, char *msg);
 
 t_bool		game_init(t_game *game, t_window *window, t_map *map);
 void		destroy_game(t_game *game);
-t_bool		load_assets(t_assets *assets, t_window *window);
+t_bool		load_assets(t_assets *assets, t_map *map, t_window *window);
 void		draw_minimap(t_game *game);
 t_coords	mask_minimap(t_coords coords);
 
@@ -132,9 +130,8 @@ t_ltxt		render_door(t_engine *engine, t_rendering *r);
 t_ltxt		render_wall(t_engine *engine, t_rendering *r);
 
 /*Path finding*/
-void	reset_path(t_game *game);
-void print_path(t_game *game);
-t_bool	exists_path(t_game *game, t_vector2 pos, t_vector2 dest);
+void		reset_path(t_game *game);
+t_bool		exists_path(t_game *game, t_vector2 pos, t_vector2 dest);
 t_vector2	move_to(t_game *game, t_vector2 pos, t_vector2 dest);
 
 #endif

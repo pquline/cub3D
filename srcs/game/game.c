@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 15:46:16 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 16:19:38 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,28 +89,19 @@ t_bool	game_init(t_game *game, t_window *window, t_map *map)
 {
 	ft_memset(game, 0, sizeof(t_game));
 	game->window = window;
-	if (!load_assets(&game->assets, window))
-		return (FAILURE);
+	if (!load_assets(&game->assets, map, window))
+		return (print_error("Failed to load textures"), FAILURE);
 	if (!engine_init(&game->engine, window, map))
 		return (FAILURE);
 	game->engine.game = (void *)game;
-	game->assets.walls[0] = mlxe_load_texture(window, map->no, TRUE);
-	game->assets.walls[1] = mlxe_load_texture(window, map->ea, TRUE);
-	game->assets.walls[2] = mlxe_load_texture(window, map->so, TRUE);
-	game->assets.walls[3] = mlxe_load_texture(window, map->we, TRUE);
-	if (!game->assets.walls[0] || !game->assets.walls[1]
-		|| !game->assets.walls[2] || !game->assets.walls[3])
-	{
-		printf("Failed to load textures\n");//TODO: handle error
-		return (FAILURE);
-	}
 	game->engine.render_block[DOOR] = &render_door;
 	game->engine.render_block[WALL] = &render_wall;
 	game->remaining_orbs = 0;
 	game->invulanerability_time = get_time();
 	game->invulanerability_time.tv_sec -= INVULNERABILITY_TIME;
+	reset_path(game);
 	if (!spawn_entities(game))
-		return (FAILURE);
+		return (destory_engine(&game->engine), FAILURE);
 	set_entity_pos(game->player, game->engine.camera.x, game->engine.camera.y);
 	game->player->dir = game->engine.camera.dir;
 	return (SUCCESS);

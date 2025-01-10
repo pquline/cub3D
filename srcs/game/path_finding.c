@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:34:51 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 12:42:11 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/10 16:01:34 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	reset_path(t_game *game)
 	}
 }
 
-void print_path(t_game *game)
+/*void print_path(t_game *game)
 {
 	size_t i;
 	size_t j;
@@ -55,7 +55,7 @@ void print_path(t_game *game)
 		i++;
 	}
 	printf("\n\n");
-}
+}*/
 
 static t_bool	solve(t_game *game, t_vector2 pos, t_vector2 dest, int pathf)
 {
@@ -89,18 +89,20 @@ static void	check_move(t_game *game,
 {
 	t_vector2	last;
 	t_vector2	dir;
+	t_tile		**grid;
 
 	last = last_dir[0];
 	dir = last_dir[1];
+	grid = game->engine.map->grid;
 	if (last.x + dir.x >= 0
 		&& last.x + dir.x < (int)game->engine.map->width
 		&& last.y + dir.y >= 0
 		&& last.y + dir.y < (int)game->engine.map->height)
 	{
-		if (game->engine.map->grid[last.y + dir.y][last.x + dir.x].path_f < *min
-			&& game->engine.map->grid[last.y + dir.y][last.x + dir.x].path_f != INT_MIN)
+		if (grid[last.y + dir.y][last.x + dir.x].path_f < *min
+			&& grid[last.y + dir.y][last.x + dir.x].path_f != INT_MIN)
 		{
-			*min = game->engine.map->grid[last.y + dir.y][last.x + dir.x].path_f;
+			*min = grid[last.y + dir.y][last.x + dir.x].path_f;
 			*dest = (t_vector2){last.x + dir.x, last.y + dir.y};
 		}
 	}
