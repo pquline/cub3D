@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ghost.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 20:19:48 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 12:17:41 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,25 @@ void	get_next_target(t_entity *enemy, t_enemy_type type, \
 		(int)enemy->pos[1]}, temp, game->engine.map);
 }
 
+static void	detect_collision(t_entity *enemy)
+{
+	t_game	*game;
+	float	dist;
+
+	game = (t_game *)enemy->game;
+	dist = sqrt(pow(enemy->pos[0] - game->player->pos[0], 2) \
+		+ pow(enemy->pos[1] - game->player->pos[1], 2));
+	if (dist < 0.5)
+	{
+		if (player_is_invulnerable(game))
+		{
+			//Respawn Enemy
+		}
+		else
+			game->window->funct_ptr = gameover_loop;
+	}
+}
+
 void	ghost_update(t_entity *enemy)
 {
 	t_enemy	*data;
@@ -133,6 +152,7 @@ void	ghost_update(t_entity *enemy)
 		add_move(enemy, 0, -ENTITY_SPEED);
 	else if (dy > 0.01)
 		add_move(enemy, 0, ENTITY_SPEED);
+	detect_collision(enemy);
 	sp_idx = data->type;
 	if (player_is_invulnerable(game))
 		sp_idx = 4;

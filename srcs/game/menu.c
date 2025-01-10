@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:35:51 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 16:24:20 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/10 12:20:12 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	gameover_loop(t_window *window, void *data)
 
 	game = (t_game *)data;
 	render_engine(&game->engine);
-	mlxe_font_set_color(game->assets.main_font, mlxe_color(255, 255, 255));
+	mlxe_font_set_color(game->assets.main_font, mlxe_color(255, 255, 0));
 	mlxe_font_set_size(game->assets.main_font, 160);
 	size = get_text_size(game->assets.main_font,
 			"GAME OVER !");
@@ -98,7 +98,7 @@ void	you_win_loop(t_window *window, void *data)
 
 	game = (t_game *)data;
 	render_engine(&game->engine);
-	mlxe_font_set_color(game->assets.main_font, mlxe_color(255, 255, 255));
+	mlxe_font_set_color(game->assets.main_font, mlxe_color(255, 255, 0));
 	mlxe_font_set_size(game->assets.main_font, 160);
 	size = get_text_size(game->assets.main_font,
 			"YOU WIN !");
