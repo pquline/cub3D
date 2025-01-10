@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:15:55 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 15:46:03 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 18:23:17 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ t_bool		spawn_orb_entities(t_game *game, t_map *map);
 t_bool		spawn_entities(t_game *game);
 
 t_vector2	get_farthest_tile(t_map *map, t_vector2 player);
-
-void		get_next_target(t_entity *enemy, t_enemy_type type, \
-				t_vector2 player_pos, float player_dir);
 
 void		player_update(t_entity *entity);
 void		player_minimap(t_entity *entity);

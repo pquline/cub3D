@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/10 12:47:48 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 18:23:33 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,6 @@ char	*ft_strndup(const char *string, size_t size);
 t_bool	free_double_array(void **array, size_t size);
 t_bool	get_cub(t_parsing *parsing, char *path);
 t_bool	get_grid(t_parsing *parsing);
-t_bool	init_parsing(t_parsing *parsing);
 t_bool	map_is_valid(t_map *map);
 t_bool	parse_color(t_color *color, char *line);
 t_bool	parse_map_line(t_parsing *parsing, size_t index);

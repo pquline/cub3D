@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 12:39:47 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/10 19:03:29 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	print_error(char *msg)
 {
-	ft_putendl_fd("Error :", 2);
+	ft_putendl_fd("Error:", 2);
 	ft_putendl_fd(msg, 2);
 	return (1);
 }
@@ -42,13 +42,12 @@ int	main(int ac, char **av)
 	t_window	*window;
 
 	if (ac != 2)
-		return (print_error("Usage : ./cub3D [map.cub]"));
+		return (print_error("Usage: ./cub3D [map.cub]"));
 	map = parsing(av[1]);
 	if (map == NULL)
 		return (EXIT_FAILURE);
-	//return (free_map(map), EXIT_SUCCESS);
 	//window = mlxe_init(1920 / 1.5, 1080 / 1.5, "cub3d");
-	window = mlxe_init_fullscreen("cub3d");
+	window = mlxe_init_fullscreen("cub3D");
 	if (!window)
 		return (free_map(map), print_error("Failed to initialize window"));
 	if (game_init(&game, window, map) == FAILURE)
