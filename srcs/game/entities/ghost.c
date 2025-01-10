@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 15:37:54 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:43:06 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	get_next_target(t_entity *enemy, t_enemy_type type, \
 			rand() % game->engine.map->height};
 	temp = (t_vector2){fmax(0, fmin(temp.x, game->engine.map->width - 1)), \
 		fmax(0, fmin(temp.y, game->engine.map->height - 1))};
-	if (game->engine.map->grid[temp.y][temp.x].id == WALL)
+	if (game->engine.map->grid[temp.y][temp.x].id != EMPTY)
 		temp = pos;
 	reset_path(game);
 	data->target = move_to(game, (t_vector2){(int)enemy->pos[0], \
