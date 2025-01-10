@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:01:32 by pfischof          #+#    #+#             */
-/*   Updated: 2024/12/18 16:34:54 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 12:51:23 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static t_bool	parse_cub_line(t_parsing *parsing, t_map *map, char *line)
 	while (line[index] && ft_isspace(line[index]))
 		++index;
 	if (ft_strncmp(&line[index], COLOR_FLOOR, 1) == 0)
-		return (map->f == UINT_MAX && parse_color(&map->f, &line[index + 1]));
+		return (parse_color(&map->f, &line[index + 1]));
 	if (ft_strncmp(&line[index], COLOR_CEILING, 1) == 0)
-		return (map->c == UINT_MAX && parse_color(&map->c, &line[index + 1]));
+		return (parse_color(&map->c, &line[index + 1]));
 	if (ft_strncmp(&line[index], TEXTURE_NORTH, 2) == 0)
 		return (parse_texture(&map->no, &line[index + 2]));
 	if (ft_strncmp(&line[index], TEXTURE_SOUTH, 2) == 0)
