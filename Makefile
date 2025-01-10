@@ -6,7 +6,7 @@
 #    By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 15:45:34 by lfarhi            #+#    #+#              #
-#    Updated: 2025/01/10 15:45:41 by pfischof         ###   ########.fr        #
+#    Updated: 2025/01/10 16:00:58 by pfischof         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,10 +44,8 @@ SRCS += ${SRC}engine/sp_mlxe/draw_subtexture_size_z.c
 SRCS += ${SRC}parsing/frees.c
 SRCS += ${SRC}parsing/get_cub.c
 SRCS += ${SRC}parsing/get_grid.c
-SRCS += ${SRC}parsing/init_parsing.c
 SRCS += ${SRC}parsing/parse_metadata.c
 SRCS += ${SRC}parsing/parsing.c
-SRCS += ${SRC}parsing/parsing_error.c
 SRCS +=	${SRC}parsing/utils.c
 SRCS +=	${SRC}parsing/validate_map.c
 
