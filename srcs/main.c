@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 19:03:29 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 21:29:29 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,6 @@ int	main(int ac, char **av)
 		mlxe_destroy(window);
 		return (EXIT_FAILURE);
 	}
-	/*TODO CHANGE*/
-	reset_path(&game);
-	t_entity *enemy = game.engine.entities->next->content;
-	exists_path(&game, (t_vector2){(int)enemy->pos[0], (int)enemy->pos[1]}, \
-		(t_vector2){(int)game.player->pos[0], (int)game.player->pos[1]});
-	print_path(&game);
 	///////////////////////
 	mlxe_loop(window, main_menu_loop, &game);
 
