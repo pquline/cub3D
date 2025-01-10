@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:35 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 16:41:12 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/10 13:37:36 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static t_bool	load_map_assets(t_assets *assets, t_window *window)
 	if (assets->map_xpm == NULL)
 		return (FAILURE);
 	if (load_map_sprites(assets->map_xpm, window, \
-			assets->map_enemy, (t_vector2){0,5}) == FAILURE)
+			assets->map_enemy, (t_vector2){0, 5}) == FAILURE)
 		return (FAILURE);
 	if (load_map_sprites(assets->map_xpm, window, \
-			assets->map_player, (t_vector2){5,4}) == FAILURE)
+			assets->map_player, (t_vector2){5, 4}) == FAILURE)
 		return (FAILURE);
 	assets->map_coin = mlxe_create_sprite(window, assets->map_xpm, \
 		(t_rect){9 * MAP_SPRITE_SIZE, 0, MAP_SPRITE_SIZE, MAP_SPRITE_SIZE}, \
@@ -123,7 +123,8 @@ static t_bool	load_world_door_and_coin_sprites(t_assets *assets, \
 		return (FAILURE);
 	if (load_four_sprites(assets->coin, window, assets->coin_xpm) == FAILURE)
 		return (FAILURE);
-	if (load_four_sprites(assets->big_orb, window, assets->big_orb_xpm) == FAILURE)
+	if (load_four_sprites(assets->big_orb,
+			window, assets->big_orb_xpm) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:52 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 16:07:22 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/10 13:36:39 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	orbe_update(t_entity *entity)
 		game->remaning_orbs--;
 		delete_entity(&game->engine, entity);
 	}
-	entity->sprites = game->assets.coin[game->current_time.tv_usec / 200000 % 4];
+	entity->sprites = game->assets.coin[game->current_time.tv_usec
+		/ 200000 % 4];
 }
 
 void	orbe_minimap(t_entity *entity)

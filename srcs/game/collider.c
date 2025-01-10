@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:14 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 16:00:51 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/10 13:46:38 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_bool	check_box(t_engine *engine, float x, float y)
 	float		dy;
 	int			check_x;
 	int			check_y;
-	const float	half_size = 0.05;
+	const float	half_size = 0.2;
 
 	dx = -half_size;
 	while (dx <= half_size)
