@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:12:10 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 13:36:16 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/10 13:44:50 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,15 @@ static void	update_keys(t_entity *entity, float speed_move)
 
 	game = entity->game;
 	if (mlxe_is_key_pressed(game->window, XK_w))
-		add_move(entity, cos(entity->dir) * speed_move,
-			sin(entity->dir) * speed_move);
+	{
+		add_move(entity, cos(entity->dir) * speed_move, 0);
+		add_move(entity, 0, sin(entity->dir) * speed_move);
+	}
 	if (mlxe_is_key_pressed(game->window, XK_s))
-		add_move(entity, -cos(entity->dir) * speed_move,
-			-sin(entity->dir) * speed_move);
+	{
+		add_move(entity, -cos(entity->dir) * speed_move, 0);
+		add_move(entity, 0, -sin(entity->dir) * speed_move);
+	}
 	if (mlxe_is_key_pressed(game->window, XK_d))
 		add_move(entity, cos(entity->dir + M_PI_2) * speed_move,
 			sin(entity->dir + M_PI_2) * speed_move);
