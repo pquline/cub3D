@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/12 23:33:14 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/12 23:34:27 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@
 # define ERR_PLAYERS		"Map can only contain one player tile [N/S/W/E]"
 # define ERR_NO_PLAYER		"Map must contain a player tile [N/S/W/E]"
 # define ERR_NOT_SURROUNDED	"Map must be surrounded by wall tiles [1]"
-# define ERR_DOORS			"Map can only contain two door tiles [2]"
 # define ERR_NO_EMPTY		"Map must contain at least one empty tile [0]"
 # define ERR_DOOR_MISPLACED	"Doors [2] can only be placed like so:\n\
 001    110\n\
