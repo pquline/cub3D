@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:54:36 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 15:54:13 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/10 16:02:13 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static void	draw_minimap_blocks(t_game *game, t_vector2 iter, t_camera *camera)
 		else
 			mlxe_draw_fillrect(game->window, rect, mlxe_color(255, 0, 255));
 	}
-
 }
 
 void	draw_minimap(t_game *game)

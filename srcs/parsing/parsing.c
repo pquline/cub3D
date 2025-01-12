@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:07:32 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/11 23:58:06 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/12 11:52:06 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static t_bool	init_parsing(t_parsing *parsing)
 	parsing->map->so = NULL;
 	parsing->map->we = NULL;
 	parsing->map->ea = NULL;
+	parsing->map->door = NULL;
 	parsing->map->grid = NULL;
 	parsing->map->visited = NULL;
 	parsing->map->f = UINT_MAX;
@@ -42,13 +43,24 @@ static t_bool	init_parsing(t_parsing *parsing)
 	return (SUCCESS);
 }
 
+static t_bool	get_default_door_texture(t_parsing *parsing)
+{
+	if (parsing->map->door == NULL)
+		parsing->map->door = ft_strdup(DEFAULT_DOOR);
+	if (parsing->map->door == NULL)
+		return (FAILURE);
+	return (SUCCESS);
+
+}
+
 t_map	*parsing(char *path)
 {
 	t_parsing	parsing;
 
 	if (init_parsing(&parsing) == FAILURE)
 		return (NULL);
-	if (get_cub(&parsing, path) == FAILURE || get_grid(&parsing) == FAILURE)
+	if (get_cub(&parsing, path) == FAILURE || get_grid(&parsing) == FAILURE \
+		|| get_default_door_texture(&parsing) == FAILURE)
 	{
 		free_parsing(&parsing);
 		return (free_map(parsing.map));

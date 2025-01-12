@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/10 18:23:33 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/12 11:51:44 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 # define TEXTURE_WEST	"WE"
 # define TEXTURE_EAST	"EA"
 # define TEXTURE_DOOR	"DO"
+
+# define DEFAULT_DOOR	"./assets/world/door.xpm"
 
 # define VALID_MAP_CHARS	"012NSWE "
 # define PLAYER_MAP_CHARS	"NSWE"
