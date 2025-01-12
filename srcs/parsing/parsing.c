@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:07:32 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/12 11:52:06 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/12 11:53:43 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static t_bool	get_default_door_texture(t_parsing *parsing)
 	if (parsing->map->door == NULL)
 		return (FAILURE);
 	return (SUCCESS);
-
 }
 
 t_map	*parsing(char *path)
