@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/12 11:57:43 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/12 23:28:47 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@
 
 # define VALID_MAP_CHARS	"012NSWE "
 # define PLAYER_MAP_CHARS	"NSWE"
-# define VALID_SURR_EMPTY	"\0\1"
 
 # define ERR_MALLOC_TMAP	"Failed to allocate memory [t_map *]"
 # define ERR_MALLOC_TLIST	"Failed to allocate memory [t_list *]"
