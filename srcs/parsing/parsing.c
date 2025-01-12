@@ -6,11 +6,18 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:07:32 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/10 16:02:06 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/11 23:58:06 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parsing.h>
+
+t_bool	parsing_error(char *error)
+{
+	ft_putendl_fd("Error:", STDERR_FILENO);
+	ft_putendl_fd(error, STDERR_FILENO);
+	return (FAILURE);
+}
 
 static t_bool	init_parsing(t_parsing *parsing)
 {
@@ -33,13 +40,6 @@ static t_bool	init_parsing(t_parsing *parsing)
 	parsing->line = NULL;
 	parsing->cub = NULL;
 	return (SUCCESS);
-}
-
-t_bool	parsing_error(char *error)
-{
-	ft_putendl_fd("Error:", STDERR_FILENO);
-	ft_putendl_fd(error, STDERR_FILENO);
-	return (FAILURE);
 }
 
 t_map	*parsing(char *path)
