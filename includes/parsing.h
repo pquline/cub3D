@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:27:00 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/12 23:28:47 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/12 23:31:44 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@
 # define ERR_MALLOC_TTILE	"Failed to allocate memory [t_tile *]"
 # define ERR_MALLOC_STRING	"Failed to allocate memory [char *]"
 # define ERR_CUB_SUFFIX		"Invalid [.cub] file extension"
-# define ERR_CUB_FORMAT		"Invalid [.cub] file format"
+# define ERR_CUB_FORMAT		"Invalid [.cub] file formatting"
 # define ERR_CUB_OPEN		"Cannot open [.cub] file"
 # define ERR_TEXTURE_PATH	"Missing texture path"
 # define ERR_TEXTURE_MULT	"Multiple definitions of texture path"
