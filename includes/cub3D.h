@@ -29,6 +29,17 @@
 # define MAP_SPRITE_SIZE		48
 # define INVULNERABILITY_TIME	10
 
+# define UI_MINIMAP		"assets/UI/minimap.xpm"
+# define UI_FONT		"assets/UI/pacman_font.xpm"
+# define WORLD_CYAN		"assets/world/cyan.xpm"
+# define WORLD_PINK		"assets/world/pink.xpm"
+# define WORLD_ORANGE	"assets/world/orange.xpm"
+# define WORLD_WHITE	"assets/world/white.xpm"
+# define WORLD_RED		"assets/world/red.xpm"
+# define WORLD_ORB		"assets/world/orb.xpm"
+# define WORLD_BIG_ORB	"assets/world/big_orb.xpm"
+# define WORLD_DOOR		"assets/world/door.xpm"
+
 typedef struct timeval	t_time;
 typedef struct s_entity	t_entity;
 

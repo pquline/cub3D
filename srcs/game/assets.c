@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:35 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/12 11:46:43 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/12 12:02:49 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_bool	load_map_sprites(t_texture *texture, t_window *window, \
 
 static t_bool	load_map_assets(t_assets *assets, t_window *window)
 {
-	assets->map_xpm = mlxe_load_texture(window, "assets/UI/minimap.xpm", TRUE);
+	assets->map_xpm = mlxe_load_texture(window, UI_MINIMAP, TRUE);
 	if (assets->map_xpm == NULL)
 		return (FAILURE);
 	if (load_map_sprites(assets->map_xpm, window, \
@@ -60,20 +60,14 @@ static t_bool	load_world_textures(t_assets *assets, t_map *map, t_window *w)
 	assets->walls[1] = mlxe_load_texture(w, map->ea, TRUE);
 	assets->walls[2] = mlxe_load_texture(w, map->so, TRUE);
 	assets->walls[3] = mlxe_load_texture(w, map->we, TRUE);
-	assets->enemy_xpm[ENEMY_RED] = mlxe_load_texture(w, \
-		"assets/world/red.xpm", TRUE);
-	assets->enemy_xpm[ENEMY_CYAN] = mlxe_load_texture(w, \
-		"assets/world/cyan.xpm", TRUE);
-	assets->enemy_xpm[ENEMY_PINK] = mlxe_load_texture(w, \
-		"assets/world/pink.xpm", TRUE);
-	assets->enemy_xpm[ENEMY_ORANGE] = mlxe_load_texture(w, \
-		"assets/world/orange.xpm", TRUE);
-	assets->enemy_xpm[ENEMY_WHITE] = mlxe_load_texture(w, \
-		"assets/world/white.xpm", TRUE);
-	assets->door_xpm = mlxe_load_texture(w, map->door, TRUE);
-	assets->orb_xpm = mlxe_load_texture(w, "assets/world/orb.xpm", TRUE);
-	assets->big_orb_xpm = mlxe_load_texture(w, \
-		"assets/world/big_orb.xpm", TRUE);
+	assets->enemy_xpm[ENEMY_RED] = mlxe_load_texture(w, WORLD_RED, TRUE);
+	assets->enemy_xpm[ENEMY_CYAN] = mlxe_load_texture(w, WORLD_CYAN, TRUE);
+	assets->enemy_xpm[ENEMY_PINK] = mlxe_load_texture(w, WORLD_PINK, TRUE);
+	assets->enemy_xpm[ENEMY_ORANGE] = mlxe_load_texture(w, WORLD_ORANGE, TRUE);
+	assets->enemy_xpm[ENEMY_WHITE] = mlxe_load_texture(w, WORLD_WHITE, TRUE);
+	assets->door_xpm = mlxe_load_texture(w, WORLD_DOOR, TRUE);
+	assets->orb_xpm = mlxe_load_texture(w, WORLD_ORB, TRUE);
+	assets->big_orb_xpm = mlxe_load_texture(w, WORLD_BIG_ORB, TRUE);
 	return (assets->walls[0] && assets->walls[1] && assets->walls[2] \
 		&& assets->walls[3] && assets->enemy_xpm[ENEMY_RED]
 		&& assets->enemy_xpm[ENEMY_CYAN] \
@@ -121,7 +115,7 @@ t_bool	load_assets(t_assets *assets, t_map *map, t_window *w)
 		return (FAILURE);
 	if (load_four_sprites(assets->big_orb, w, assets->big_orb_xpm) == FAILURE)
 		return (FAILURE);
-	assets->main_font = mlxe_create_font(w, "assets/UI/pacman_font.xpm", TRUE);
+	assets->main_font = mlxe_create_font(w, UI_FONT, TRUE);
 	if (assets->main_font == NULL)
 		return (FAILURE);
 	return (SUCCESS);

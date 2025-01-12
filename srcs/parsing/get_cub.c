@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:01:32 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/10 12:51:23 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/12 11:55:55 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ static t_bool	parse_cub_line(t_parsing *parsing, t_map *map, char *line)
 		return (parse_texture(&map->we, &line[index + 2]));
 	if (ft_strncmp(&line[index], TEXTURE_EAST, 2) == 0)
 		return (parse_texture(&map->ea, &line[index + 2]));
-	if (ft_strncmp(&line[index], TEXTURE_DOOR, 2) == 0)
-		return (parse_texture(&map->door, &line[index + 2]));
 	if (parsing->state == PARSING_MAP && line[0] != NL_CHAR)
 		return (parse_map_line(parsing, index));
 	return (parsing_error(ERR_CUB_FORMAT));
