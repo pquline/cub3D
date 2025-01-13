@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/13 15:37:38 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/13 16:08:20 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,54 @@ int	print_error(char *msg)
 	return (1);
 }
 
-int	main(int ac, char **av)
+static int	start_game(t_window *window, t_map *map)
 {
 	t_game		game;
-	t_map		*map;
-	t_window	*window;
 
-	if (ac != 2)
-		return (print_error("Usage: ./cub3D [map.cub]"));
-	map = parsing(av[1]);
-	if (map == NULL)
-		return (EXIT_FAILURE);
-	window = mlxe_init_fullscreen("cub3D");
-	//window = mlxe_init(1920/1, 1080/1, "cub3D");
-	if (!window)
-		return (free_map(map), print_error("Failed to initialize window"));
 	if (game_init(&game, window, map) == FAILURE)
 	{
 		free_map(map);
 		mlxe_destroy(window);
-		return (EXIT_FAILURE);
+		return (FAILURE);
 	}
 	mlxe_loop(window, main_menu_loop, &game);
 	destroy_game(&game);
+	return (SUCCESS);
+}
+
+static t_bool	get_resolution(int ac, char **av, t_vector2 *resolution)
+{
+	if (ac < 3)
+		return (SUCCESS);
+	if (ac == 5 && ft_strncmp(av[2], "--resolution", 12) == 0)
+	{
+		*resolution = (t_vector2){ft_atoi(av[3]), ft_atoi(av[4])};
+		return (SUCCESS);
+	}
+	else
+		return (FAILURE);
+}
+
+int	main(int ac, char **av)
+{
+	t_vector2	resolution;
+	t_map		*map;
+	t_window	*window;
+
+	resolution = (t_vector2){-1, -1};
+	if (ac < 2 || get_resolution(ac, av, &resolution) == FAILURE)
+		return (print_error("Usage: ./cub3D [map.cub]"));
+	map = parsing(av[1]);
+	if (map == NULL)
+		return (EXIT_FAILURE);
+	if (resolution.x < 0 || resolution.y < 0)
+		window = mlxe_init_fullscreen("cub3D");
+	else
+		window = mlxe_init(resolution.x, resolution.y, "cub3D");
+	if (!window)
+		return (free_map(map), print_error("Failed to initialize window"));
+	if (start_game(window, map) == FAILURE)
+		return (EXIT_FAILURE);
 	mlxe_destroy(window);
 	return (EXIT_SUCCESS);
 }
