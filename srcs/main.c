@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/12 11:25:09 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/13 15:37:38 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int ac, char **av)
 	if (map == NULL)
 		return (EXIT_FAILURE);
 	window = mlxe_init_fullscreen("cub3D");
+	//window = mlxe_init(1920/1, 1080/1, "cub3D");
 	if (!window)
 		return (free_map(map), print_error("Failed to initialize window"));
 	if (game_init(&game, window, map) == FAILURE)

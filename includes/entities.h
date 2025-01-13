@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:15:55 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 19:21:39 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/13 15:36:02 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <cub3D.h>
 
-# define ENEMY_SPEED	0.03
+# define ENEMY_SPEED	0.0015
 # define BIG_ORBS_DIST	5
 
 t_bool		big_orb_can_spawn(t_map *map, t_vector2 min, t_vector2 max);

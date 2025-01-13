@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:35:51 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 12:20:12 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/13 15:08:00 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ static void	menu_text(t_game *game, float i, t_window *window, t_color c)
 	t_vector2	size;
 
 	mlxe_font_set_color(game->assets.main_font, c);
-	mlxe_font_set_size(game->assets.main_font, 140);
+	mlxe_font_set_size(game->assets.main_font, (140 * window->width) / 1920);
 	size = get_text_size(game->assets.main_font, "PACASTING");
 	mlxe_draw_text(window, game->assets.main_font,
 		"PACASTING", (t_vector2){window->width / 2 - size.x / 2,
 		window->height / 6 - size.y / 2});
-	mlxe_font_set_size(game->assets.main_font, 64);
+	mlxe_font_set_size(game->assets.main_font, (64 * window->width) / 1920);
 	size = get_text_size(game->assets.main_font, "MOVE TO START");
 	mlxe_draw_text(window, game->assets.main_font, "MOVE TO START",
 		(t_vector2){window->width / 2 - size.x / 2,
@@ -60,7 +60,7 @@ void	pause_menu_loop(t_window *window, void *data)
 	game = (t_game *)data;
 	render_engine(&game->engine);
 	mlxe_font_set_color(game->assets.main_font, mlxe_color(255, 255, 255));
-	mlxe_font_set_size(game->assets.main_font, 160);
+	mlxe_font_set_size(game->assets.main_font, (160 * window->width) / 1920);
 	size = get_text_size(game->assets.main_font,
 			"PAUSE");
 	mlxe_draw_text(window, game->assets.main_font, "PAUSE",
@@ -82,7 +82,7 @@ void	gameover_loop(t_window *window, void *data)
 	game = (t_game *)data;
 	render_engine(&game->engine);
 	mlxe_font_set_color(game->assets.main_font, mlxe_color(255, 255, 0));
-	mlxe_font_set_size(game->assets.main_font, 160);
+	mlxe_font_set_size(game->assets.main_font, (160 * window->width) / 1920);
 	size = get_text_size(game->assets.main_font,
 			"GAME OVER !");
 	mlxe_draw_text(window, game->assets.main_font, "GAME OVER !",
@@ -99,7 +99,7 @@ void	you_win_loop(t_window *window, void *data)
 	game = (t_game *)data;
 	render_engine(&game->engine);
 	mlxe_font_set_color(game->assets.main_font, mlxe_color(255, 255, 0));
-	mlxe_font_set_size(game->assets.main_font, 160);
+	mlxe_font_set_size(game->assets.main_font, (160 * window->width) / 1920);
 	size = get_text_size(game->assets.main_font,
 			"YOU WIN !");
 	mlxe_draw_text(window, game->assets.main_font, "YOU WIN !",
