@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   big_orb.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:56:52 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/10 15:55:17 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/13 14:54:27 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	big_orb_update(t_entity *entity)
 	game = entity->game;
 	orb_pos = (t_vector2){entity->pos[0], entity->pos[1]};
 	player_pos = (t_vector2){game->player->pos[0], game->player->pos[1]};
+	entity->sprites = game->assets.big_orb[game->current_time.tv_usec \
+		/ 200000 % 4];
 	if (orb_pos.x == player_pos.x && orb_pos.y == player_pos.y)
 	{
 		game->remaining_orbs--;
 		delete_entity(&game->engine, entity);
 		game->invulanerability_time = get_time();
 	}
-	entity->sprites = game->assets.big_orb[game->current_time.tv_usec \
-		/ 200000 % 4];
 }
 
 void	big_orb_minimap(t_entity *entity)

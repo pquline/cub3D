@@ -21,13 +21,13 @@ void	orb_update(t_entity *entity)
 	game = entity->game;
 	orb_pos = (t_vector2){entity->pos[0], entity->pos[1]};
 	player_pos = (t_vector2){game->player->pos[0], game->player->pos[1]};
+	entity->sprites = game->assets.orb[game->current_time.tv_usec
+		/ 200000 % 4];
 	if (orb_pos.x == player_pos.x && orb_pos.y == player_pos.y)
 	{
 		game->remaining_orbs--;
 		delete_entity(&game->engine, entity);
 	}
-	entity->sprites = game->assets.orb[game->current_time.tv_usec
-		/ 200000 % 4];
 }
 
 void	orb_minimap(t_entity *entity)
