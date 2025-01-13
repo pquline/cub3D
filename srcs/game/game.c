@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/12 12:06:20 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:28:28 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,7 @@ void	main_loop(t_window *window, void *data)
 		return ;
 	}
 	if (game->remaining_orbs == 0)
-	{
 		window->funct_ptr = you_win_loop;
-		mlxe_mouse_move(window, window->width / 2, window->height / 2);
-		return ;
-	}
 	mlxe_render(window);
 	mlxe_mouse_move(window, window->width / 2, window->height);
 	end = get_time();

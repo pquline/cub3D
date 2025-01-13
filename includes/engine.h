@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:37:47 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/12 11:55:09 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:43:31 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ typedef struct s_ltxt
 	t_texture	*texture;
 }				t_ltxt;
 
+typedef struct s_engine	t_engine;
+
+typedef t_ltxt			(*t_renderf)(struct s_engine *engine, t_rendering *r);
+
 typedef struct s_engine
 {
 	void		*game;
@@ -84,7 +88,7 @@ typedef struct s_engine
 	t_camera	camera;
 	t_map		*map;
 	t_list		*entities;
-	t_ltxt		(*render_block[LEN_TILE_ID])(struct s_engine *engine, t_rendering *r);
+	t_renderf	render_block[LEN_TILE_ID];
 }				t_engine;
 
 typedef struct s_entity	t_entity;
