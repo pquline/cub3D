@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:00:37 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 15:41:35 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/13 15:51:32 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	remove_empty_entities(t_engine *engine)
 				prev->next = curr->next;
 			else
 				engine->entities = curr->next;
+			free(curr);
+			curr = prev;
 		}
 		prev = curr;
 		curr = curr->next;
