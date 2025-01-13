@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:32:19 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/13 16:08:20 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/13 17:25:43 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ static t_bool	get_resolution(int ac, char **av, t_vector2 *resolution)
 		*resolution = (t_vector2){ft_atoi(av[3]), ft_atoi(av[4])};
 		return (SUCCESS);
 	}
-	else
-		return (FAILURE);
+	return (FAILURE);
 }
 
 int	main(int ac, char **av)
@@ -55,7 +54,7 @@ int	main(int ac, char **av)
 
 	resolution = (t_vector2){-1, -1};
 	if (ac < 2 || get_resolution(ac, av, &resolution) == FAILURE)
-		return (print_error("Usage: ./cub3D [map.cub]"));
+		return (print_error("Usage: ./cub3D [map.cub] [--resolution x y]"));
 	map = parsing(av[1]);
 	if (map == NULL)
 		return (EXIT_FAILURE);
