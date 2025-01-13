@@ -6,14 +6,14 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:42:12 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/08 13:43:43 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/13 13:46:13 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <engine.h>
 #include <float.h>
 
-static void	raycast_init_dir(t_ray_calc *ray_calc)
+static inline void	raycast_init_dir(t_ray_calc *ray_calc)
 {
 	if (ray_calc->ray_dir_x < 0)
 	{
@@ -52,11 +52,11 @@ static void	raycast_init(t_engine *engine, float angle, t_ray_calc *ray_calc)
 	ray_calc->map_x = (int)ray_calc->ray.x;
 	ray_calc->map_y = (int)ray_calc->ray.y;
 	if (ray_calc->ray_dir_x == 0)
-		ray_calc->delta_dist_x = 1e30;
+		ray_calc->delta_dist_x = FLT_MAX;
 	else
 		ray_calc->delta_dist_x = fabs(1 / ray_calc->ray_dir_x);
 	if (ray_calc->ray_dir_y == 0)
-		ray_calc->delta_dist_y = 1e30;
+		ray_calc->delta_dist_y = FLT_MAX;
 	else
 		ray_calc->delta_dist_y = fabs(1 / ray_calc->ray_dir_y);
 	raycast_init_dir(ray_calc);
@@ -64,12 +64,10 @@ static void	raycast_init(t_engine *engine, float angle, t_ray_calc *ray_calc)
 
 static int	raycast_loop(t_engine *engine, t_ray_calc *rc)
 {
-	int	hit;
 	int	iter;
 
-	hit = 0;
 	iter = 0;
-	while (!hit && iter < 500)
+	while (!rc->ray.hit && iter < 500)
 	{
 		if (rc->side_dist_x < rc->side_dist_y)
 		{
@@ -85,50 +83,45 @@ static int	raycast_loop(t_engine *engine, t_ray_calc *rc)
 		}
 		rc->ray.tile_id = engine->map->grid[rc->map_y][rc->map_x].id;
 		if (engine->map->grid[rc->map_y][rc->map_x].id != EMPTY)
-			hit = 1;
+			rc->ray.hit = 1;
 		iter++;
 	}
-	return (hit);
+	return (rc->ray.hit);
 }
 
-void	raycast_side(t_ray_calc *ray_calc)
+static inline void	raycast_side(t_ray_calc *ray_calc)
 {
 	if (ray_calc->side == 0)
 	{
 		ray_calc->ray.dist = (ray_calc->map_x - ray_calc->ray.x
-				+ (1 - ray_calc->step_x) / 2.0) / ray_calc->ray_dir_x;
+				+ (1 - ray_calc->step_x) * 0.5f) / ray_calc->ray_dir_x;
 		if (ray_calc->step_x < 0)
 			ray_calc->ray.side_hit = 3;
 		else
 			ray_calc->ray.side_hit = 1;
-		ray_calc->ray.x_t = ray_calc->ray.y
-			+ ray_calc->ray.dist * ray_calc->ray_dir_y
-			- floor(ray_calc->ray.y + ray_calc->ray.dist * ray_calc->ray_dir_y);
+		ray_calc->ray.x_t = fmodf(ray_calc->ray.y
+				+ ray_calc->ray.dist * ray_calc->ray_dir_y, 1.0f);
 	}
 	if (ray_calc->side == 1)
 	{
 		ray_calc->ray.dist = (ray_calc->map_y - ray_calc->ray.y
-				+ (1 - ray_calc->step_y) / 2.0) / ray_calc->ray_dir_y;
+				+ (1 - ray_calc->step_y) * 0.5f) / ray_calc->ray_dir_y;
 		if (ray_calc->step_y < 0)
 			ray_calc->ray.side_hit = 0;
 		else
 			ray_calc->ray.side_hit = 2;
-		ray_calc->ray.x_t = ray_calc->ray.x
-			+ ray_calc->ray.dist * ray_calc->ray_dir_x
-			- floor(ray_calc->ray.x + ray_calc->ray.dist * ray_calc->ray_dir_x);
+		ray_calc->ray.x_t = fmodf(ray_calc->ray.x
+				+ ray_calc->ray.dist * ray_calc->ray_dir_x, 1.0f);
 	}
 }
 
 t_ray_calc	raycast(t_engine *engine, float angle)
 {
 	t_ray_calc	ray_calc;
-	int			hit;
 
 	raycast_init(engine, angle, &ray_calc);
-	hit = raycast_loop(engine, &ray_calc);
-	if (hit)
+	if (raycast_loop(engine, &ray_calc))
 	{
-		ray_calc.ray.hit = TRUE;
 		raycast_side(&ray_calc);
 		ray_calc.ray.x = ray_calc.map_x;
 		ray_calc.ray.y = ray_calc.map_y;

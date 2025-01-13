@@ -15,10 +15,6 @@
 
 void	mlxe_write_pixel(t_texture *texture, int x, int y, t_color color)
 {
-	(void)texture;
-	(void)x;
-	(void)y;
-	(void)color;
 	*(unsigned int *)(texture->addr
 			+ (y * texture->size_line + x
 				* (texture->bits_per_pixel / 8))) = color;

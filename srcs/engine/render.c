@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 15:06:39 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 11:46:32 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/13 14:02:27 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	draw_line(t_engine *engine, t_rendering *r)
 		d = y * 256 - engine->window->buffer->size.y * 128
 			+ r->line_height * 128;
 		tex_y = ((d * r->texture->size.y) / r->line_height) / 256;
-		color = mlxe_get_pixel(r->texture, r->tex_x, tex_y);
+		color = mlxe_read_pixel(r->texture, r->tex_x, tex_y);
 		mlxe_draw_pixel(engine->window->buffer, r->screen_x, y, color);
 		y++;
 	}
