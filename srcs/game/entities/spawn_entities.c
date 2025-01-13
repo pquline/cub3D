@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spawn_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:21:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/10 19:19:22 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/13 17:16:43 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,44 +60,21 @@ static t_bool	spawn_orb_entities(t_game *game, t_map *map)
 	return (SUCCESS);
 }
 
-static t_bool	init_enemy_data(t_entity *enemy, t_enemy_type type)
-{
-	t_enemy	*ghost;
-
-	ghost = (t_enemy *)ft_calloc(1, sizeof(t_enemy));
-	if (ghost == NULL)
-		return (FAILURE);
-	ghost->type = type;
-	ghost->mode = ENEMY_CHASING;
-	ghost->red = NULL;
-	enemy->data = ghost;
-	return (SUCCESS);
-}
-
 static t_bool	spawn_enemy_entities(t_game *game, t_map *map)
 {
-	size_t			index;
-	t_enemy			*data;
-	t_entity		*enemy;
+	int				index;
 	t_entity		*red;
+	t_entity		*enemy;
 	const t_vector2	pos = get_farthest_tile(map, map->start_coords);
 
 	index = 0;
 	while (index < 4)
 	{
-		enemy = spawn_entity(&game->engine, game, (t_efunc){&ghost_update, \
-			&ghost_minimap, free}, game->assets.enemy[index][0]);
-		if (enemy == NULL)
-			return (FAILURE);
-		set_entity_pos(enemy, (float)pos.x + 0.5, (float)pos.y + 0.5);
-		if (init_enemy_data(enemy, index) == FAILURE)
-			return (FAILURE);
-		data = (t_enemy *)enemy->data;
+		enemy = ghost_spawn(game, pos, index);
 		if (index == ENEMY_RED)
 			red = enemy;
 		else
-			data->red = red;
-		data->target = (t_vector2){(int)enemy->pos[0], (int)enemy->pos[1]};
+			((t_enemy *)enemy->data)->red = red;
 		++index;
 	}
 	return (SUCCESS);

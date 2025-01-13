@@ -61,6 +61,7 @@ typedef enum e_enemy_mode
 typedef struct s_enemy
 {
 	t_vector2		target;
+	float			last_pos[2];
 	t_enemy_type	type;
 	t_enemy_mode	mode;
 	t_entity		*red;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ghost_move.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:06:36 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/10 19:07:41 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/13 17:44:21 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ void	sp_add_move(t_entity *entity, float x, float y, t_vector2 target)
 
 	t[0] = (float)target.x + 0.5;
 	t[1] = (float)target.y + 0.5;
-	if (fabs(entity->pos[0] - t[0]) < ENEMY_SPEED * 1.75)
+	if (fabs(entity->pos[0] - t[0]) < 0.032)
 	{
 		want_to_move(entity, t[0], 0);
 		x = 0;
 	}
-	if (fabs(entity->pos[1] - t[1]) < ENEMY_SPEED * 1.75)
+	if (fabs(entity->pos[1] - t[1]) < 0.032)
 	{
 		want_to_move(entity, 0, t[1]);
 		y = 0;
