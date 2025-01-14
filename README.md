@@ -19,7 +19,7 @@
 ## Installation et Compilation
 Pour tester **cub3d**, suivez les étapes ci-dessous :
 
-1. Clonez ce dépôt ainsi que la version étendue de la MiniLibX.
+1. Clonez ce dépôt ainsi que la version originale de la MiniLibX.
 2. Compilez le projet en exécutant la commande suivante dans le répertoire du jeu :
    ```bash
    make
