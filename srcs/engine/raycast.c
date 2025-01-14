@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:42:12 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/13 13:46:13 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/14 11:15:25 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,30 +89,30 @@ static int	raycast_loop(t_engine *engine, t_ray_calc *rc)
 	return (rc->ray.hit);
 }
 
-static inline void	raycast_side(t_ray_calc *ray_calc)
+static inline void	raycast_side(t_ray_calc *rc)
 {
-	if (ray_calc->side == 0)
+	if (rc->side == 0)
 	{
-		ray_calc->ray.dist = (ray_calc->map_x - ray_calc->ray.x
-				+ (1 - ray_calc->step_x) * 0.5f) / ray_calc->ray_dir_x;
-		if (ray_calc->step_x < 0)
-			ray_calc->ray.side_hit = 3;
+		rc->ray.dist = (rc->map_x - rc->ray.x
+				+ (1 - rc->step_x) * 0.5f) / rc->ray_dir_x;
+		if (rc->step_x < 0)
+			rc->ray.side_hit = 3;
 		else
-			ray_calc->ray.side_hit = 1;
-		ray_calc->ray.x_t = fmodf(ray_calc->ray.y
-				+ ray_calc->ray.dist * ray_calc->ray_dir_y, 1.0f);
+			rc->ray.side_hit = 1;
+		rc->ray.x_t = fmodf(rc->ray.y + rc->ray.dist * rc->ray_dir_y, 1.0f);
 	}
-	if (ray_calc->side == 1)
+	if (rc->side == 1)
 	{
-		ray_calc->ray.dist = (ray_calc->map_y - ray_calc->ray.y
-				+ (1 - ray_calc->step_y) * 0.5f) / ray_calc->ray_dir_y;
-		if (ray_calc->step_y < 0)
-			ray_calc->ray.side_hit = 0;
+		rc->ray.dist = (rc->map_y - rc->ray.y
+				+ (1 - rc->step_y) * 0.5f) / rc->ray_dir_y;
+		if (rc->step_y < 0)
+			rc->ray.side_hit = 0;
 		else
-			ray_calc->ray.side_hit = 2;
-		ray_calc->ray.x_t = fmodf(ray_calc->ray.x
-				+ ray_calc->ray.dist * ray_calc->ray_dir_x, 1.0f);
+			rc->ray.side_hit = 2;
+		rc->ray.x_t = fmodf(rc->ray.x + rc->ray.dist * rc->ray_dir_x, 1.0f);
 	}
+	if (rc->ray.side_hit == 3 || rc->ray.side_hit == 2)
+		rc->ray.x_t = 1 - rc->ray.x_t;
 }
 
 t_ray_calc	raycast(t_engine *engine, float angle)
