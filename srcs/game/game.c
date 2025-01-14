@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:51:32 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/13 12:28:28 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/14 11:31:24 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	main_loop(t_window *window, void *data)
 	if (game->remaining_orbs == 0)
 		window->funct_ptr = you_win_loop;
 	mlxe_render(window);
-	mlxe_mouse_move(window, window->width / 2, window->height);
+	mlxe_mouse_move(window, window->width / 2, window->height-1);
 	end = get_time();
 	game->delta_time = get_delta(start, end);
 }
