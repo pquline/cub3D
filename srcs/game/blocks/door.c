@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:50:49 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/09 11:54:37 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/14 12:18:05 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_ltxt	render_door(t_engine *engine, t_rendering *r)
 	return (res);
 }
 
-static t_bool	check_entity_collider(t_game *game, int x, int y)
+static t_bool	check_entity_collider(t_game *game, float x, float y)
 {
 	t_list		*current;
 	t_entity	*entity;
@@ -65,7 +65,8 @@ static t_bool	check_entity_collider(t_game *game, int x, int y)
 	while (current)
 	{
 		entity = (t_entity *)current->content;
-		if ((int)entity->pos[0] == x && (int)entity->pos[1] == y)
+		if (sqrt(pow(entity->pos[0] - x, 2)
+				+ pow(entity->pos[1] - y, 2)) < 0.75)
 			return (TRUE);
 		current = current->next;
 	}
@@ -81,7 +82,7 @@ void	toggle_door(t_game	*game, int x, int y)
 	{
 		if (tile->data == 100)
 		{
-			if (!check_entity_collider(game, x, y))
+			if (!check_entity_collider(game, x + 0.5f, y + 0.5f))
 				tile->data = -96;
 		}
 		else if (tile->data == 0)
