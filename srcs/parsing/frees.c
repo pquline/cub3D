@@ -6,7 +6,7 @@
 /*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:14:56 by pfischof          #+#    #+#             */
-/*   Updated: 2025/01/14 10:22:43 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:43:49 by pfischof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*free_map(t_map *map)
 	map->no = NULL;
 	free(map->door);
 	map->door = NULL;
-	if (map->grid && map->grid[0])
+	if (map->height > 0 && map->grid && map->grid[0])
 		free_double_array((void **)map->grid, map->height);
 	free(map->grid);
 	map->grid = NULL;
