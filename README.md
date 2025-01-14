@@ -1,7 +1,7 @@
 # cub3D
 
 ## Introduction
-**cub3d** est un projet développé dans le cadre de mon cursus à l'école 42. Il s'agit d'un mini-jeu en 3D utilisant la technique de raycasting, conçu avec la bibliothèque graphique MiniLibX. Ce projet utilise une version améliorée de la MiniLibX, appelée [MiniLibX-Extended](https://github.com/leofarhi/MiniLibX-Extended), qui offre des fonctionnalités supplémentaires.
+**cub3d** est un projet développé dans le cadre de notre cursus à l'école 42. Il s'agit d'un mini-jeu en 3D utilisant la technique de raycasting, conçu avec la bibliothèque graphique MiniLibX. Ce projet utilise une version améliorée de la MiniLibX, appelée [MiniLibX-Extended](https://github.com/leofarhi/MiniLibX-Extended), qui offre des fonctionnalités supplémentaires.
 
 ---
 
