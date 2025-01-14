@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:15:55 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/13 15:36:02 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/13 17:17:50 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void		big_orb_update(t_entity *entity);
 void		big_orb_minimap(t_entity *entity);
 void		ghost_update(t_entity *entity);
 void		ghost_minimap(t_entity *entity);
+t_entity	*ghost_spawn(t_game *game, t_vector2 pos, int index);
 void		orb_update(t_entity *entity);
 void		orb_minimap(t_entity *entity);
 void		player_update(t_entity *entity);
