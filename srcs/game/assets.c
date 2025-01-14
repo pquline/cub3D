@@ -65,7 +65,7 @@ static t_bool	load_world_textures(t_assets *assets, t_map *map, t_window *w)
 	assets->enemy_xpm[ENEMY_PINK] = mlxe_load_texture(w, WORLD_PINK, TRUE);
 	assets->enemy_xpm[ENEMY_ORANGE] = mlxe_load_texture(w, WORLD_ORANGE, TRUE);
 	assets->enemy_xpm[ENEMY_WHITE] = mlxe_load_texture(w, WORLD_WHITE, TRUE);
-	assets->door_xpm = mlxe_load_texture(w, WORLD_DOOR, TRUE);
+	assets->door_xpm = mlxe_load_texture(w, map->door, TRUE);
 	assets->orb_xpm = mlxe_load_texture(w, WORLD_ORB, TRUE);
 	assets->big_orb_xpm = mlxe_load_texture(w, WORLD_BIG_ORB, TRUE);
 	return (assets->walls[0] && assets->walls[1] && assets->walls[2] \

@@ -1,7 +1,8 @@
-NO ./assets/world/wall.xpm
-SO ./assets/world/wall.xpm
-WE ./assets/world/wall.xpm
-EA ./assets/world/wall.xpm
+NO ./assets/tests/textures/wolfenstein/eagle.xpm
+SO ./assets/tests/textures/wolfenstein/color_stone.xpm
+WE ./assets/tests/textures/wolfenstein/blue_stone.xpm
+EA ./assets/tests/textures/wolfenstein/red_brick.xpm
+DO ./assets/tests/textures/made_door.xpm
 
 F 14,5,58
 C 10,0,10

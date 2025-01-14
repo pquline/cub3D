@@ -38,7 +38,6 @@
 # define WORLD_RED		"assets/world/red.xpm"
 # define WORLD_ORB		"assets/world/orb.xpm"
 # define WORLD_BIG_ORB	"assets/world/big_orb.xpm"
-# define WORLD_DOOR		"assets/world/door.xpm"
 
 typedef struct timeval	t_time;
 typedef struct s_entity	t_entity;

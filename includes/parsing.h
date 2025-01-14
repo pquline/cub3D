@@ -50,6 +50,9 @@
 # define TEXTURE_SOUTH	"SO"
 # define TEXTURE_WEST	"WE"
 # define TEXTURE_EAST	"EA"
+# define TEXTURE_DOOR	"DO"
+
+# define DEFAULT_DOOR	"./assets/world/door.xpm"
 
 # define VALID_MAP_CHARS	"012NSWE "
 # define PLAYER_MAP_CHARS	"NSWE"
@@ -122,6 +125,7 @@ typedef struct s_map
 	char		*so;
 	char		*we;
 	char		*ea;
+	char		*door;
 	char		start_direction;
 	size_t		width;
 	size_t		height;
