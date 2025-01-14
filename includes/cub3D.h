@@ -25,7 +25,6 @@
 # include <parsing.h>
 # include "engine.h"
 
-# define SPRITE_SIZE			640
 # define MAP_SPRITE_SIZE		48
 # define INVULNERABILITY_TIME	10
 
