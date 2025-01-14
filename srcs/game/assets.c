@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assets.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pfischof <pfischof@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:35 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/14 10:33:05 by pfischof         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:58:06 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,15 @@ static t_bool	load_world_textures(t_assets *assets, t_map *map, t_window *w)
 static t_bool	load_four_sprites(t_sprite **sprite, t_window *window, \
 	t_texture *texture)
 {
-	size_t	index;
+	size_t		index;
+	t_vector2	sp_size;
 
 	index = 0;
+	sp_size = (t_vector2){texture->size.x / 4, texture->size.y};
 	while (index < 4)
 	{
 		sprite[index] = mlxe_create_sprite(window, texture, \
-			(t_rect){index * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE}, TRUE);
+			(t_rect){index * sp_size.x, 0, sp_size.x, sp_size.y}, TRUE);
 		if (sprite[index] == NULL)
 			return (FAILURE);
 		++index;
