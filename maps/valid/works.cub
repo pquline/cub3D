@@ -1,13 +1,13 @@
-   WE                            assets/tests/textures/wolfenstein/grey_stone.xpm
-NO      assets/tests/textures/wolfenstein/purple_stone.xpm
+   WE                            assets/maps/wolfenstein/grey_stone.xpm
+NO      assets/maps/wolfenstein/purple_stone.xpm
 
 
 
-SO assets/tests/textures/wolfenstein/red_brick.xpm
+SO assets/maps/wolfenstein/red_brick.xpm
 
 F      17,    38,     64
 
-EA assets/tests/textures/wolfenstein/wood.xpm
+EA assets/maps/wolfenstein/wood.xpm
 
 
 

@@ -1,7 +1,7 @@
 NO assets/tests/textures/test/forbidden.xpm
-SO assets/tests/textures/test/south.xpm
-WE assets/tests/textures/test/west.xpm
-EA assets/tests/textures/test/east.xpm
+SO assets/maps/direction/south.xpm
+WE assets/maps/direction/west.xpm
+EA assets/maps/direction/east.xpm
 
 F 20,20,20
 C 200,200,200

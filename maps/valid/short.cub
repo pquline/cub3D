@@ -1,8 +1,8 @@
-NO ./assets/tests/textures/wolfenstein/eagle.xpm
-SO ./assets/tests/textures/wolfenstein/color_stone.xpm
-WE ./assets/tests/textures/wolfenstein/blue_stone.xpm
-EA ./assets/tests/textures/wolfenstein/red_brick.xpm
-DO ./assets/tests/textures/made_door.xpm
+NO ./assets/maps/wolfenstein/eagle.xpm
+SO ./assets/maps/wolfenstein/color_stone.xpm
+WE ./assets/maps/wolfenstein/blue_stone.xpm
+EA ./assets/maps/wolfenstein/red_brick.xpm
+DO ./assets/maps/made/made_door.xpm
 
 F 14,5,58
 C 10,0,10

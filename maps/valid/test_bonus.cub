@@ -1,8 +1,8 @@
-NO assets/tests/textures/rendu/1.xpm
-SO assets/tests/textures/rendu/5.xpm
-WE assets/tests/textures/rendu/3.xpm
-EA assets/tests/textures/rendu/2.xpm
-DO assets/tests/textures/rendu/4.xpm
+NO assets/maps/scifi/1.xpm
+SO assets/maps/scifi/5.xpm
+WE assets/maps/scifi/3.xpm
+EA assets/maps/scifi/2.xpm
+DO assets/maps/scifi/4.xpm
 
 C 153,204,255
 F 20,20,20

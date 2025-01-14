@@ -60,10 +60,10 @@ for i in range(1, height-1):
 txt = ""
 if wall_texture == "debug":
 	txt += \
-"""NO ./assets/tests/missing_n.xpm
-SO ./assets/tests/missing_s.xpm
-WE ./assets/tests/missing_w.xpm
-EA ./assets/tests/missing_e.xpm
+"""NO ./assets/maps/debug/missing_n.xpm
+SO ./assets/maps/debug/missing_s.xpm
+WE ./assets/maps/debug/missing_w.xpm
+EA ./assets/maps/debug/missing_e.xpm
 """
 else:
 	txt += \

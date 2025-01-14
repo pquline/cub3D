@@ -1,7 +1,7 @@
-NO assets/tests/textures/simonkraft/soul_sand.xpm
-SO assets/tests/textures/simonkraft/soul_soil_01.xpm
-WE assets/tests/textures/simonkraft/soul_soil.xpm
-EA assets/tests/textures/simonkraft/soul_sand.xpm
+NO assets/maps/simonkraft/soul_sand.xpm
+SO assets/maps/simonkraft/soul_soil_01.xpm
+WE assets/maps/simonkraft/soul_soil.xpm
+EA assets/maps/simonkraft/soul_sand.xpm
 
 C 53,41,34
 F 45,33,27

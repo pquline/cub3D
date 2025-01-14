@@ -1,6 +1,6 @@
-NO assets/tests/textures/test/north.xpm
-SO assets/tests/textures/test/south.xpm
-WE assets/tests/textures/test/west.xpm
+NO assets/maps/direction/north.xpm
+SO assets/maps/direction/south.xpm
+WE assets/maps/direction/west.xpm
 EA assets/tests/textures/test/
 
 F 20,20,20
