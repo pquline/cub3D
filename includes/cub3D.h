@@ -29,8 +29,8 @@
 # define MAP_SPRITE_SIZE		48
 # define INVULNERABILITY_TIME	10
 
-# define UI_MINIMAP		"assets/UI/minimap.xpm"
-# define UI_FONT		"assets/UI/pacman_font.xpm"
+# define UI_MINIMAP		"assets/ui/minimap.xpm"
+# define UI_FONT		"assets/ui/pacman_font.xpm"
 # define WORLD_CYAN		"assets/world/cyan.xpm"
 # define WORLD_PINK		"assets/world/pink.xpm"
 # define WORLD_ORANGE	"assets/world/orange.xpm"
