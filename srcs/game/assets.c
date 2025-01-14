@@ -6,7 +6,7 @@
 /*   By: lfarhi <lfarhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 16:20:35 by lfarhi            #+#    #+#             */
-/*   Updated: 2025/01/14 11:58:06 by lfarhi           ###   ########.fr       */
+/*   Updated: 2025/01/14 12:05:01 by lfarhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,12 @@ static t_bool	load_four_sprites(t_sprite **sprite, t_window *window, \
 	sp_size = (t_vector2){texture->size.x / 4, texture->size.y};
 	while (index < 4)
 	{
-		sprite[index] = mlxe_create_sprite(window, texture, \
-			(t_rect){index * sp_size.x, 0, sp_size.x, sp_size.y}, TRUE);
+		if (texture->size.x > texture->size.y * 2)
+			sprite[index] = mlxe_create_sprite(window, texture, \
+				(t_rect){index * sp_size.x, 0, sp_size.x, sp_size.y}, TRUE);
+		else
+			sprite[index] = mlxe_create_sprite(window, texture, \
+				(t_rect){0, 0, texture->size.x, texture->size.y}, TRUE);
 		if (sprite[index] == NULL)
 			return (FAILURE);
 		++index;
