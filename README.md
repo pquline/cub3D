@@ -1,60 +1,82 @@
 # cub3D
 
+![cub3d](https://github.com/user-attachments/assets/673b2602-6ab3-4103-a7e2-b4b14441d01b)
+
 ## Introduction
-**cub3d** est un projet développé dans le cadre de notre cursus à l'école 42. Il s'agit d'un mini-jeu en 3D utilisant la technique de raycasting, conçu avec la bibliothèque graphique MiniLibX. Ce projet utilise une version améliorée de la MiniLibX, appelée [MiniLibX-Extended](https://github.com/leofarhi/MiniLibX-Extended), qui offre des fonctionnalités supplémentaires.
+
+**cub3D** is a project developed as part of our curriculum at 42 school. It’s a mini 3D game using the raycasting technique, built with the MiniLibX graphics library. This project uses an enhanced version of MiniLibX called [MiniLibX-Extended](https://github.com/leofarhi/MiniLibX-Extended), which provides additional features.
 
 ---
 
-## Fonctionnalités et Objectif
-**cub3d** revisite le classique *Pac-Man* en 3D. Voici les principales fonctionnalités :
+## Features and Goal
 
-- **Objectif principal** : Collectez toutes les boules jaunes pour gagner.
-- **Fantômes** : Évitez les fantômes ou mangez-les après avoir collecté une boule verte.
-- **Minimap** : Représentation 2D de la carte, similaire à l'original *Pac-Man*.
-- **Portes** : Ouvrez-les avec un clic gauche ou la touche Espace.
-- **Pause** : Appuyez sur Tab pour mettre le jeu en pause.
+**cub3D** is a 3D reinterpretation of the classic *Pac-Man*. Main features include:
+
+* **Main goal**: Collect all the yellow balls to win.
+* **Ghosts**: Avoid them, or eat them after grabbing a green ball.
+* **Minimap**: 2D view of the map, similar to the original *Pac-Man*.
+* **Doors**: Open them with a left click or the Space key.
+* **Pause**: Press Tab to pause the game.
 
 ---
 
-## Installation et Compilation
-Pour tester **cub3d**, suivez les étapes ci-dessous :
+## Installation and Compilation
 
-1. Clonez ce dépôt ainsi que la version originale de la MiniLibX.
-2. Compilez le projet en exécutant la commande suivante dans le répertoire du jeu :
+To try **cub3D**, follow these steps:
+
+1. Clone this repository along with the original MiniLibX version.
+2. Compile the project by running:
+
    ```bash
    make
    ```
-3. Lancez le jeu avec la commande suivante :
+3. Launch the game with:
+
    ```bash
-   ./cub3D maps/valid/[votre_map].cub
+   ./cub3D maps/valid/[your_map].cub
    ```
-   > Pour une meilleure expérience, essayez la carte par défaut :
+
+   > For the best experience, try the default map:
+   >
    > ```bash
    > ./cub3D maps/valid/pacman.cub
    > ```
 
 ---
 
-## Génération de Cartes
-**cub3d** permet de créer vos propres cartes personnalisées grâce à un générateur intégré.
+## Map Generation
 
-### Étapes :
-1. Exécutez le script de génération de cartes :
+**cub3D** lets you create your own custom maps with an integrated generator.
+
+### Steps:
+
+1. Run the map generator script:
+
    ```bash
    python ./map_gen.py
    ```
-2. Une fois votre carte générée (générée sous le nom `gen_map.cub`), lancez-la avec :
+2. Once your map is generated (as `gen_map.cub`), run it with:
+
    ```bash
    ./cub3D maps/gen_map.cub
    ```
 
 ---
 
-## Contrôles
+## Controls
 
-| **Action**               | **Touche/Commande**         |
-|--------------------------|-----------------------------|
-| Déplacement              | W, A, S, D                 |
-| Rotation de la caméra    | Souris ou Flèches gauche/droite |
-| Ouvrir les portes        | Espace ou Clic gauche       |
-| Mettre en pause          | Tab                         |
+| **Action**    | **Key/Command**            |
+| ------------- | -------------------------- |
+| Move          | W, A, S, D                 |
+| Rotate camera | Mouse or Left/Right Arrows |
+| Open doors    | Space or Left Click        |
+| Pause         | Tab                        |
+
+---
+
+## Team
+
+This project was developed by:
+
+- [leofarhi](https://github.com/leofarhi)
+- [pquline](https://github.com/pquline)
