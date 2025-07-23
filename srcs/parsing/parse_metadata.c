@@ -59,7 +59,7 @@ static int	get_primary_color(char *line, size_t *i)
 	index = 0;
 	while (line[index] && ft_isdigit(line[index]))
 		++index;
-	if (index < MIN_RGB_LENGTH || index > MAX_RGB_COLOR)
+	if (index < MIN_RGB_LENGTH || index > MAX_RGB_LENGTH)
 		return (INT_MAX);
 	color = ft_atoi(line);
 	if (color < MIN_RGB_COLOR || color > MAX_RGB_COLOR)
